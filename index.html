@@ -4,71 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Najmul Hasan | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="profile-container">
-            <img src="https://www.linkedin.com/in/najmulhasan-cs-math/photo" alt="Najmul Hasan Profile Photo" class="profile-photo">
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <img src="https://www.linkedin.com/in/najmulhasan-cs-math/photo" alt="Najmul Hasan" class="profile-photo">
             <h1>Najmul Hasan</h1>
-            <p>
-                <a href="https://www.linkedin.com/in/najmulhasan-cs-math" target="_blank">LinkedIn</a> |
+            <p class="tagline">B.S. in Computer Science | AI Enthusiast | SOC Analyst</p>
+            <div class="links">
+                <a href="https://www.linkedin.com/in/najmulhasan-cs-math" target="_blank">LinkedIn</a>
                 <a href="https://github.com/najmulhasan-code" target="_blank">GitHub</a>
-            </p>
+            </div>
         </div>
     </header>
 
+    <!-- Main Content -->
     <main>
-        <section id="education">
+        <!-- Education Section -->
+        <section class="section" id="education">
             <h2>Education</h2>
-            <p><strong>University of North Carolina at Pembroke</strong></p>
-            <p>B.S. in Computer Science, Minor in Mathematics</p>
-            <p>January 2023 - December 2025</p>
+            <div class="card">
+                <h3>University of North Carolina at Pembroke</h3>
+                <p>B.S. in Computer Science, Minor in Mathematics</p>
+                <p>January 2023 - December 2025</p>
+            </div>
         </section>
 
-        <section id="experience">
+        <!-- Experience Section -->
+        <section class="section" id="experience">
             <h2>Experience</h2>
-            <p><strong>Undergraduate Research Assistant</strong>, UNC Pembroke</p>
-            <p>May 2024 – Present</p>
-
-            <p><strong>SOC Analyst</strong>, UNC Pembroke</p>
-            <p>July 2023 – Present</p>
-
-            <p><strong>Programming Intern</strong>, Emerging Technology Institute</p>
-            <p>January 2024 – April 2024</p>
-
-            <p><strong>Research Assistant</strong>, PURC</p>
-            <p>January 2024 – April 2024</p>
-
-            <p><strong>Senior Design Project Collaboration</strong>, UNC Pembroke / NSA</p>
-            <p>August 2023 – December 2023</p>
+            <div class="card">
+                <h3>Undergraduate Research Assistant</h3>
+                <p>UNC Pembroke</p>
+                <p>May 2024 – Present</p>
+            </div>
+            <div class="card">
+                <h3>SOC Analyst</h3>
+                <p>UNC Pembroke</p>
+                <p>July 2023 – Present</p>
+            </div>
+            <div class="card">
+                <h3>Programming Intern</h3>
+                <p>Emerging Technology Institute</p>
+                <p>January 2024 – April 2024</p>
+            </div>
         </section>
 
-        <section id="leadership">
+        <!-- Other Sections -->
+        <section class="section" id="leadership">
             <h2>Leadership</h2>
-            <p><strong>President</strong>, AI@UNCP</p>
-            <p>November 2023 – Present</p>
-
-            <p><strong>Founder</strong>, AI@UNCP</p>
-            <p>September 2023 – Present</p>
+            <div class="card">
+                <h3>President</h3>
+                <p>AI@UNCP</p>
+                <p>November 2023 – Present</p>
+            </div>
+            <div class="card">
+                <h3>Founder</h3>
+                <p>AI@UNCP</p>
+                <p>September 2023 – Present</p>
+            </div>
         </section>
-
-        <section id="awards">
+        <section class="section" id="awards">
             <h2>Awards</h2>
-            <p><strong>Honors Scholar Fellowship</strong>, Spring 2023</p>
-            <p><strong>Semester-Long Undergraduate Research Fellowship</strong>, Spring 2024</p>
+            <div class="card">
+                <h3>Honors Scholar Fellowship</h3>
+                <p>Spring 2023</p>
+            </div>
+            <div class="card">
+                <h3>Undergraduate Research Fellowship</h3>
+                <p>Spring 2024</p>
+            </div>
         </section>
-
-        <section id="certificates">
+        <section class="section" id="certificates">
             <h2>Certificates</h2>
-            <p><strong>IBM AI Engineering Professional Certificate</strong>, July 2024</p>
-            <p><strong>Google Cybersecurity Professional Certificate</strong>, July 2023</p>
+            <div class="card">
+                <h3>IBM AI Engineering Professional Certificate</h3>
+                <p>July 2024</p>
+            </div>
+            <div class="card">
+                <h3>Google Cybersecurity Professional Certificate</h3>
+                <p>July 2023</p>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Najmul Hasan | Built with HTML, CSS, and JavaScript</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Najmul Hasan</p>
     </footer>
-    <script src="script.js"></script>
 </body>
 </html>
