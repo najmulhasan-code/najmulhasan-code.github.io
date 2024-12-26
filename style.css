@@ -1,56 +1,55 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
-    background-color: #121212; /* Dark background for a modern look */
-    color: #ffffff;
+    padding: 0;
+    color: #333;
+    background-color: #f9f9f9;
 }
 
 header {
     text-align: center;
-    background-color: #1e1e1e;
-    padding: 20px;
-    margin-bottom: 20px;
+    background-color: #1f2937;
+    color: #fff;
+    padding: 2rem 1rem;
 }
 
-.profile-header img {
-    width: 100px;
-    height: 100px;
+.profile-container {
+    margin-top: 1rem;
+}
+
+.profile-photo {
     border-radius: 50%;
-    margin-bottom: 10px;
+    width: 150px;
+    height: 150px;
 }
 
-.profile-header h1 {
-    font-size: 2.5rem;
-}
-
-.profile-header a {
-    color: #0d6efd;
-    text-decoration: none;
-    margin: 0 10px;
-}
-
-.content-section {
+main {
+    margin: 2rem auto;
     max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    padding: 0 1rem;
 }
 
-.content-section h2 {
-    color: #0d6efd;
-    border-bottom: 2px solid #0d6efd;
-    padding-bottom: 5px;
-    margin-bottom: 15px;
-}
-
-.content-section p,
-.content-section ul {
-    margin-bottom: 15px;
+h2 {
+    color: #1f2937;
+    border-bottom: 2px solid #1f2937;
+    padding-bottom: 0.5rem;
 }
 
 footer {
     text-align: center;
-    background-color: #1e1e1e;
-    padding: 10px 0;
-    margin-top: 20px;
-    color: #a5a5a5;
+    background-color: #1f2937;
+    color: #fff;
+    padding: 1rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
