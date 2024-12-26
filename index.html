@@ -7,17 +7,45 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Najmul Hasan</h1>
-        <p>Welcome to my portfolio!</p>
-    </header>
-    <section>
-        <h2>About Me</h2>
-        <p>I am a SOC Analyst at UNCP, passionate about AI and Machine Learning.</p>
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <h1>Najmul Hasan</h1>
+            <p>Building a better future with AI and cybersecurity.</p>
+            <button onclick="scrollToSection('about')">Explore</button>
+        </div>
     </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I am pursuing a B.S. in Computer Science with a minor in Mathematics. I am passionate about software engineering, cybersecurity, and mathematics, and I am particularly interested in AI and ML.</p>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work">
+        <h2>Work Experience</h2>
+        <div class="work-cards">
+            <div class="work-card">
+                <h3>SOC Analyst</h3>
+                <p>UNC Pembroke</p>
+            </div>
+            <div class="work-card">
+                <h3>Programming Intern</h3>
+                <p>Emerging Technology Institute</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Najmul Hasan</p>
+        <div class="socials">
+            <a href="https://linkedin.com/in/najmulhasan-cs-math" target="_blank">LinkedIn</a>
+            <a href="https://github.com/najmulhasan-code" target="_blank">GitHub</a>
+        </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
