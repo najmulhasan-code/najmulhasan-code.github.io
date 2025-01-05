@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://najmulhasan-code.github.io/sitemap.xml
