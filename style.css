@@ -79,6 +79,32 @@ h1, h2 {
     transform: translateY(-5px);
 }
 
+/* Product Hunt Launch Section */
+#product-hunt-launch {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 900px;
+    text-align: center;
+}
+
+#product-hunt-launch h2 {
+    color: #00bcd4;
+    margin-bottom: 1rem;
+}
+
+#product-hunt-launch p {
+    color: #f1f1f1;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.product-hunt-embed iframe {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+}
+
+
+
 /* Footer */
 .footer {
     text-align: center;
