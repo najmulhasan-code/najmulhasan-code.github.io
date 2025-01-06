@@ -1,114 +1,146 @@
 /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background: #121212;
-    color: #f1f1f1;
-    line-height: 1.6;
+  font-family: "Poppins", sans-serif;
+  background: #121212;
+  color: #f1f1f1;
+  line-height: 1.6;
 }
 
 /* Headings */
-h1, h2 {
-    color: #00bcd4;
-    margin-bottom: 1rem;
+h1,
+h2 {
+  color: #00bcd4;
+  margin-bottom: 1rem;
 }
 
 /* Hero Section */
 .hero {
-    text-align: center;
-    padding: 2rem;
-    background: linear-gradient(135deg, #004d7a, #008793);
-    color: white;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #004d7a, #008793);
+  color: white;
 }
 
 .hero .profile-photo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 3px solid white;
-    margin-bottom: 1rem;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid white;
+  margin-bottom: 1rem;
 }
 
 .hero .tagline {
-    font-size: 1.2rem;
-    margin: 0.5rem 0;
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
 }
 
 .hero .links a {
-    margin: 0 10px;
-    padding: 10px 20px;
-    color: white;
-    text-decoration: none;
-    background: #00bcd4;
-    border-radius: 5px;
-    transition: 0.3s;
+  margin: 0 10px;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  background: #00bcd4;
+  border-radius: 5px;
+  transition: 0.3s;
 }
 
 .hero .links a:hover {
-    background: #004d7a;
+  background: #004d7a;
 }
 
 /* Section Styling */
 .section {
-    margin: 2rem auto;
-    padding: 1rem;
-    max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  max-width: 900px;
 }
 
 .section h2 {
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #00bcd4;
-    display: inline-block;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #00bcd4;
+  display: inline-block;
 }
 
 .card {
-    background: #1e1e1e;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s;
+  background: #1e1e1e;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
-/* Product Hunt Launch Section */
 #product-hunt-launch {
-    margin: 2rem auto;
-    padding: 1rem;
-    max-width: 900px;
-    text-align: center;
+  margin: 2rem auto;
+  padding: 1rem;
+  max-width: 900px;
+  text-align: center;
 }
 
 #product-hunt-launch h2 {
-    color: #00bcd4;
-    margin-bottom: 1rem;
+  color: #00bcd4;
+  margin-bottom: 1rem;
+  font-size: 2rem;
 }
 
 #product-hunt-launch p {
-    color: #f1f1f1;
-    margin-bottom: 1.5rem;
-    line-height: 1.5;
+  color: #f1f1f1;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.product-hunt-embed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
 }
 
 .product-hunt-embed iframe {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  aspect-ratio: 5 / 4;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border: none;
+  transition: transform 0.3s ease;
 }
 
+.product-hunt-embed iframe:hover {
+  transform: scale(1.02);
+}
 
+@media (max-width: 768px) {
+  #product-hunt-launch h2 {
+    font-size: 1.8rem;
+  }
+
+  #product-hunt-launch p {
+    font-size: 0.9rem;
+  }
+
+  .product-hunt-embed iframe {
+    max-width: 100%;
+    border-radius: 6px;
+  }
+}
 
 /* Footer */
 .footer {
-    text-align: center;
-    padding: 1rem;
-    background: #004d7a;
-    color: white;
+  text-align: center;
+  padding: 1rem;
+  background: #004d7a;
+  color: white;
 }
