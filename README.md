@@ -31,7 +31,7 @@
 - Lead "HackUNCP 2025" Organizer
 
 ## Research Focus
-- Phishing Email Detection with LLMs, Phishing URL Detection 
+- Multilingual Phishing Scam Detection with LLMs, Phishing URL Detection 
 - Mobile Driver's License (mDL)
 - Speech Emotion Recognition (SER)
 - Lightweight Cryptography
