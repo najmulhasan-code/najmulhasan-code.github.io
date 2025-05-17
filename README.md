@@ -1,8 +1,20 @@
+
+
 <div align="center">
 
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:396afc,100:2948ff&height=200&section=header&text=Najmul%20Hasan&fontSize=60&fontColor=ffffff&animation=fadeIn&fontAlignY=50" alt="Header" width="100%" />
 
 <br />
+
+<!-- Profile Image -->
+<p align="center" style="margin-top: 20px;">
+  <img src="https://github.com/user-attachments/assets/118eac18-5645-4a33-ad1a-1377714203de"
+       alt="Najmul Hasan Profile"
+       width="200"
+       height="200"
+       style="border-radius: 50%; object-fit: cover; border: 3px solid #ddd; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+</p>
+
 
   <img src="https://img.shields.io/badge/Computer_Science-34495e?style=for-the-badge" alt="Computer Science"/>
   <img src="https://img.shields.io/badge/AI_&_ML-1abc9c?style=for-the-badge" alt="AI & ML"/>
