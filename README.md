@@ -56,8 +56,13 @@ Jul 2023 – Present
 Pembroke, North Carolina, United States · On-site
 
 **Undergraduate Research Assistant**  
-May 2024 – Feb 2025  
-Research focused on cross-linguistic speech emotion recognition (SER). Advisor: Dr. Shaohu Zhang.
+Sep 2023 – Present  
+1. Joined Dr. Shaohu Zhang’s lab in Fall 2023, focusing on cross-linguistic speech emotion recognition (SER).
+
+2. Awarded the Semester-Long Undergraduate Research Fellowship (SURF) – Spring 2024; conducted SER research under Dr. Zhang’s mentorship.
+
+3. Awarded the Undergraduate Research Fellowship – Summer (URFS) 2025 to conduct research on multilingual phishing detection using large language models (LLMs), co-mentored by Dr. Zhang and Dr. Prashanth BusiReddyGari.
+
 
 ---
 
