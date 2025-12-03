@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Calendar, MapPin } from 'lucide-react';
 import Image from 'next/image';
 
 interface Education {
@@ -53,80 +52,65 @@ export default function Education() {
 
   return (
     <section id="education" className="py-12 sm:py-16 lg:py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8 sm:mb-10 lg:mb-12"
+          className="mb-8"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
             Education
           </h2>
         </motion.div>
 
-        {/* Education Timeline */}
-        <div className="max-w-4xl mx-auto">
+        {/* Education List */}
+        <div className="space-y-6">
           {education.map((edu, index) => (
             <motion.div
               key={`${edu.institution}-${index}`}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="flex gap-4 sm:gap-6"
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className="flex gap-4"
             >
               {/* Logo */}
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 w-20 h-20 sm:w-28 sm:h-28">
                 {edu.logo && (
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 relative bg-white border border-gray-200 rounded-lg overflow-hidden flex items-center justify-center p-2">
-                    <Image
-                      src={edu.logo}
-                      alt={edu.institution}
-                      width={96}
-                      height={96}
-                      className="object-contain w-full h-full"
-                    />
-                  </div>
+                  <Image
+                    src={edu.logo}
+                    alt={edu.institution}
+                    width={112}
+                    height={112}
+                    className="object-contain w-full h-full"
+                  />
                 )}
               </div>
 
               {/* Content */}
-              <div className="flex-1 min-w-0">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-1">
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight">
-                    {edu.institution}
-                  </h3>
-                  <div className="flex items-center gap-1.5 text-gray-600 text-sm flex-shrink-0">
-                    <Calendar size={14} />
-                    <span className="whitespace-nowrap">
-                      Expected {formatDate(edu.endDate)}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="text-gray-700 font-medium mb-1">
+              <div className="flex-1">
+                <h3 className="font-semibold text-gray-900 leading-snug">
+                  {edu.institution}
+                </h3>
+                <p className="text-gray-700 text-sm">
                   {edu.degree}
-                </div>
-
+                </p>
                 {edu.minors.length > 0 && (
-                  <div className="text-gray-600 text-sm mb-1">
+                  <p className="text-gray-600 text-sm">
                     Minors in {edu.minors.join(' and ')}
-                  </div>
+                  </p>
                 )}
-
                 {edu.honors && (
-                  <div className="text-gray-600 text-sm mb-2">
+                  <p className="text-gray-600 text-sm">
                     {edu.honors}
-                  </div>
+                  </p>
                 )}
-
-                <div className="flex items-center gap-1.5 text-gray-600 text-sm mb-3">
-                  <MapPin size={14} />
-                  <span>{edu.location}</span>
-                </div>
+                <p className="text-gray-500 text-sm">
+                  {edu.location} · Expected {formatDate(edu.endDate)}
+                </p>
               </div>
             </motion.div>
           ))}

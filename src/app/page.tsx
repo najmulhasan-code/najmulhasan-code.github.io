@@ -5,7 +5,6 @@ import News from '@/components/News';
 import Projects from '@/components/Projects';
 import WorkExperience from '@/components/WorkExperience';
 import Education from '@/components/Education';
-import Certificates from '@/components/Certificates';
 import Awards from '@/components/Awards';
 import Footer from '@/components/Footer';
 
@@ -20,7 +19,6 @@ export default function Home() {
       <Education />
       <Projects />
       <Awards />
-      <Certificates />
       <Footer />
     </main>
   );

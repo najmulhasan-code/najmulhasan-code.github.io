@@ -33,53 +33,49 @@ export default function Awards() {
 
   return (
     <section id="awards" className="py-12 sm:py-16 lg:py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8 sm:mb-10 lg:mb-12"
+          className="mb-8"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
             Awards & Recognition
           </h2>
-          <p className="text-gray-600 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed px-4">
-            Honors, fellowships, and scholarships
-          </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-4 sm:space-y-6">
-            {awards.map((item, index) => (
-              <motion.div
-                key={`${item.year}-${item.month}-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white border border-gray-200 rounded-xl p-5 sm:p-6 hover:border-blue-500 hover:shadow-lg transition-all duration-300"
-              >
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-                  <div className="flex-shrink-0">
-                    <div className="inline-flex sm:flex flex-col items-center px-4 py-2 sm:px-3 sm:py-3 bg-blue-50 border border-blue-200 rounded-lg">
-                      <div className="text-blue-600 font-bold text-sm sm:text-lg">{item.month}</div>
-                      <div className="text-blue-800 font-semibold text-xs sm:text-sm">{item.year}</div>
-                    </div>
-                  </div>
+        {/* Awards List */}
+        <div className="space-y-6">
+          {awards.map((item, index) => (
+            <motion.div
+              key={`${item.year}-${item.month}-${index}`}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className="flex gap-4"
+            >
+              {/* Date Badge */}
+              <div className="flex-shrink-0 w-24 sm:w-28">
+                <span className="inline-block px-2 py-1 bg-blue-600 text-white text-xs font-medium rounded">
+                  {item.month} {item.year}
+                </span>
+              </div>
 
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 leading-tight">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              {/* Content */}
+              <div className="flex-1">
+                <h3 className="font-semibold text-gray-900 leading-snug mb-1">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

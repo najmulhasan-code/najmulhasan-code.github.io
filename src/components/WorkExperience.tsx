@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Calendar, MapPin } from 'lucide-react';
 import Image from 'next/image';
 
 interface WorkExperience {
@@ -99,85 +98,68 @@ export default function WorkExperience() {
 
   return (
     <section id="experience" className="py-12 sm:py-16 lg:py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8 sm:mb-10 lg:mb-12"
+          className="mb-8"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
             Work Experience
           </h2>
         </motion.div>
 
-        {/* Experience Timeline */}
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-8">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={`${exp.startDate}-${exp.position}-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.05 }}
-                className="flex gap-4 sm:gap-6"
-              >
-                {/* Logo */}
-                <div className="flex-shrink-0">
-                  {exp.logo && (
-                    <div className="w-20 h-20 sm:w-24 sm:h-24 relative bg-white border border-gray-200 rounded-lg overflow-hidden flex items-center justify-center p-2">
-                      <Image
-                        src={exp.logo}
-                        alt={exp.institution}
-                        width={96}
-                        height={96}
-                        className="object-contain w-full h-full"
-                      />
-                    </div>
-                  )}
-                </div>
+        {/* Experience List */}
+        <div className="space-y-6">
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={`${exp.startDate}-${exp.position}-${index}`}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className="flex gap-4"
+            >
+              {/* Logo */}
+              <div className="flex-shrink-0 w-20 h-20 sm:w-28 sm:h-28">
+                {exp.logo && (
+                  <Image
+                    src={exp.logo}
+                    alt={exp.institution}
+                    width={112}
+                    height={112}
+                    className="object-contain w-full h-full"
+                  />
+                )}
+              </div>
 
-                {/* Content */}
-                <div className="flex-1 min-w-0 pb-8 border-b border-gray-200 last:border-0">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-1">
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight">
-                      {exp.position}
-                    </h3>
-                    <div className="flex items-center gap-1.5 text-gray-600 text-sm flex-shrink-0">
-                      <Calendar size={14} />
-                      <span className="whitespace-nowrap">
-                        {formatDate(exp.startDate)} – {exp.endDate ? formatDate(exp.endDate) : 'Present'}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="text-gray-700 font-medium mb-1">
-                    {exp.institution}
-                  </div>
-
-                  <div className="flex items-center gap-1.5 text-gray-600 text-sm mb-2">
-                    <MapPin size={14} />
-                    <span>{exp.location}</span>
-                  </div>
-
-                  {exp.mentor && (
-                    <div className="text-sm text-gray-600 mb-3">
-                      <span className="font-medium">Mentor:</span> {exp.mentor}
-                    </div>
-                  )}
-
-                  {exp.keywords && (
-                    <div className="mt-3 text-sm text-gray-700">
-                      {exp.keywords}
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              {/* Content */}
+              <div className="flex-1">
+                <h3 className="font-semibold text-gray-900 leading-snug">
+                  {exp.position}
+                </h3>
+                <p className="text-gray-700 text-sm">
+                  {exp.institution}
+                </p>
+                {exp.mentor && (
+                  <p className="text-gray-600 text-sm">
+                    Mentor: {exp.mentor}
+                  </p>
+                )}
+                <p className="text-gray-500 text-sm">
+                  {exp.location} · {formatDate(exp.startDate)} – {exp.endDate ? formatDate(exp.endDate) : 'Present'}
+                </p>
+                {exp.keywords && (
+                  <p className="text-gray-600 text-sm mt-1">
+                    {exp.keywords}
+                  </p>
+                )}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

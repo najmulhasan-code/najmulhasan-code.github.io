@@ -38,21 +38,17 @@ export default function Navbar() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: '-20% 0px -70% 0px',
-      threshold: [0, 0.25, 0.5, 0.75, 1]
+      rootMargin: '-80px 0px -50% 0px',
+      threshold: 0
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       if (isScrolling) return;
 
       entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
+        if (entry.isIntersecting) {
           const sectionId = entry.target.id;
           setActiveSection(sectionId);
-
-          if (window.location.hash !== `#${sectionId}`) {
-            window.history.replaceState(null, '', `#${sectionId}`);
-          }
         }
       });
     };

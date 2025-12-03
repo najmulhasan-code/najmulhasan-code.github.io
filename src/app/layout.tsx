@@ -435,6 +435,89 @@ export default function RootLayout({
             })
           }}
         />
+
+        {/* ScholarlyArticle Schema - Publication 1 */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ScholarlyArticle",
+              "@id": "https://najmulhasan-code.github.io/#paper-llm-url-detection",
+              "headline": "Benchmarking Large Language Models for Zero-shot and Few-shot Phishing URL Detection",
+              "name": "Benchmarking Large Language Models for Zero-shot and Few-shot Phishing URL Detection",
+              "author": [
+                {
+                  "@type": "Person",
+                  "name": "Najmul Hasan",
+                  "url": "https://najmulhasan-code.github.io"
+                },
+                {
+                  "@type": "Person",
+                  "name": "Prashanth BusiReddyGari"
+                }
+              ],
+              "publisher": {
+                "@type": "Organization",
+                "name": "NeurIPS 2025 - LAW Workshop"
+              },
+              "isPartOf": {
+                "@type": "PublicationEvent",
+                "name": "LAW 2025 Workshop, 39th Conference on Neural Information Processing Systems (NeurIPS 2025)"
+              },
+              "about": [
+                "Large Language Models",
+                "Phishing Detection",
+                "Zero-shot Learning",
+                "Few-shot Learning",
+                "Cybersecurity",
+                "URL Classification"
+              ],
+              "keywords": "LLM, phishing detection, zero-shot, few-shot, cybersecurity, URL classification, NeurIPS"
+            })
+          }}
+        />
+
+        {/* ScholarlyArticle Schema - Publication 2 */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ScholarlyArticle",
+              "@id": "https://najmulhasan-code.github.io/#paper-lightweight-crypto",
+              "headline": "Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists",
+              "name": "Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists",
+              "author": [
+                {
+                  "@type": "Person",
+                  "name": "Prashanth BusiReddyGari"
+                },
+                {
+                  "@type": "Person",
+                  "name": "Najmul Hasan",
+                  "url": "https://najmulhasan-code.github.io"
+                }
+              ],
+              "publisher": {
+                "@type": "Organization",
+                "name": "IEEE"
+              },
+              "isPartOf": {
+                "@type": "PublicationEvent",
+                "name": "2026 IEEE 16th Annual Computing and Communication Workshop and Conference (CCWC)"
+              },
+              "about": [
+                "Lightweight Cryptography",
+                "NIST",
+                "Time Complexity",
+                "Cryptographic Algorithms",
+                "Security"
+              ],
+              "keywords": "lightweight cryptography, NIST, time complexity, cryptographic algorithms, IEEE CCWC"
+            })
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

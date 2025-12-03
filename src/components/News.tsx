@@ -14,6 +14,18 @@ interface NewsItem {
 export default function News() {
   const newsItems: NewsItem[] = [
     {
+      month: 'Nov',
+      year: '2025',
+      title: 'Participated in HackPrinceton Fall 2025',
+      description: 'Participated in HackPrinceton Fall 2025 (November 7-9), a 36-hour hackathon at Princeton University hosted by the Princeton Entrepreneurship Club.'
+    },
+    {
+      month: 'Oct',
+      year: '2025',
+      title: 'Participated in Cal Hacks 12.0',
+      description: 'Participated in Cal Hacks 12.0 (October 24-26), the world\'s largest collegiate hackathon, held at the Palace of Fine Arts in San Francisco.'
+    },
+    {
       month: 'Oct',
       year: '2025',
       title: 'Participated in HackHarvard 2025',
@@ -89,80 +101,72 @@ export default function News() {
 
   return (
     <section id="news" className="py-12 sm:py-16 lg:py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8 sm:mb-10 lg:mb-12"
+          className="mb-8"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
             News
           </h2>
-          <p className="text-gray-600 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed px-4">
-            Recent updates, achievements, and milestones
-          </p>
         </motion.div>
 
         {/* News Items */}
-        <div className="max-w-4xl mx-auto">
+        <div>
           {newsItems.length === 0 ? (
-            // Empty state
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center py-12 bg-gray-50 rounded-2xl border border-gray-200"
+              className="text-center py-12"
             >
               <Calendar className="mx-auto mb-4 text-gray-400" size={48} />
-              <p className="text-gray-600 text-lg">News items coming soon...</p>
-              <p className="text-gray-500 text-sm mt-2">Check back for updates on research, awards, and achievements</p>
+              <p className="text-gray-600">News items coming soon...</p>
             </motion.div>
           ) : (
-            <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-6">
               {newsItems.map((item, index) => (
                 <motion.div
                   key={`${item.year}-${item.month}-${index}`}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white border border-gray-200 rounded-xl p-5 sm:p-6 hover:border-blue-500 hover:shadow-lg transition-all duration-300"
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className="flex gap-4"
                 >
-                  <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-                    {/* Date */}
-                    <div className="flex-shrink-0">
-                      <div className="inline-flex sm:flex flex-col items-center px-4 py-2 sm:px-3 sm:py-3 bg-blue-50 border border-blue-200 rounded-lg">
-                        <div className="text-blue-600 font-bold text-sm sm:text-lg">{item.month}</div>
-                        <div className="text-blue-800 font-semibold text-xs sm:text-sm">{item.year}</div>
-                      </div>
-                    </div>
+                  {/* Date Badge */}
+                  <div className="flex-shrink-0 w-24 sm:w-28">
+                    <span className="inline-block px-2 py-1 bg-blue-600 text-white text-xs font-medium rounded">
+                      {item.month} {item.year}
+                    </span>
+                  </div>
 
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 leading-tight">
-                        {item.title}
-                      </h3>
-                      {item.description && (
-                        <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                          {item.description}
-                        </p>
-                      )}
-                      {item.link && (
-                        <a
-                          href={item.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 mt-3 text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors"
-                        >
-                          Learn more
-                          <ExternalLink size={14} />
-                        </a>
-                      )}
-                    </div>
+                  {/* Content */}
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-gray-900 leading-snug mb-1">
+                      {item.title}
+                    </h3>
+                    {item.description && (
+                      <p className="text-gray-600 text-sm leading-relaxed">
+                        {item.description}
+                      </p>
+                    )}
+                    {item.link && (
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 mt-2 text-blue-600 hover:text-blue-700 text-sm font-medium transition-colors"
+                      >
+                        Learn more
+                        <ExternalLink size={14} />
+                      </a>
+                    )}
                   </div>
                 </motion.div>
               ))}
