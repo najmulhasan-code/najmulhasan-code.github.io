@@ -64,7 +64,21 @@ export default function Navbar() {
       }
     });
 
-    return () => observer.disconnect();
+    // Handle scroll to bottom for last section
+    const handleScroll = () => {
+      if (isScrolling) return;
+      const scrolledToBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 100;
+      if (scrolledToBottom) {
+        setActiveSection('writing');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [isScrolling, navLinks]);
 
   // Smooth scroll to section with navbar offset
