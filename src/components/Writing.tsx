@@ -16,7 +16,7 @@ function formatDateBadge(dateString: string): { month: string; year: string } {
 }
 
 export default function Writing() {
-  const posts = getAllPosts().slice(0, 3);
+  const posts = getAllPosts();
 
   return (
     <section id="writing" className="py-12 sm:py-16 lg:py-20 bg-white">
@@ -77,20 +77,6 @@ export default function Writing() {
               );
             })}
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="pt-4"
-            >
-              <Link
-                href="/writing"
-                className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
-              >
-                View all writing
-              </Link>
-            </motion.div>
           </div>
         )}
       </div>
