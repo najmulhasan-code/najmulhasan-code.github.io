@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Najmul Hasan | AI Researcher | Reinforcement Learning & LLM Reasoning | PhD Applicant",
+  title: "Najmul Hasan",
   description: "Najmul Hasan - Undergraduate AI researcher at UNC Pembroke specializing in reinforcement learning for large language model reasoning, multilingual NLP, cybersecurity, and AI safety. Expert in SLIC (step-level intrinsic calibration), process supervision, phishing detection, and speech emotion recognition. Applying to PhD programs in Computer Science, EECS, Machine Learning, and Artificial Intelligence for Fall 2026. Research with Dr. Shaohu Zhang and Dr. Prashanth BusiReddyGari on LLM reasoning, AI security, and deep learning applications.",
   keywords: [
     // Primary Identity
@@ -120,7 +120,7 @@ export const metadata: Metadata = {
     "Dr. Shaohu Zhang",
     "Dr. Prashanth BusiReddyGari",
     "Dr. Ali Saman Tosun",
-    "Shaohu Zhang research",
+    
 
     // Competitions & Activities
     "HackHarvard",
@@ -221,8 +221,8 @@ export const metadata: Metadata = {
     type: "profile",
     locale: "en_US",
     url: "https://najmulhasan-code.github.io",
-    title: "Najmul Hasan | AI Researcher in Reinforcement Learning & LLM Reasoning",
-    description: "AI researcher specializing in reinforcement learning for large language model reasoning, multilingual NLP, and cybersecurity. Expert in SLIC (step-level intrinsic calibration), process supervision, and AI safety. PhD applicant for Fall 2026 in Computer Science and Machine Learning.",
+    title: "Najmul Hasan | AI Researcher in LLM Reasoning",
+    description: "AI researcher specializing in large language model reasoning, multilingual NLP, and cybersecurity.",
     siteName: "Najmul Hasan - AI Research Portfolio",
     images: [
       {
@@ -274,7 +274,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.jpg" type="image/jpeg" />
         <link rel="apple-touch-icon" href="/images/najmul_hasan.jpg" />
         <meta name="theme-color" content="#ffffff" />
 
@@ -432,89 +432,6 @@ export default function RootLayout({
                 },
                 "query-input": "required name=search_term_string"
               }
-            })
-          }}
-        />
-
-        {/* ScholarlyArticle Schema - Publication 1 */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ScholarlyArticle",
-              "@id": "https://najmulhasan-code.github.io/#paper-llm-url-detection",
-              "headline": "Benchmarking Large Language Models for Zero-shot and Few-shot Phishing URL Detection",
-              "name": "Benchmarking Large Language Models for Zero-shot and Few-shot Phishing URL Detection",
-              "author": [
-                {
-                  "@type": "Person",
-                  "name": "Najmul Hasan",
-                  "url": "https://najmulhasan-code.github.io"
-                },
-                {
-                  "@type": "Person",
-                  "name": "Prashanth BusiReddyGari"
-                }
-              ],
-              "publisher": {
-                "@type": "Organization",
-                "name": "NeurIPS 2025 - LAW Workshop"
-              },
-              "isPartOf": {
-                "@type": "PublicationEvent",
-                "name": "LAW 2025 Workshop, 39th Conference on Neural Information Processing Systems (NeurIPS 2025)"
-              },
-              "about": [
-                "Large Language Models",
-                "Phishing Detection",
-                "Zero-shot Learning",
-                "Few-shot Learning",
-                "Cybersecurity",
-                "URL Classification"
-              ],
-              "keywords": "LLM, phishing detection, zero-shot, few-shot, cybersecurity, URL classification, NeurIPS"
-            })
-          }}
-        />
-
-        {/* ScholarlyArticle Schema - Publication 2 */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ScholarlyArticle",
-              "@id": "https://najmulhasan-code.github.io/#paper-lightweight-crypto",
-              "headline": "Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists",
-              "name": "Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists",
-              "author": [
-                {
-                  "@type": "Person",
-                  "name": "Prashanth BusiReddyGari"
-                },
-                {
-                  "@type": "Person",
-                  "name": "Najmul Hasan",
-                  "url": "https://najmulhasan-code.github.io"
-                }
-              ],
-              "publisher": {
-                "@type": "Organization",
-                "name": "IEEE"
-              },
-              "isPartOf": {
-                "@type": "PublicationEvent",
-                "name": "2026 IEEE 16th Annual Computing and Communication Workshop and Conference (CCWC)"
-              },
-              "about": [
-                "Lightweight Cryptography",
-                "NIST",
-                "Time Complexity",
-                "Cryptographic Algorithms",
-                "Security"
-              ],
-              "keywords": "lightweight cryptography, NIST, time complexity, cryptographic algorithms, IEEE CCWC"
             })
           }}
         />

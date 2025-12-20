@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Publications from '@/components/Publications';
+import Writing from '@/components/Writing';
 import News from '@/components/News';
 import Projects from '@/components/Projects';
 import WorkExperience from '@/components/WorkExperience';
@@ -19,6 +20,7 @@ export default function Home() {
       <Education />
       <Projects />
       <Awards />
+      <Writing />
       <Footer />
     </main>
   );

@@ -19,6 +19,7 @@ export default function Navbar() {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { scrollY } = useScroll();
 
+  // Navigation links matching page section order
   const navLinks: NavLink[] = useMemo(() => [
     { label: 'Home', href: '#hero', id: 'hero' },
     { label: 'News', href: '#news', id: 'news' },
@@ -26,7 +27,8 @@ export default function Navbar() {
     { label: 'Work Experience', href: '#experience', id: 'experience' },
     { label: 'Education', href: '#education', id: 'education' },
     { label: 'Projects', href: '#projects', id: 'projects' },
-    { label: 'Awards & Recognition', href: '#awards', id: 'awards' }
+    { label: 'Awards & Recognition', href: '#awards', id: 'awards' },
+    { label: 'Writing', href: '#writing', id: 'writing' }
   ], []);
 
   // Detect scroll position for navbar style changes

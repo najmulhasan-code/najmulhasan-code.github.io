@@ -1,209 +1,45 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github as GithubIcon, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Github, ExternalLink, Package } from 'lucide-react';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
+/**
+ * Project interface for type safety
+ */
 interface Project {
   title: string;
-  subtitle?: string;
   description: string;
+  tags: string[];
   githubUrl?: string;
   liveUrl?: string;
-  logo?: string;
-  screenshots?: string[];
+  pypiUrl?: string;
+  articleUrl?: string;
+  image?: string;
 }
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-
-  const nextSlide = () => {
-    if (project.screenshots) {
-      setCurrentSlide((prev) => (prev + 1) % project.screenshots!.length);
-    }
-  };
-
-  const prevSlide = () => {
-    if (project.screenshots) {
-      setCurrentSlide((prev) => (prev - 1 + project.screenshots!.length) % project.screenshots!.length);
-    }
-  };
-
-  useEffect(() => {
-    if (!project.screenshots || project.screenshots.length <= 1) return;
-
-    const interval = setInterval(() => {
-      if (!isHovered) {
-        setCurrentSlide((prev) => (prev + 1) % project.screenshots!.length);
-      }
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [isHovered, project.screenshots]);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="flex gap-4"
-    >
-      {/* Logo */}
-      <div className="flex-shrink-0 w-20 h-20 sm:w-28 sm:h-28">
-        {project.logo && (
-          <Image
-            src={project.logo}
-            alt={project.title}
-            width={112}
-            height={112}
-            className="object-contain w-full h-full"
-          />
-        )}
-      </div>
-
-      {/* Content */}
-      <div className="flex-1">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="font-semibold text-gray-900 leading-snug">
-            {project.title}
-          </h3>
-          <div className="flex gap-3 flex-shrink-0">
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-900 transition-colors"
-                aria-label="View on GitHub"
-              >
-                <GithubIcon size={18} />
-              </a>
-            )}
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-900 transition-colors"
-                aria-label="View live project"
-              >
-                <ExternalLink size={18} />
-              </a>
-            )}
-          </div>
-        </div>
-        {project.subtitle && (
-          <p className="text-gray-600 text-sm">
-            {project.subtitle}
-          </p>
-        )}
-        <p className="text-gray-600 text-sm mt-1">
-          {project.description}
-        </p>
-
-        {project.screenshots && project.screenshots.length > 0 && (
-          <div
-            className="relative group mt-4"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <div className="relative w-full overflow-hidden rounded-lg" style={{ height: '400px' }}>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <motion.div
-                  key={currentSlide}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.4 }}
-                  className="absolute inset-0 flex items-center justify-center"
-                >
-                  <Image
-                    src={project.screenshots[currentSlide]}
-                    alt={`${project.title} screenshot ${currentSlide + 1}`}
-                    width={800}
-                    height={500}
-                    className="w-auto h-auto rounded-lg shadow-lg"
-                    style={{ maxHeight: '380px', maxWidth: '100%' }}
-                    priority={currentSlide === 0}
-                  />
-                </motion.div>
-              </div>
-            </div>
-
-            {project.screenshots.length > 1 && (
-              <>
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 rounded-full p-2 shadow-md transition-all opacity-0 group-hover:opacity-100"
-                  aria-label="Previous slide"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 rounded-full p-2 shadow-md transition-all opacity-0 group-hover:opacity-100"
-                  aria-label="Next slide"
-                >
-                  <ChevronRight size={20} />
-                </button>
-
-                <div className="flex justify-center gap-1.5 mt-3">
-                  {project.screenshots.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrentSlide(idx)}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
-                        idx === currentSlide ? 'bg-gray-800 w-6' : 'bg-gray-300 w-1.5 hover:bg-gray-400'
-                      }`}
-                      aria-label={`Go to slide ${idx + 1}`}
-                    />
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        )}
-      </div>
-    </motion.div>
-  );
-}
-
+/**
+ * Projects section displaying research and development work
+ * Responsive layout: cards adapt to desktop, tablet, and mobile screens
+ */
 export default function Projects() {
   const projects: Project[] = [
     {
+      title: 'SAGE',
+      description: 'A multi-agent deliberation framework where AI agents research, debate, and synthesize answers together. Features a three-phase workflow, supports multiple LLM providers, and includes nine predefined agent roles.',
+      tags: ['Python', 'LLMs', 'Multi-Agent', 'CLI'],
+      githubUrl: 'https://github.com/najmulhasan-code/sage',
+      pypiUrl: 'https://pypi.org/project/agentsage/',
+      articleUrl: '/writing/sage-multi-agent-deliberation',
+      image: '/images/SAGE/SAGE.png'
+    },
+    {
       title: 'SummaryOne',
-      subtitle: 'Capstone Project for CSC 4900: Advanced Software Project',
-      description: 'Led a team of three to architect and develop an AI-powered text processing platform that enables multi-function text transformations. The system integrates summarization, translation, grammar correction, content expansion, and tone adjustment with secure user authentication and customizable summarization preferences.',
+      description: 'AI-powered text processing platform with multi-function transformations including summarization, translation, grammar correction, content expansion, and tone adjustment.',
+      tags: ['Python', 'NLP', 'Full-Stack', 'Team Lead'],
       githubUrl: 'https://github.com/najmulhasan-code/SummaryOne',
-      logo: '/images/SummaryOne/summaryone_logo.png',
-      screenshots: [
-        '/images/SummaryOne/summaryone_10.png',
-        '/images/SummaryOne/summaryone_11.png',
-        '/images/SummaryOne/summaryone_12.png',
-        '/images/SummaryOne/summaryone_13.png',
-        '/images/SummaryOne/summaryone_14.png',
-        '/images/SummaryOne/summaryone_15.png',
-        '/images/SummaryOne/summaryone_16.png',
-        '/images/SummaryOne/summaryone_17.png',
-        '/images/SummaryOne/summaryone_18.png',
-        '/images/SummaryOne/summaryone_19.png',
-        '/images/SummaryOne/summaryone_20.png',
-        '/images/SummaryOne/summaryone_21.png',
-        '/images/SummaryOne/summaryone_22.png',
-        '/images/SummaryOne/summaryone_23.png',
-        '/images/SummaryOne/summaryone_24.png',
-        '/images/SummaryOne/summaryone_1.png',
-        '/images/SummaryOne/summaryone_2.png',
-        '/images/SummaryOne/summaryone_3.png',
-        '/images/SummaryOne/summaryone_4.png',
-        '/images/SummaryOne/summaryone_5.png',
-        '/images/SummaryOne/summaryone_6.png',
-        '/images/SummaryOne/summaryone_7.png',
-        '/images/SummaryOne/summaryone_9.png'
-      ]
+      image: '/images/SummaryOne/summaryone_logo.png'
     }
   ];
 
@@ -223,11 +59,122 @@ export default function Projects() {
           </h2>
         </motion.div>
 
-        {/* Projects List */}
-        <div className="space-y-6">
-          {projects.map((project, index) => (
-            <ProjectCard key={`${project.title}-${index}`} project={project} index={index} />
-          ))}
+        {/* Projects Grid */}
+        <div className="space-y-8">
+          {projects.map((project, index) => {
+            const cardContent = (
+              <>
+                {/* Project Image */}
+                {project.image && (
+                  <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      width={80}
+                      height={80}
+                      className="w-full h-full object-contain rounded-lg"
+                    />
+                  </div>
+                )}
+
+                {/* Project Content */}
+                <div className="flex-1 min-w-0">
+                  {/* Title and Links Row */}
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
+                    <h3 className={`text-lg font-semibold text-gray-900 ${
+                      project.articleUrl ? 'group-hover:text-blue-600 transition-colors' : ''
+                    }`}>
+                      {project.title}
+                    </h3>
+
+                    {/* External Links */}
+                    <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-400 hover:text-gray-900 transition-colors"
+                          aria-label={`${project.title} GitHub repository`}
+                        >
+                          <Github size={16} />
+                        </a>
+                      )}
+                      {project.pypiUrl && (
+                        <a
+                          href={project.pypiUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-400 hover:text-gray-900 transition-colors"
+                          aria-label={`${project.title} on PyPI`}
+                        >
+                          <Package size={16} />
+                        </a>
+                      )}
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-400 hover:text-gray-900 transition-colors"
+                          aria-label={`${project.title} live demo`}
+                        >
+                          <ExternalLink size={16} />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-gray-600 text-sm leading-relaxed mb-3">
+                    {project.description}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-0.5 text-xs font-medium text-gray-500 bg-gray-100 rounded"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </>
+            );
+
+            return (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group"
+              >
+                {/* Project Card - Whole card clickable if articleUrl exists */}
+                {project.articleUrl ? (
+                  <Link
+                    href={project.articleUrl}
+                    className="flex flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer hover:bg-gray-50 -mx-4 px-4 py-4 -my-4 rounded-lg transition-colors"
+                  >
+                    {cardContent}
+                  </Link>
+                ) : (
+                  <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                    {cardContent}
+                  </div>
+                )}
+
+                {/* Separator */}
+                {index < projects.length - 1 && (
+                  <div className="mt-8 border-b border-gray-100" />
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
