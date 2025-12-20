@@ -14,11 +14,11 @@ export default function PostContent({ post }: PostContentProps) {
     <main className="min-h-screen bg-white">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <Link
-          href="/writing"
+          href="/#writing"
           className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors mb-8 text-sm"
         >
           <ArrowLeft size={16} />
-          <span>Writing</span>
+          <span>Home</span>
         </Link>
 
         <motion.div
@@ -53,10 +53,10 @@ export default function PostContent({ post }: PostContentProps) {
           className="mt-16 pt-8 border-t border-gray-100"
         >
           <Link
-            href="/writing"
+            href="/#writing"
             className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
           >
-            ← Back to writing
+            ← Back to home
           </Link>
         </motion.div>
       </div>
