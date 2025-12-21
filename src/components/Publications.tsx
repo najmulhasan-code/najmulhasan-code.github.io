@@ -30,7 +30,7 @@ export default function Publications() {
     },
     {
       title: 'Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists',
-      authors: ['Prashanth BusiReddyGari', 'Najmul Hasan'],
+      authors: ['Najmul Hasan', 'Prashanth BusiReddyGari'],
       venue: '2026 IEEE 16th Annual Computing and Communication Workshop and Conference (CCWC)',
       venueShort: 'IEEE CCWC',
       year: '',

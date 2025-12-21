@@ -22,21 +22,22 @@ export default function WorkExperience() {
       position: 'Undergraduate Research Assistant',
       institution: 'UNC Pembroke',
       location: 'Pembroke, NC',
-      startDate: '2023-09-01',
-      mentor: 'Dr. Shaohu Zhang',
+      startDate: '2023-05-01',
+      mentor: 'Dr. Prashanth BusiReddyGari',
       logo: '/images/uncp_logo.png',
       type: 'research',
-      keywords: 'Reinforcement Learning, Large Language Models, LLM Reasoning, Speech Emotion Recognition'
+      keywords: 'Natural Language Processing, Large Language Models, Multi-Agent Reinforcement Learning, Phishing URL Detection, Lightweight Cryptography, Cybersecurity'
     },
     {
       position: 'Undergraduate Research Assistant',
       institution: 'UNC Pembroke',
       location: 'Pembroke, NC',
-      startDate: '2023-05-01',
-      mentor: 'Dr. Prashanth BusiReddyGari',
+      startDate: '2023-09-01',
+      endDate: '2025-12-01',
+      mentor: 'Dr. Shaohu Zhang',
       logo: '/images/uncp_logo.png',
       type: 'research',
-      keywords: 'Large Language Models, Phishing URL Detection, Lightweight Cryptography, Cybersecurity'
+      keywords: 'Large Language Models, Speech Emotion Recognition, Natural Language Processing, Phishing Detection'
     },
     {
       position: 'Research Assistant',

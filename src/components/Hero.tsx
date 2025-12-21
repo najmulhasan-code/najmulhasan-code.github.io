@@ -47,7 +47,9 @@ export default function Hero() {
 
             {/* Affiliation */}
             <p className="text-gray-600 text-sm mb-4">
-              BS Computer Science, University of North Carolina at Pembroke
+              BS in Computer Science with minors in Mathematics and Physics, Honors Student
+              <br />
+              University of North Carolina at Pembroke
             </p>
 
             {/* Social Links */}
@@ -69,11 +71,19 @@ export default function Hero() {
             {/* Bio Content */}
             <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
               <p>
-                I research how to make large language models reason reliably under distribution shifts, adversarial inputs, and real-world deployment conditions. Currently, I am developing step-level intrinsic calibration (SLIC), which combines process supervision with confidence measurement to train models that are both accurate and well calibrated about their uncertainty.
+                I am an undergraduate researcher advised by <a href="https://www.uncp.edu/about/directory/prashanth-busi_reddy_gari.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Dr. Prashanth BusiReddyGari</a> at UNC Pembroke. Previously, I worked with <a href="https://zhangshaohu.github.io/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Dr. Shaohu Zhang</a> (UNC Pembroke / NC A&amp;T).
               </p>
 
               <p>
-                I work with Dr. Shaohu Zhang (NC A&T) and Dr. Prashanth BusiReddyGari (UNC Pembroke).
+                My research focuses on Natural Language Processing, specifically on understanding how large language models behave under distribution shifts, adversarial inputs, and real-world deployment constraints. I am interested in building robust NLP systems that can generalize across languages and domains.
+              </p>
+
+              <p>
+                Currently, I am working on multi-agent reinforcement learning for decentralized resource coordination, investigating emergent communication patterns and fairness in cooperative AI agents.
+              </p>
+
+              <p>
+                I have first-authored papers accepted to the NeurIPS 2025 LAW Workshop and IEEE CCWC 2026.
               </p>
 
               <p className="text-gray-900 font-medium">
