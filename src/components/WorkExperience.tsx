@@ -100,23 +100,22 @@ export default function WorkExperience() {
 
   return (
     <section id="experience" className="py-12 sm:py-16 lg:py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8 sm:mb-10 lg:mb-12"
+          className="mb-8"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
             Work Experience
           </h2>
         </motion.div>
 
         {/* Experience Timeline */}
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-8">
+        <div className="space-y-8">
             {experiences.map((exp, index) => (
               <motion.div
                 key={`${exp.startDate}-${exp.position}-${index}`}
@@ -178,7 +177,6 @@ export default function WorkExperience() {
                 </div>
               </motion.div>
             ))}
-          </div>
         </div>
       </div>
     </section>
