@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Najmul Hasan",
-  description: "Najmul Hasan - Undergraduate AI researcher at UNC Pembroke specializing in reinforcement learning for large language model reasoning, multilingual NLP, cybersecurity, and AI safety. Expert in SLIC (step-level intrinsic calibration), process supervision, phishing detection, and speech emotion recognition. Applying to PhD programs in Computer Science, EECS, Machine Learning, and Artificial Intelligence for Fall 2026. Research with Dr. Shaohu Zhang and Dr. Prashanth BusiReddyGari on LLM reasoning, AI security, and deep learning applications.",
+  description: "Najmul Hasan - Undergraduate researcher at UNC Pembroke specializing in Natural Language Processing, large language models, and multi-agent reinforcement learning. PhD applicant for Fall 2026. Research with Dr. Prashanth BusiReddyGari on NLP and multi-agent systems.",
   keywords: [
     // Primary Identity
     "Najmul Hasan",
@@ -197,7 +197,7 @@ export const metadata: Metadata = {
   ],
   creator: "Najmul Hasan",
   publisher: "Najmul Hasan",
-  applicationName: "Najmul Hasan Research Portfolio",
+  applicationName: "Najmul Hasan",
   referrer: "origin-when-cross-origin",
   formatDetection: {
     email: true,
@@ -221,16 +221,16 @@ export const metadata: Metadata = {
     type: "profile",
     locale: "en_US",
     url: "https://najmulhasan-code.github.io",
-    title: "Najmul Hasan | AI Researcher in LLM Reasoning",
-    description: "AI researcher specializing in large language model reasoning, multilingual NLP, and cybersecurity.",
-    siteName: "Najmul Hasan - AI Research Portfolio",
+    title: "Najmul Hasan",
+    description: "Undergraduate researcher specializing in Natural Language Processing, large language models, and multi-agent reinforcement learning.",
+    siteName: "Najmul Hasan",
     images: [
       {
         url: "https://najmulhasan-code.github.io/images/najmul_hasan.jpg",
         secureUrl: "https://najmulhasan-code.github.io/images/najmul_hasan.jpg",
         width: 1200,
         height: 630,
-        alt: "Najmul Hasan - AI Researcher specializing in Reinforcement Learning and LLM Reasoning",
+        alt: "Najmul Hasan - Undergraduate Researcher",
         type: "image/jpeg",
       },
     ],
@@ -239,11 +239,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@_najmulhasan",
     creator: "@_najmulhasan",
-    title: "Najmul Hasan | AI Researcher | Reinforcement Learning & LLM Reasoning",
-    description: "AI researcher specializing in reinforcement learning for LLM reasoning, multilingual NLP, and cybersecurity. PhD applicant Fall 2026. Research on SLIC, process supervision, and AI safety.",
+    title: "Najmul Hasan",
+    description: "Undergraduate researcher specializing in Natural Language Processing, large language models, and multi-agent reinforcement learning. PhD applicant Fall 2026.",
     images: {
       url: "https://najmulhasan-code.github.io/images/najmul_hasan.jpg",
-      alt: "Najmul Hasan - AI Researcher",
+      alt: "Najmul Hasan",
     },
   },
   alternates: {
