@@ -4,8 +4,22 @@ import { Github, Linkedin, Twitter } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
+// Custom Google Scholar icon
+const GoogleScholar = ({ size = 20 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14Zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5 12 0Z" />
+  </svg>
+);
+
 export default function Hero() {
   const socialLinks = [
+    { icon: GoogleScholar, label: 'Google Scholar', url: 'https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en&oi=ao' },
     { icon: Github, label: 'GitHub', url: 'https://github.com/najmulhasan-code' },
     { icon: Linkedin, label: 'LinkedIn', url: 'https://linkedin.com/in/najmulhasan-cs-math' },
     { icon: Twitter, label: 'Twitter', url: 'https://x.com/_najmulhasan' }

@@ -14,6 +14,18 @@ interface NewsItem {
 export default function News() {
   const newsItems: NewsItem[] = [
     {
+      month: 'Jan',
+      year: '2026',
+      title: 'Presented at IEEE CCWC 2026',
+      description: 'Presented "Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists" at the IEEE 16th Annual Computing and Communication Workshop and Conference (CCWC) in Las Vegas.'
+    },
+    {
+      month: 'Dec',
+      year: '2025',
+      title: 'Presented at NeurIPS 2025 LAW Workshop',
+      description: 'Presented "Benchmarking Large Language Models for Zero-shot and Few-shot Phishing URL Detection" at the LAW 2025: Bridging Language, Agent, and World Models for Reasoning and Planning Workshop at NeurIPS 2025 in San Diego.'
+    },
+    {
       month: 'Nov',
       year: '2025',
       title: 'Participated in HackPrinceton Fall 2025',
