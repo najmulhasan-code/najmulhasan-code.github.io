@@ -95,6 +95,10 @@ export default function Hero() {
               <p>
                 Currently, I am working on multi-agent reinforcement learning for decentralized resource coordination, investigating emergent communication patterns and fairness in cooperative AI agents.
               </p>
+
+              <p>
+                I&apos;m always happy to discuss research ideas or potential collaborations. Feel free to reach out!
+              </p>
             </div>
           </motion.div>
         </div>
