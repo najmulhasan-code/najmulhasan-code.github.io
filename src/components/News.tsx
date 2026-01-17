@@ -1,7 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Calendar, ExternalLink } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Calendar, ExternalLink, ChevronDown } from 'lucide-react';
 
 interface NewsItem {
   month: string;
@@ -11,7 +12,11 @@ interface NewsItem {
   link?: string;
 }
 
+const INITIAL_DISPLAY_COUNT = 6;
+const LOAD_MORE_COUNT = 5;
+
 export default function News() {
+  const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
   const newsItems: NewsItem[] = [
     {
       month: 'Jan',
@@ -141,48 +146,79 @@ export default function News() {
               <p className="text-gray-600">News items coming soon...</p>
             </motion.div>
           ) : (
-            <div className="space-y-6">
-              {newsItems.map((item, index) => (
-                <motion.div
-                  key={`${item.year}-${item.month}-${index}`}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="flex gap-4"
-                >
-                  {/* Date Badge */}
-                  <div className="flex-shrink-0 w-24 sm:w-28">
-                    <span className="inline-block px-2 py-1 bg-blue-600 text-white text-xs font-medium rounded">
-                      {item.month} {item.year}
-                    </span>
-                  </div>
+            <>
+              <div className="space-y-6">
+                <AnimatePresence initial={false}>
+                  {newsItems.slice(0, displayCount).map((item, index) => (
+                    <motion.div
+                      key={`${item.year}-${item.month}-${index}`}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3, delay: index >= INITIAL_DISPLAY_COUNT ? (index - INITIAL_DISPLAY_COUNT) * 0.05 : 0 }}
+                      className="flex gap-4"
+                    >
+                      {/* Date Badge */}
+                      <div className="flex-shrink-0 w-24 sm:w-28">
+                        <span className="inline-block px-2 py-1 bg-blue-600 text-white text-xs font-medium rounded">
+                          {item.month} {item.year}
+                        </span>
+                      </div>
 
-                  {/* Content */}
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 leading-snug mb-1">
-                      {item.title}
-                    </h3>
-                    {item.description && (
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        {item.description}
-                      </p>
-                    )}
-                    {item.link && (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 mt-2 text-blue-600 hover:text-blue-700 text-sm font-medium transition-colors"
-                      >
-                        Learn more
-                        <ExternalLink size={14} />
-                      </a>
-                    )}
-                  </div>
+                      {/* Content */}
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-gray-900 leading-snug mb-1">
+                          {item.title}
+                        </h3>
+                        {item.description && (
+                          <p className="text-gray-600 text-sm leading-relaxed">
+                            {item.description}
+                          </p>
+                        )}
+                        {item.link && (
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 mt-2 text-blue-600 hover:text-blue-700 text-sm font-medium transition-colors"
+                          >
+                            Learn more
+                            <ExternalLink size={14} />
+                          </a>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+
+              {/* Show more / Show less buttons */}
+              {newsItems.length > INITIAL_DISPLAY_COUNT && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="mt-8 text-center"
+                >
+                  {displayCount < newsItems.length ? (
+                    <button
+                      onClick={() => setDisplayCount(prev => Math.min(prev + LOAD_MORE_COUNT, newsItems.length))}
+                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                    >
+                      Show more
+                      <ChevronDown className="w-4 h-4 transition-transform" />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setDisplayCount(INITIAL_DISPLAY_COUNT)}
+                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                    >
+                      Show less
+                      <ChevronDown className="w-4 h-4 rotate-180 transition-transform" />
+                    </button>
+                  )}
                 </motion.div>
-              ))}
-            </div>
+              )}
+            </>
           )}
         </div>
       </div>
