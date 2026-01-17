@@ -10,7 +10,7 @@ I focus on using reinforcement learning (RL) to improve reasoning in large langu
 
 I also work with Dr. Prashanth BusiReddyGari on drone security applications using LLMs. Previously, I have worked on multilingual phishing email detection with LLM with Dr. BusiReddyGari and Dr. Zhang, speech emotion recognition with Dr. Zhang, phishing URL detection with LLM with Dr. BusiReddyGari, and lightweight cryptography algorithms and mobile driver's license (mDL) with Dr. BusiReddyGari and Dr. Ali Saman Tosun.
 
-I'm applying to PhD programs for Fall 2026. I'm always happy to discuss research ideas or potential collaborations. Feel free to reach out!
+I'm always happy to discuss research ideas or potential collaborations. Feel free to reach out!
 
 ---
 
