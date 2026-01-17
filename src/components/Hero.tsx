@@ -95,14 +95,6 @@ export default function Hero() {
               <p>
                 Currently, I am working on multi-agent reinforcement learning for decentralized resource coordination, investigating emergent communication patterns and fairness in cooperative AI agents.
               </p>
-
-              <p>
-                I have first-authored papers accepted to the NeurIPS 2025 LAW Workshop and IEEE CCWC 2026.
-              </p>
-
-              <p className="text-gray-900 font-medium">
-                I&apos;m applying to PhD programs for Fall 2026. Feel free to reach out!
-              </p>
             </div>
           </motion.div>
         </div>
