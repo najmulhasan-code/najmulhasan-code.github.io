@@ -1,10 +1,10 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Publications from '@/components/Publications';
-import Writing from '@/components/Writing';
+import Blog from '@/components/Blog';
 import News from '@/components/News';
-import Projects from '@/components/Projects';
-import WorkExperience from '@/components/WorkExperience';
+
+import Experience from '@/components/Experience';
 import Education from '@/components/Education';
 import Awards from '@/components/Awards';
 import Footer from '@/components/Footer';
@@ -16,11 +16,10 @@ export default function Home() {
       <Hero />
       <News />
       <Publications />
-      <WorkExperience />
+      <Experience />
       <Education />
-      <Projects />
       <Awards />
-      <Writing />
+      <Blog />
       <Footer />
     </main>
   );

@@ -1,0 +1,28 @@
+# Najmul Hasan
+
+> Najmul Hasan is an undergraduate researcher at the University of North Carolina at Pembroke working at the intersection of AI safety & alignment and natural language processing. He is advised by Dr. Prashanth BusiReddyGari, previously worked with Dr. Shaohu Zhang, and is currently an AI Safety Research Fellow at Algoverse. Current work uses reinforcement learning (GRPO, QLoRA) to train LLMs as agents on classical concurrency problems like Dining Philosophers. He also founded and runs UNC Pembroke's AI student organization, AI@UNCP, and has organized HackUNCP 2025 and HackUNCP 2026.
+
+## Research Papers
+
+- [Honeypot Protocol](https://najmulhasan-code.github.io/papers/honeypot-protocol): Trusted monitoring, the standard defense in AI control, is vulnerable to adaptive attacks, collusion, and strategic attack selection. The honeypot protocol tests context-dependent behavior in AI systems by varying system prompts across evaluation, deployment, and no-monitoring conditions. AI Control Hackathon by Apart Research, 2026. [Paper](https://apartresearch.com/project/honeypot-protocol-hmsb) | [Code](https://github.com/najmulhasan-code/honeypot-protocol)
+
+- [DPBench: Large Language Models Struggle with Simultaneous Coordination](https://najmulhasan-code.github.io/papers/dpbench): A benchmark based on the Dining Philosophers problem showing LLMs fail at simultaneous coordination with deadlock rates exceeding 95%. Communication alone does not resolve coordination failures. arXiv preprint, Feb 2026. [arXiv](https://arxiv.org/abs/2602.13255) | [Code](https://github.com/najmulhasan-code/dpbench)
+
+- [Benchmarking Large Language Models for Zero-shot and Few-shot Phishing URL Detection](https://najmulhasan-code.github.io/papers/phishing-url-detection): Comprehensive benchmark of LLMs under zero-shot and few-shot prompting for phishing URL detection; few-shot prompting with 6 examples raised best model accuracy from 89% to 94%. LAW Workshop at NeurIPS 2025. [Paper](https://openreview.net/forum?id=COmhlLFVk9) | [arXiv](https://arxiv.org/abs/2602.02641)
+
+- [Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists](https://najmulhasan-code.github.io/papers/nist-crypto): Symbolic model decomposing NIST lightweight cryptography finalists into initialization, data-processing, and finalization phases for formal time-complexity derivation. IEEE CCWC 2026. [DOI](https://doi.org/10.1109/CCWC67433.2026.11393752) | [arXiv](https://arxiv.org/abs/2602.05641)
+
+- [Phishing Email Detection Using Large Language Models](https://najmulhasan-code.github.io/papers/phishing-email-detection): LLM-PEA framework evaluating three frontier LLMs against adversarial, prompt injection, and cross-lingual phishing attacks across 4,000+ email samples; revealed up to 904% false positive rate increase in non-English settings. arXiv preprint, Dec 2025. [arXiv](https://arxiv.org/abs/2512.10104)
+
+## Service
+
+- Founder and President, AI@UNCP (AI student organization at UNC Pembroke), since 2023
+- Lead Organizer, HackUNCP 2025 and HackUNCP 2026
+
+## Links
+
+- [Homepage](https://najmulhasan-code.github.io)
+- [Google Scholar](https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en&oi=ao)
+- [GitHub](https://github.com/najmulhasan-code)
+- [LinkedIn](https://linkedin.com/in/najmulhasan-cs-math)
+- [Twitter / X](https://x.com/_najmulhasan)

@@ -7,7 +7,6 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-// Generate static params for all posts
 export function generateStaticParams() {
   const posts = getAllPosts();
   return posts.map((post) => ({
@@ -15,21 +14,21 @@ export function generateStaticParams() {
   }));
 }
 
-// Generate metadata for each post
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
 
   if (!post) {
-    return {
-      title: 'Post Not Found',
-    };
+    return { title: 'Post Not Found' };
   }
 
   return {
     title: `${post.title} | Najmul Hasan`,
     description: post.description,
     keywords: post.tags,
+    alternates: {
+      canonical: `https://najmulhasan-code.github.io/blog/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.description,
@@ -37,6 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.date,
       authors: ['Najmul Hasan'],
       tags: post.tags,
+      url: `https://najmulhasan-code.github.io/blog/${post.slug}`,
     },
     twitter: {
       card: 'summary_large_image',

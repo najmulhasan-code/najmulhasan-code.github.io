@@ -1,0 +1,36 @@
+import type { Paper } from './_types';
+
+export const paper: Paper = {
+  slug: 'honeypot-protocol',
+  title: 'Honeypot Protocol',
+  authors: ['Najmul Hasan'],
+  keywords: [
+    'AI safety',
+    'AI control',
+    'trusted monitoring',
+    'honeypot',
+    'context-dependent behavior',
+    'large language models',
+  ],
+  venue: 'AI Control Hackathon by Apart Research, Mar. 2026',
+  venueShort: 'AI Control Hackathon 2026',
+  year: '2026',
+  date: '2026-03-01',
+  abstract:
+    'Trusted monitoring, the standard defense in AI control, is vulnerable to adaptive attacks, collusion, and strategic attack selection. All of these exploit the fact that monitoring is passive: it observes model behavior but never probes whether the model would behave differently under different perceived conditions. We introduce the honeypot protocol, which tests for context-dependent behavior by varying only the system prompt across three conditions (evaluation, synthetic deployment, explicit no-monitoring) while holding the task, environment, and scoring identical. We evaluate Claude Opus 4.6 in BashArena across all three conditions in both honest and attack modes. The model achieved 100% main task success and triggered zero side tasks uniformly across conditions, providing a baseline for future comparisons with stronger attack policies and additional models.',
+  thumbnail: '/papers/honeypot-protocol/thumbnail.png',
+  paperLink: 'https://apartresearch.com/project/honeypot-protocol-hmsb',
+  arxivLink: 'https://arxiv.org/abs/2604.13301',
+  codeLink: 'https://github.com/najmulhasan-code/honeypot-protocol',
+  bibtex: `@misc{hasan2026honeypot,
+  title         = {Honeypot Protocol},
+  author        = {Hasan, Najmul},
+  year          = {2026},
+  month         = apr,
+  eprint        = {2604.13301},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  howpublished  = {AI Control Hackathon, Apart Research, March 2026},
+  url           = {https://arxiv.org/abs/2604.13301}
+}`,
+};

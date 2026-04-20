@@ -1,67 +1,25 @@
 @import "tailwindcss";
 
-/* Enhanced Academic Design System - Premium Light Theme */
 :root {
-  /* Professional light palette for academic excellence */
   --gray-50: #f9fafb;
   --gray-100: #f3f4f6;
   --gray-200: #e5e7eb;
-  --gray-300: #d1d5db;
   --gray-400: #9ca3af;
   --gray-500: #6b7280;
   --gray-600: #4b5563;
   --gray-700: #374151;
   --gray-800: #1f2937;
   --gray-900: #111827;
-  --gray-950: #030712;
 
-  /* Professional blue accents */
-  --blue-50: #eff6ff;
-  --blue-100: #dbeafe;
-  --blue-200: #bfdbfe;
-  --blue-300: #93c5fd;
-  --blue-400: #60a5fa;
-  --blue-500: #3b82f6;
-  --blue-600: #2563eb;
-  --blue-700: #1d4ed8;
-  --blue-800: #1e40af;
-  --blue-900: #1e3a8a;
+  --teal-100: #ccfbf1;
+  --teal-500: #14b8a6;
+  --teal-800: #115e59;
+  --teal-900: #134e4a;
 
-  /* Accent colors */
-  --accent-blue: #2563eb;
-  --accent-indigo: #4f46e5;
-  --accent-purple: #7c3aed;
-  --accent-emerald: #059669;
-  --accent-amber: #d97706;
+  --accent-primary: #0f766e;
 
-  /* Semantic colors */
   --background: #ffffff;
-  --background-secondary: var(--gray-50);
   --foreground: var(--gray-900);
-  --foreground-muted: var(--gray-600);
-  --card-bg: #ffffff;
-  --card-border: var(--gray-200);
-  --card-hover: var(--gray-100);
-
-  /* Typography scale */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
-  --text-5xl: 3rem;
-
-  /* Spacing scale */
-  --space-xs: 0.5rem;
-  --space-sm: 0.75rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 4rem;
 }
 
 @theme inline {
@@ -77,6 +35,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 72px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -89,7 +48,6 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* Enhanced scrollbar styling */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -108,48 +66,16 @@ body {
   background: var(--gray-500);
 }
 
-/* Custom scrollbar for News section - thin and elegant */
-.news-scroll::-webkit-scrollbar {
-  width: 6px;
-}
-
-.news-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.news-scroll::-webkit-scrollbar-thumb {
-  background: var(--gray-300);
-  border-radius: 3px;
-}
-
-.news-scroll::-webkit-scrollbar-thumb:hover {
-  background: var(--gray-400);
-}
-
-/* Firefox support for news scroll */
-.news-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: var(--gray-300) transparent;
-}
-
-/* Selection styling */
 ::selection {
-  background: var(--blue-100);
-  color: var(--blue-900);
+  background: var(--teal-100);
+  color: var(--teal-900);
 }
 
-/* Focus states for accessibility */
 :focus-visible {
-  outline: 2px solid var(--accent-blue);
+  outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
 
-/* Smooth transitions for theme elements */
-.smooth-transition {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Prose styling for blog/writing content */
 .prose {
   color: var(--gray-700);
   max-width: 65ch;
@@ -231,17 +157,17 @@ body {
 }
 
 .prose a {
-  color: var(--accent-blue);
+  color: var(--accent-primary);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .prose a:hover {
-  color: var(--blue-700);
+  color: var(--teal-800);
 }
 
 .prose blockquote {
-  border-left: 4px solid var(--blue-500);
+  border-left: 4px solid var(--teal-500);
   padding-left: 1rem;
   margin: 1.5rem 0;
   color: var(--gray-600);
@@ -254,7 +180,6 @@ body {
   margin: 2rem 0;
 }
 
-/* Line clamp utility */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;

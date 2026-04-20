@@ -5,6 +5,9 @@ Allow: /
 
 Sitemap: https://najmulhasan-code.github.io/sitemap.xml
 
+# AI Content Map
+# See https://najmulhasan-code.github.io/llms.txt
+
 User-agent: Googlebot
 Allow: /
 

@@ -12,195 +12,105 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_DESCRIPTION =
+  "Najmul Hasan is an undergraduate researcher at the University of North Carolina at Pembroke working at the intersection of AI safety & alignment and natural language processing. AI Safety Research Fellow at Algoverse. First-author work at NeurIPS 2025 LAW Workshop and IEEE CCWC 2026. PhD applicant for Fall 2026.";
+
+const SITE_SHORT_DESCRIPTION =
+  "Undergraduate researcher at UNC Pembroke working at the intersection of AI safety & alignment and natural language processing.";
+
 export const metadata: Metadata = {
   title: "Najmul Hasan",
-  description: "Najmul Hasan - Undergraduate researcher at UNC Pembroke specializing in Natural Language Processing, large language models, and multi-agent reinforcement learning. PhD applicant for Fall 2026. Research with Dr. Prashanth BusiReddyGari on NLP and multi-agent systems.",
+  description: SITE_DESCRIPTION,
   keywords: [
-    // Primary Identity
+    // Identity
     "Najmul Hasan",
     "Najmul",
     "Hasan",
-    "Najmul Hasan AI researcher",
-    "Najmul Hasan computer science",
     "Najmul Hasan UNC Pembroke",
+    "Najmul Hasan AI safety",
+    "Najmul Hasan researcher",
 
-    // Academic & Career
-    "PhD applicant computer science",
-    "PhD applicant artificial intelligence",
-    "PhD applicant machine learning",
-    "PhD applicant EECS",
-    "AI researcher",
-    "machine learning researcher",
+    // Career stage
     "undergraduate researcher",
-    "computer science researcher",
+    "PhD applicant Fall 2026",
+    "PhD applicant computer science",
+    "PhD applicant machine learning",
+    "PhD applicant AI safety",
 
-    // Core Research Areas - Reinforcement Learning
-    "reinforcement learning",
-    "reinforcement learning for LLMs",
-    "RL for large language models",
-    "reinforcement learning AI",
-    "reinforcement learning reasoning",
-    "process supervision",
-    "reward design",
-    "RLHF",
-    "reinforcement learning from human feedback",
-
-    // Core Research Areas - LLM & Reasoning
-    "large language models",
-    "LLM reasoning",
-    "LLM calibration",
-    "language model reasoning",
-    "AI reasoning",
-    "step-by-step reasoning",
-    "chain of thought reasoning",
-    "mathematical reasoning AI",
-    "reasoning in AI",
-
-    // Specific Research Projects
-    "SLIC",
-    "step-level intrinsic calibration",
-    "intrinsic calibration",
-    "confidence calibration",
-    "uncertainty quantification",
-    "model calibration",
-
-    // NLP & Language
-    "multilingual NLP",
-    "natural language processing",
-    "cross-lingual NLP",
-    "multilingual AI",
-    "speech emotion recognition",
-    "speech recognition",
-    "emotion detection",
-    "sentiment analysis",
-
-    // Cybersecurity & AI Security
-    "AI security",
-    "AI cybersecurity",
-    "phishing detection",
-    "phishing email detection",
-    "adversarial AI",
+    // Primary research areas
     "AI safety",
-    "secure AI",
-    "LLM security",
-    "prompt injection",
-    "adversarial attacks",
-    "cyber threat intelligence",
-    "lightweight cryptography",
-    "mobile driver license security",
-
-    // Deep Learning & ML
-    "deep learning",
-    "neural networks",
-    "transformer models",
-    "deep learning research",
-    "machine learning",
-    "artificial intelligence",
-    "AI research",
-    "ML research",
-
-    // Software Engineering & Development
-    "software engineering",
-    "full stack development",
-    "web development",
-    "software development",
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Python",
-    "AI engineer",
-
-    // Academic Institutions
-    "UNC Pembroke",
-    "University of North Carolina Pembroke",
-    "UNCP",
-    "Esther G Maynor Honors College",
-
-    // Mentors & Collaborators
-    "Dr. Shaohu Zhang",
-    "Dr. Prashanth BusiReddyGari",
-    "Dr. Ali Saman Tosun",
-    
-
-    // Competitions & Activities
-    "HackHarvard",
-    "HackNC",
-    "hackathon participant",
-    "AI club president",
-    "AI@UNCP",
-
-    // Research Topics - Specific
-    "process supervision LLM",
-    "reward modeling",
-    "LLM fine-tuning",
-    "model alignment",
     "AI alignment",
-    "Wav2Vec2",
-    "STIX 2.0",
-    "knowledge graphs",
-    "synthetic data generation",
-
-    // Fellowships & Recognition
-    "URFS fellowship",
-    "SURF fellowship",
-    "Honors Scholar Fellowship",
-    "research fellowship",
-    "undergraduate research",
-
-    // Application Areas
-    "AI for education",
-    "AI for healthcare",
-    "AI for cybersecurity",
-    "AI for sustainability",
-
-    // Technologies & Frameworks
-    "PyTorch",
-    "TensorFlow",
-    "Hugging Face",
-    "OpenAI",
-    "GPT-4",
-    "Supabase",
-    "Firebase",
-    "Django",
-    "Angular",
-    "Flutter",
-
-    // Broader Topics
-    "artificial general intelligence",
-    "AGI research",
-    "computational linguistics",
-    "cognitive computing",
-    "explainable AI",
-    "interpretable AI",
+    "AI safety research",
+    "LLM agents",
+    "multi-agent LLMs",
+    "multi-agent systems",
+    "LLM coordination",
+    "LLM evaluation",
+    "adversarial robustness",
+    "LLM security",
     "trustworthy AI",
-    "responsible AI",
+    "AI control",
 
-    // Career Goals
-    "PhD computer science",
-    "PhD machine learning",
-    "PhD artificial intelligence",
-    "PhD EECS",
-    "graduate school applications",
-    "research portfolio",
-    "academic portfolio",
+    // Methods
+    "reinforcement learning post-training",
+    "GRPO",
+    "QLoRA",
+    "LLM fine-tuning",
 
-    // Regional
-    "AI researcher North Carolina",
-    "machine learning researcher NC",
-    "computer science UNC system"
+    // Publication topics
+    "phishing detection with LLMs",
+    "phishing URL detection",
+    "phishing email detection",
+    "multilingual NLP",
+    "multilingual phishing detection",
+    "lightweight cryptography time complexity",
+
+    // Broader ML / NLP
+    "natural language processing",
+    "large language models",
+    "transformer models",
+    "machine learning research",
+    "artificial intelligence research",
+
+    // Institutions
+    "University of North Carolina at Pembroke",
+    "UNC Pembroke",
+    "UNCP",
+    "Algoverse",
+    "Esther G. Maynor Honors College",
+
+    // Advisors & collaborators
+    "Dr. Prashanth BusiReddyGari",
+    "Dr. Shaohu Zhang",
+
+    // Service & community
+    "AI@UNCP",
+    "HackUNCP",
+
+    // Fellowships
+    "Undergraduate Research Fellowship Summer",
+    "URFS",
+    "Semester-Long Undergraduate Research Fellowship",
+    "SURF",
+    "Honors Scholar Fellowship",
+
+    // Venues
+    "NeurIPS 2025 LAW Workshop",
+    "IEEE CCWC 2026",
+    "Apart Research AI Control Hackathon",
   ],
   authors: [
     {
       name: "Najmul Hasan",
-      url: "https://najmulhasan-code.github.io"
-    }
+      url: "https://najmulhasan-code.github.io",
+    },
   ],
   creator: "Najmul Hasan",
   publisher: "Najmul Hasan",
   applicationName: "Najmul Hasan",
   referrer: "origin-when-cross-origin",
   formatDetection: {
-    email: true,
+    email: false,
     address: false,
     telephone: false,
   },
@@ -212,9 +122,9 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
@@ -222,7 +132,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://najmulhasan-code.github.io",
     title: "Najmul Hasan",
-    description: "Undergraduate researcher specializing in Natural Language Processing, large language models, and multi-agent reinforcement learning.",
+    description: SITE_SHORT_DESCRIPTION,
     siteName: "Najmul Hasan",
     images: [
       {
@@ -230,7 +140,7 @@ export const metadata: Metadata = {
         secureUrl: "https://najmulhasan-code.github.io/images/najmul_hasan.jpg",
         width: 1200,
         height: 630,
-        alt: "Najmul Hasan - Undergraduate Researcher",
+        alt: "Najmul Hasan",
         type: "image/jpeg",
       },
     ],
@@ -240,7 +150,7 @@ export const metadata: Metadata = {
     site: "@_najmulhasan",
     creator: "@_najmulhasan",
     title: "Najmul Hasan",
-    description: "Undergraduate researcher specializing in Natural Language Processing, large language models, and multi-agent reinforcement learning. PhD applicant Fall 2026.",
+    description: SITE_SHORT_DESCRIPTION,
     images: {
       url: "https://najmulhasan-code.github.io/images/najmul_hasan.jpg",
       alt: "Najmul Hasan",
@@ -249,21 +159,96 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://najmulhasan-code.github.io",
     languages: {
-      'en-US': 'https://najmulhasan-code.github.io',
+      "en-US": "https://najmulhasan-code.github.io",
     },
-  },
-  verification: {
-    // google: 'your-google-site-verification-code',
-    // yandex: 'your-yandex-verification-code',
-    // bing: 'your-bing-verification-code',
   },
   category: "Technology",
   classification: "Academic Research Portfolio",
-  other: {
-    "google-site-verification": "pending",
-    "msvalidate.01": "pending",
-    "p:domain_verify": "pending",
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://najmulhasan-code.github.io/#person",
+  name: "Najmul Hasan",
+  givenName: "Najmul",
+  familyName: "Hasan",
+  url: "https://najmulhasan-code.github.io",
+  image: "https://najmulhasan-code.github.io/images/najmul_hasan.jpg",
+  sameAs: [
+    "https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en",
+    "https://github.com/najmulhasan-code",
+    "https://linkedin.com/in/najmulhasan-cs-math",
+    "https://x.com/_najmulhasan",
+  ],
+  jobTitle: "Undergraduate Researcher",
+  worksFor: [
+    {
+      "@type": "EducationalOrganization",
+      name: "University of North Carolina at Pembroke",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Pembroke",
+        addressRegion: "NC",
+        addressCountry: "US",
+      },
+    },
+    {
+      "@type": "Organization",
+      name: "Algoverse",
+    },
+  ],
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "University of North Carolina at Pembroke",
+    sameAs: "https://www.uncp.edu",
   },
+  knowsAbout: [
+    "AI Safety",
+    "AI Alignment",
+    "LLM Agents",
+    "Multi-Agent LLMs",
+    "LLM Evaluation",
+    "Adversarial Robustness",
+    "Natural Language Processing",
+    "Large Language Models",
+    "Reinforcement Learning Post-Training",
+    "GRPO",
+    "QLoRA",
+    "Phishing Detection with LLMs",
+    "Multilingual NLP",
+    "Lightweight Cryptography",
+  ],
+  description: SITE_SHORT_DESCRIPTION,
+  memberOf: [
+    {
+      "@type": "Organization",
+      name: "AI@UNCP",
+      description: "AI student organization at UNC Pembroke, founded by Najmul Hasan",
+    },
+    {
+      "@type": "Organization",
+      name: "Esther G. Maynor Honors College",
+    },
+  ],
+  seeks: {
+    "@type": "EducationalOccupationalProgram",
+    name: "PhD in Computer Science",
+    programType: "Doctoral",
+    occupationalCategory: "Computer and Information Research Scientists",
+  },
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://najmulhasan-code.github.io/#website",
+  url: "https://najmulhasan-code.github.io",
+  name: "Najmul Hasan",
+  description:
+    "Academic portfolio of Najmul Hasan, undergraduate researcher working on AI safety and natural language processing.",
+  inLanguage: "en-US",
+  author: { "@id": "https://najmulhasan-code.github.io/#person" },
 };
 
 export default function RootLayout({
@@ -278,167 +263,20 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/images/najmul_hasan.jpg" />
         <meta name="theme-color" content="#ffffff" />
 
-        {/* Additional SEO Meta Tags */}
         <meta name="author" content="Najmul Hasan" />
         <meta name="language" content="English" />
-        <meta name="revisit-after" content="7 days" />
-        <meta name="coverage" content="Worldwide" />
-        <meta name="distribution" content="Global" />
-        <meta name="rating" content="General" />
-        <meta name="target" content="all" />
         <meta name="HandheldFriendly" content="True" />
-        <meta name="MobileOptimized" content="320" />
 
-        {/* Structured Data for Search Engines and AI */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "@id": "https://najmulhasan-code.github.io/#person",
-              "name": "Najmul Hasan",
-              "givenName": "Najmul",
-              "familyName": "Hasan",
-              "url": "https://najmulhasan-code.github.io",
-              "image": "https://najmulhasan-code.github.io/images/najmul_hasan.jpg",
-              "sameAs": [
-                "https://github.com/najmulhasan-code",
-                "https://linkedin.com/in/najmulhasan-cs-math",
-                "https://x.com/_najmulhasan"
-              ],
-              "jobTitle": "Undergraduate AI Researcher",
-              "worksFor": {
-                "@type": "EducationalOrganization",
-                "name": "University of North Carolina at Pembroke",
-                "address": {
-                  "@type": "PostalAddress",
-                  "addressLocality": "Pembroke",
-                  "addressRegion": "NC",
-                  "addressCountry": "US"
-                }
-              },
-              "alumniOf": {
-                "@type": "CollegeOrUniversity",
-                "name": "University of North Carolina at Pembroke",
-                "sameAs": "https://www.uncp.edu"
-              },
-              "knowsAbout": [
-                "Artificial Intelligence",
-                "Machine Learning",
-                "Reinforcement Learning",
-                "Large Language Models",
-                "Natural Language Processing",
-                "Deep Learning",
-                "Cybersecurity",
-                "Software Engineering",
-                "Computer Science",
-                "LLM Reasoning",
-                "Process Supervision",
-                "AI Safety",
-                "Multilingual NLP",
-                "Speech Emotion Recognition",
-                "Phishing Detection"
-              ],
-              "description": "AI researcher specializing in reinforcement learning for large language model reasoning, multilingual NLP, and cybersecurity applications. Developing SLIC (step-level intrinsic calibration) for improved LLM reasoning. PhD applicant for Fall 2026.",
-              "email": "contact@najmulhasan.com",
-              "memberOf": [
-                {
-                  "@type": "Organization",
-                  "name": "AI@UNCP",
-                  "description": "Artificial Intelligence Club at UNC Pembroke"
-                },
-                {
-                  "@type": "Organization",
-                  "name": "Esther G. Maynor Honors College"
-                }
-              ],
-              "seeks": {
-                "@type": "EducationalOccupationalProgram",
-                "name": "PhD in Computer Science",
-                "programType": "Doctoral",
-                "occupationalCategory": "Computer and Information Research Scientists"
-              }
-            })
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-
-        {/* Organization Schema for Research Work */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ResearchProject",
-              "@id": "https://najmulhasan-code.github.io/#research",
-              "name": "Step-Level Intrinsic Calibration for Large Language Models",
-              "alternateName": "SLIC",
-              "description": "Research on reinforcement learning to improve reasoning in large language models through step-level intrinsic calibration, combining process supervision with confidence measurement.",
-              "url": "https://najmulhasan-code.github.io",
-              "author": {
-                "@type": "Person",
-                "name": "Najmul Hasan",
-                "url": "https://najmulhasan-code.github.io"
-              },
-              "contributor": [
-                {
-                  "@type": "Person",
-                  "name": "Dr. Shaohu Zhang"
-                },
-                {
-                  "@type": "Person",
-                  "name": "Dr. Prashanth BusiReddyGari"
-                }
-              ],
-              "about": [
-                {
-                  "@type": "Thing",
-                  "name": "Reinforcement Learning"
-                },
-                {
-                  "@type": "Thing",
-                  "name": "Large Language Models"
-                },
-                {
-                  "@type": "Thing",
-                  "name": "AI Reasoning"
-                },
-                {
-                  "@type": "Thing",
-                  "name": "Process Supervision"
-                }
-              ]
-            })
-          }}
-        />
-
-        {/* Website Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "@id": "https://najmulhasan-code.github.io/#website",
-              "url": "https://najmulhasan-code.github.io",
-              "name": "Najmul Hasan - AI Research Portfolio",
-              "description": "Academic and research portfolio of Najmul Hasan, AI researcher specializing in reinforcement learning for LLM reasoning",
-              "inLanguage": "en-US",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": {
-                  "@type": "EntryPoint",
-                  "urlTemplate": "https://najmulhasan-code.github.io/#{search_term_string}"
-                },
-                "query-input": "required name=search_term_string"
-              }
-            })
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
     </html>

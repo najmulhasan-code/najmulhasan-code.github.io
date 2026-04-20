@@ -1,48 +1,21 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FileText } from 'lucide-react';
+import { FileText, ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { getAllPapers } from '@/data/papers';
 
-interface Publication {
-  title: string;
-  authors: string[];
-  venue: string;
-  venueShort: string;
-  year: string;
-  arxivLink?: string;
-  pdfLink?: string;
-  codeLink?: string;
-  scholarLink?: string;
-}
-
-// Your name to be highlighted in author lists
 const AUTHOR_NAME = 'Najmul Hasan';
 
 export default function Publications() {
-  const publications: Publication[] = [
-    {
-      title: 'Benchmarking Large Language Models for Zero-shot and Few-shot Phishing URL Detection',
-      authors: ['Najmul Hasan', 'Prashanth BusiReddyGari'],
-      venue: 'LAW 2025 Workshop, 39th Conference on Neural Information Processing Systems (NeurIPS 2025)',
-      venueShort: 'NeurIPS Workshop',
-      year: '',
-      scholarLink: 'https://scholar.google.com/scholar?hl=en&as_sdt=0%2C34&q=Benchmarking+Large+Language+Models+for+Zero-shot+and+Few-shot+Phishing+URL+Detection',
-    },
-    {
-      title: 'Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists',
-      authors: ['Najmul Hasan', 'Prashanth BusiReddyGari'],
-      venue: '2026 IEEE 16th Annual Computing and Communication Workshop and Conference (CCWC)',
-      venueShort: 'IEEE CCWC',
-      year: '',
-    },
-  ];
+  const publications = getAllPapers();
 
-  // Helper to render authors with your name highlighted
   const renderAuthors = (authors: string[]) => {
     return authors.map((author, idx) => (
       <span key={idx}>
         {author === AUTHOR_NAME ? (
-          <span className="text-blue-600">{author}</span>
+          <span className="text-teal-700">{author}</span>
         ) : (
           <span>{author}</span>
         )}
@@ -52,115 +25,82 @@ export default function Publications() {
   };
 
   return (
-    <section id="research" className="py-12 sm:py-16 lg:py-20 bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        {/* Section Header */}
+    <section id="research" className="py-12 sm:py-16 lg:py-20 bg-[#f8fafa]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-8"
+          className="mb-10"
         >
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-            Selected Publications
+            Research
           </h2>
         </motion.div>
 
-        {/* Publications List */}
-        <div>
-          {publications.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center py-12"
-            >
-              <FileText className="mx-auto mb-4 text-gray-400" size={48} />
-              <p className="text-gray-600">Publications coming soon...</p>
-            </motion.div>
-          ) : (
-            <div className="space-y-8">
-              {publications.map((pub, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="flex gap-4"
-                >
-                  {/* Venue Badge */}
-                  <div className="flex-shrink-0 w-32 sm:w-36">
-                    <span className="inline-block px-2 py-1 bg-blue-600 text-white text-xs font-medium rounded text-center">
+        {publications.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center py-12"
+          >
+            <FileText className="mx-auto mb-4 text-gray-400" size={48} />
+            <p className="text-gray-600">Publications coming soon...</p>
+          </motion.div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {publications.map((pub, index) => (
+              <motion.article
+                key={pub.slug}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                className="group relative bg-white rounded-md overflow-hidden border border-gray-200 hover:border-teal-600 shadow-[0_0_24px_rgba(0,0,0,0.06)] hover:shadow-[0_0_40px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col border-t-[6px] border-t-teal-600 cursor-pointer"
+              >
+                <Link href={`/papers/${pub.slug}`} className="absolute inset-0 z-10" aria-label={`Read more about ${pub.title}`} />
+
+                {pub.thumbnail && (
+                  <div className="aspect-[16/9] flex items-center justify-center overflow-hidden">
+                    <Image
+                      src={pub.thumbnail}
+                      alt={pub.title}
+                      width={600}
+                      height={338}
+                      className="object-contain w-[85%] h-[85%] group-hover:scale-[1.02] transition-transform duration-300"
+                    />
+                  </div>
+                )}
+
+                <div className="px-4 pt-4 pb-4 flex flex-col flex-1">
+                  <h3 className="text-[15px] sm:text-[16px] font-medium text-gray-900 leading-snug mb-1.5 group-hover:text-teal-800 transition-colors line-clamp-2">
+                    {pub.title}
+                  </h3>
+
+                  <p className="text-[12.5px] sm:text-[13px] text-gray-500 mb-2 line-clamp-1">
+                    {renderAuthors(pub.authors)}
+                  </p>
+
+                  <p className="text-[12.5px] sm:text-[13px] text-gray-400 leading-relaxed line-clamp-3 flex-1">
+                    {pub.abstract}
+                  </p>
+
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100 relative z-20">
+                    <span className="text-[11px] font-medium tracking-wide uppercase text-teal-700">
                       {pub.venueShort}
                     </span>
+                    <span className="inline-flex items-center gap-1 text-[13px] font-medium text-gray-600 group-hover:text-teal-700 transition-colors cursor-pointer">
+                      Read more <ArrowUpRight size={13} />
+                    </span>
                   </div>
-
-                  {/* Content */}
-                  <div className="flex-1">
-                    {/* Title */}
-                    <h3 className="font-semibold text-gray-900 leading-snug mb-1">
-                      {pub.title}
-                    </h3>
-                    {/* Authors */}
-                    <p className="text-gray-600 text-sm mb-1">
-                      {renderAuthors(pub.authors)}
-                    </p>
-                    {/* Venue and Year */}
-                    <p className="text-gray-500 text-sm mb-2">
-                      <em>{pub.venue}</em>{pub.year && ` ${pub.year}`}
-                    </p>
-                    {/* Links */}
-                    <div className="flex gap-2">
-                      {pub.arxivLink && (
-                        <a
-                          href={pub.arxivLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-3 py-1 border border-gray-300 text-gray-700 text-xs font-medium rounded hover:bg-gray-100 transition-colors"
-                        >
-                          ARXIV
-                        </a>
-                      )}
-                      {pub.pdfLink && (
-                        <a
-                          href={pub.pdfLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-3 py-1 border border-gray-300 text-gray-700 text-xs font-medium rounded hover:bg-gray-100 transition-colors"
-                        >
-                          PDF
-                        </a>
-                      )}
-                      {pub.codeLink && (
-                        <a
-                          href={pub.codeLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-3 py-1 border border-gray-300 text-gray-700 text-xs font-medium rounded hover:bg-gray-100 transition-colors"
-                        >
-                          CODE
-                        </a>
-                      )}
-                      {pub.scholarLink && (
-                        <a
-                          href={pub.scholarLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-3 py-1 border border-gray-300 text-gray-700 text-xs font-medium rounded hover:bg-gray-100 transition-colors"
-                        >
-                          GOOGLE SCHOLAR
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          )}
-        </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

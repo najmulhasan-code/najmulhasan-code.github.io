@@ -1,38 +1,24 @@
 'use client';
 
-import { Github, Linkedin, Twitter } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-
-// Custom Google Scholar icon
-const GoogleScholar = ({ size = 20 }: { size?: number }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14Zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5 12 0Z" />
-  </svg>
-);
+import { ScholarIcon, GithubIcon, LinkedinIcon, XIcon } from './icons';
 
 export default function Hero() {
   const socialLinks = [
-    { icon: GoogleScholar, label: 'Google Scholar', url: 'https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en&oi=ao' },
-    { icon: Github, label: 'GitHub', url: 'https://github.com/najmulhasan-code' },
-    { icon: Linkedin, label: 'LinkedIn', url: 'https://linkedin.com/in/najmulhasan-cs-math' },
-    { icon: Twitter, label: 'Twitter', url: 'https://x.com/_najmulhasan' }
+    { label: 'Google Scholar', url: 'https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en&oi=ao', Icon: ScholarIcon },
+    { label: 'GitHub', url: 'https://github.com/najmulhasan-code', Icon: GithubIcon },
+    { label: 'LinkedIn', url: 'https://linkedin.com/in/najmulhasan-cs-math', Icon: LinkedinIcon },
+    { label: 'Twitter', url: 'https://x.com/_najmulhasan', Icon: XIcon }
   ];
 
   return (
-    <section id="hero" className="bg-white pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col sm:flex-row gap-8 items-start">
+    <section id="hero" className="py-12 sm:py-16 lg:py-20 bg-[#f8fafa]">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="flex flex-col sm:flex-row gap-8 sm:gap-10 items-start">
 
-          {/* Left Column - Photo */}
           <motion.div
-            className="flex-shrink-0"
+            className="flex-shrink-0 flex flex-col items-center sm:items-start"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
@@ -40,64 +26,57 @@ export default function Hero() {
             <Image
               src="/images/najmul_hasan.jpg"
               alt="Najmul Hasan"
-              width={180}
-              height={180}
-              className="rounded-lg w-36 h-36 sm:w-44 sm:h-44 object-cover"
+              width={400}
+              height={400}
+              className="rounded-xl w-44 h-56 sm:w-52 sm:h-64 lg:w-60 lg:h-80 object-cover object-top shadow-lg ring-1 ring-gray-200"
               priority
             />
+
+            <div className="mt-5 flex items-center justify-center gap-4 w-44 sm:w-52 lg:w-60">
+              {socialLinks.map((social) => {
+                const Icon = social.Icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    title={social.label}
+                    className="inline-flex items-center justify-center w-8 h-8 rounded-md text-gray-500 hover:text-teal-700 hover:bg-gray-100 transition-colors"
+                  >
+                    <Icon className="w-[18px] h-[18px]" />
+                  </a>
+                );
+              })}
+            </div>
           </motion.div>
 
-          {/* Right Column - Bio */}
           <motion.div
-            className="flex-1"
+            className="flex-1 min-w-0"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            {/* Name */}
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+            <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-bold text-gray-900 tracking-tight leading-[1.1] mb-3">
               Najmul Hasan
             </h1>
 
-            {/* Affiliation */}
-            <p className="text-gray-600 text-sm mb-4">
-              BS in Computer Science with minors in Mathematics and Physics, Honors Student
-              <br />
-              University of North Carolina at Pembroke
-            </p>
-
-            {/* Social Links */}
-            <div className="flex gap-4 mb-6">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-gray-900 transition-colors"
-                  aria-label={social.label}
-                >
-                  <social.icon size={20} />
-                </a>
-              ))}
+            <div className="text-[14px] text-gray-600 leading-relaxed mb-5">
+              Undergraduate Researcher · <span className="text-gray-800">University of North Carolina at Pembroke</span>
             </div>
 
-            {/* Bio Content */}
-            <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
+            <div className="space-y-4 text-[15px] text-gray-700 leading-[1.7]">
               <p>
-                I am an undergraduate researcher advised by <a href="https://www.uncp.edu/about/directory/prashanth-busi_reddy_gari.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Dr. Prashanth BusiReddyGari</a> at UNC Pembroke. Previously, I worked with <a href="https://zhangshaohu.github.io/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Dr. Shaohu Zhang</a> (UNC Pembroke / NC A&amp;T).
+                Hi <span className="mx-0.5" role="img" aria-label="waving hand">👋</span>! I work at the intersection of AI safety &amp; alignment and natural language processing. Read my latest work, <a href="https://arxiv.org/abs/2602.13255" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">DPBench: Large Language Models Struggle with Simultaneous Coordination</a>. I&apos;m advised by <a href="https://www.uncp.edu/about/directory/prashanth-busi_reddy_gari.html" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Prashanth BusiReddyGari</a>, previously worked with <a href="https://zhangshaohu.github.io/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Shaohu Zhang</a>, and am currently an AI Safety Research Fellow at <a href="https://algoverseairesearch.org" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Algoverse</a>.
               </p>
 
               <p>
-                My research focuses on Natural Language Processing, specifically on understanding how large language models behave under distribution shifts, adversarial inputs, and real-world deployment constraints. I am interested in building robust NLP systems that can generalize across languages and domains.
+                My current work uses reinforcement learning (GRPO, QLoRA) to train LLMs as agents on classical concurrency problems like Dining Philosophers.
               </p>
 
               <p>
-                Currently, I am working on multi-agent reinforcement learning for decentralized resource coordination, investigating emergent communication patterns and fairness in cooperative AI agents.
-              </p>
-
-              <p>
-                I&apos;m always happy to discuss research ideas or potential collaborations. Feel free to reach out!
+                I also founded and run UNC Pembroke&apos;s AI student organization, AI@UNCP, and have organized <a href="https://hackuncp-2025.devpost.com/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">HackUNCP 2025</a> and <a href="https://hackuncp-2026.devpost.com/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">HackUNCP 2026</a>.
               </p>
             </div>
           </motion.div>
