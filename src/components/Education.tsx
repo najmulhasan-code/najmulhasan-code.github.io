@@ -22,7 +22,6 @@ const education: EducationEntry[] = [
     location: 'Pembroke, NC',
     startDate: '2023-01-01',
     endDate: '2026-05-01',
-    expected: true,
   },
 ];
 

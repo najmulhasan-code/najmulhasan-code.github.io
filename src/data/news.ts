@@ -7,10 +7,16 @@ export interface NewsItem {
 
 export const newsItems: NewsItem[] = [
   {
-    date: '2026-04',
-    title: 'New preprint: CRC-Screen for DNA-synthesis hazard screening',
+    date: '2026-05',
+    title: 'Graduated from UNC Pembroke',
     description:
-      'Released "CRC-Screen: Certified DNA-Synthesis Hazard Screening Under Taxonomic Shift" on arXiv — a conformal-risk-control screener that fuses sequence similarity, an LLM judge panel, and embedding similarity with certified false-negative-rate bounds.',
+      'Graduated from the University of North Carolina at Pembroke with a B.S. in Computer Science and minors in Mathematics and Physics. Completed the honors curriculum as a member of the Esther G. Maynor Honors College.',
+  },
+  {
+    date: '2026-04',
+    title: 'Released preprint: CRC-Screen for DNA-synthesis hazard screening',
+    description:
+      'Released "CRC-Screen: Certified DNA-Synthesis Hazard Screening Under Taxonomic Shift" on arXiv. A conformal-risk-control screener that fuses sequence similarity, an LLM judge panel, and embedding similarity with certified false-negative-rate bounds.',
     link: 'https://arxiv.org/abs/2605.00074',
   },
   {
