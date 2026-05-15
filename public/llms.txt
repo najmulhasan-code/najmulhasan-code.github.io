@@ -4,6 +4,8 @@
 
 ## Research Papers
 
+- [CRC-Screen: Certified DNA-Synthesis Hazard Screening Under Taxonomic Shift](https://najmulhasan-code.github.io/papers/crc-screen): A conformal-risk-control screener for DNA-synthesis biosecurity that fuses k-mer Jaccard similarity, a five-LLM judge panel, and embedding-centroid cosine similarity into a calibrated aggregator with a certified false-negative-rate bound; achieves 0% test miss rate across leave-one-taxonomic-family-out folds on UniProt KW-0800 toxins. arXiv preprint, Apr 2026. [arXiv](https://arxiv.org/abs/2605.00074) | [Code](https://github.com/najmulhasan-code/crc-screen)
+
 - [Honeypot Protocol](https://najmulhasan-code.github.io/papers/honeypot-protocol): Trusted monitoring, the standard defense in AI control, is vulnerable to adaptive attacks, collusion, and strategic attack selection. The honeypot protocol tests context-dependent behavior in AI systems by varying system prompts across evaluation, deployment, and no-monitoring conditions. AI Control Hackathon by Apart Research, 2026. [Paper](https://apartresearch.com/project/honeypot-protocol-hmsb) | [Code](https://github.com/najmulhasan-code/honeypot-protocol)
 
 - [DPBench: Large Language Models Struggle with Simultaneous Coordination](https://najmulhasan-code.github.io/papers/dpbench): A benchmark based on the Dining Philosophers problem showing LLMs fail at simultaneous coordination with deadlock rates exceeding 95%. Communication alone does not resolve coordination failures. arXiv preprint, Feb 2026. [arXiv](https://arxiv.org/abs/2602.13255) | [Code](https://github.com/najmulhasan-code/dpbench)

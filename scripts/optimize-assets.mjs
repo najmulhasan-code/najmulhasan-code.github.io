@@ -20,6 +20,7 @@ await sharp(etiSrc)
   .toFile('public/logos/eti.png');
 
 const paperThumbs = [
+  'public/papers/crc-screen/thumbnail.png',
   'public/papers/dpbench/thumbnail.png',
   'public/papers/honeypot-protocol/thumbnail.png',
   'public/papers/nist-crypto/thumbnail.png',

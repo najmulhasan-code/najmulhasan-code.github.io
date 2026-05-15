@@ -8,6 +8,13 @@ export interface NewsItem {
 export const newsItems: NewsItem[] = [
   {
     date: '2026-04',
+    title: 'New preprint: CRC-Screen for DNA-synthesis hazard screening',
+    description:
+      'Released "CRC-Screen: Certified DNA-Synthesis Hazard Screening Under Taxonomic Shift" on arXiv — a conformal-risk-control screener that fuses sequence similarity, an LLM judge panel, and embedding similarity with certified false-negative-rate bounds.',
+    link: 'https://arxiv.org/abs/2605.00074',
+  },
+  {
+    date: '2026-04',
     title: 'Presented at PURC Symposium 2026',
     description: 'Presented research on stress-testing LLMs across adversarial attacks, prompt injection, and non-English languages at the PURC Symposium 2026 at UNC Pembroke.',
   },

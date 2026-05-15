@@ -24,12 +24,14 @@ const roles: Role[] = [
     institution: 'Algoverse',
     location: 'Remote',
     startDate: '2026-02-01',
+    endDate: '2026-04-30',
   },
   {
     position: 'Undergraduate Research Assistant',
     institution: 'UNC Pembroke',
     location: 'Pembroke, NC',
     startDate: '2024-05-01',
+    endDate: '2026-05-01',
     advisor: 'Dr. Prashanth BusiReddyGari',
   },
   {
@@ -37,6 +39,7 @@ const roles: Role[] = [
     institution: 'UNC Pembroke',
     location: 'Pembroke, NC',
     startDate: '2023-07-01',
+    endDate: '2026-05-01',
   },
   {
     position: 'Undergraduate Research Assistant',

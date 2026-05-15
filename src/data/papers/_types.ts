@@ -13,7 +13,7 @@ export interface Paper {
   year: string;
   date: string;
   abstract: string;
-  thumbnail: string;
+  thumbnail?: string;
   paperLink?: string;
   arxivLink?: string;
   doiLink?: string;

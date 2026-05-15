@@ -63,16 +63,12 @@ export default function Hero() {
             </h1>
 
             <div className="text-[14px] text-gray-600 leading-relaxed mb-5">
-              Undergraduate Researcher · <span className="text-gray-800">University of North Carolina at Pembroke</span>
+              B.S. Computer Science · <span className="text-gray-800">University of North Carolina at Pembroke</span>
             </div>
 
             <div className="space-y-4 text-[15px] text-gray-700 leading-[1.7]">
               <p>
-                Hi <span className="mx-0.5" role="img" aria-label="waving hand">👋</span>! I work at the intersection of AI safety &amp; alignment and natural language processing. Read my latest work, <a href="https://arxiv.org/abs/2602.13255" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">DPBench: Large Language Models Struggle with Simultaneous Coordination</a>. I&apos;m advised by <a href="https://www.uncp.edu/about/directory/prashanth-busi_reddy_gari.html" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Prashanth BusiReddyGari</a>, previously worked with <a href="https://zhangshaohu.github.io/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Shaohu Zhang</a>, and am currently an AI Safety Research Fellow at <a href="https://algoverseairesearch.org" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Algoverse</a>.
-              </p>
-
-              <p>
-                My current work uses reinforcement learning (GRPO, QLoRA) to train LLMs as agents on classical concurrency problems like Dining Philosophers.
+                Hi <span className="mx-0.5" role="img" aria-label="waving hand">👋</span>! I work at the intersection of AI safety &amp; alignment and natural language processing. Read my latest work, <a href="https://arxiv.org/abs/2605.00074" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">CRC-Screen: Certified DNA-Synthesis Hazard Screening Under Taxonomic Shift</a>. I was advised by <a href="https://www.uncp.edu/about/directory/prashanth-busi_reddy_gari.html" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Prashanth BusiReddyGari</a>, previously worked with <a href="https://zhangshaohu.github.io/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Shaohu Zhang</a>, and was an AI Safety Research Fellow at <a href="https://algoverseairesearch.org" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Algoverse</a>.
               </p>
 
               <p>

@@ -1,4 +1,5 @@
 import type { Paper } from './_types';
+import { paper as crcScreen } from './crc-screen';
 import { paper as honeypotProtocol } from './honeypot-protocol';
 import { paper as phishingUrlDetection } from './phishing-url-detection';
 import { paper as nistCrypto } from './nist-crypto';
@@ -6,6 +7,7 @@ import { paper as dpbench } from './dpbench';
 import { paper as phishingEmailDetection } from './phishing-email-detection';
 
 const papers: Paper[] = [
+  crcScreen,
   honeypotProtocol,
   phishingUrlDetection,
   nistCrypto,
