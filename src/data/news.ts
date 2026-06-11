@@ -10,7 +10,7 @@ export const newsItems: NewsItem[] = [
     date: '2026-06',
     title: 'Reviewer for the MusIML Workshop at ICML 2026',
     description:
-      'Reviewed submissions for the Muslims in Machine Learning (MusIML) Workshop at the International Conference on Machine Learning (ICML 2026).',
+      'Reviewed submissions for the Muslims in ML (MusIML) Workshop at the International Conference on Machine Learning (ICML 2026).',
   },
   {
     date: '2026-05',

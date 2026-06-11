@@ -43,7 +43,7 @@ const serviceGroups: ServiceGroup[] = [
         date: '2026',
       },
       {
-        role: 'Reviewer, Muslims in Machine Learning (MusIML) Workshop',
+        role: 'Reviewer, Muslims in ML (MusIML) Workshop',
         organization: 'ICML 2026',
         date: '2026',
       },
