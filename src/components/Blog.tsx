@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getAllPosts, formatDate } from '@/data/posts';
+import { formatDate } from '@/lib/format';
+import type { BlogPost } from '@/data/blog';
 
-export default function Blog() {
-  const posts = getAllPosts();
+export default function Blog({ posts }: { posts: BlogPost[] }) {
 
   return (
     <section id="blog" className="py-12 sm:py-16 lg:py-20 bg-[#f8fafa]">

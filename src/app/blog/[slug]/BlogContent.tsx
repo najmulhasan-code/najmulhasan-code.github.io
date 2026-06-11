@@ -2,7 +2,8 @@
 
 import { ComponentType } from 'react';
 import { motion } from 'framer-motion';
-import { Post, formatDate } from '@/data/posts';
+import { formatDate } from '@/lib/format';
+import type { BlogPost } from '@/data/blog';
 import { PaperIcon, PackageIcon, ExternalLinkIcon } from '@/components/icons';
 
 function getDomain(url: string): string {
@@ -32,11 +33,11 @@ function getLinkMeta(url: string): LinkMeta {
   return { label: 'View', FallbackIcon: ExternalLinkIcon };
 }
 
-interface PostContentProps {
-  post: Post;
+interface BlogContentProps {
+  post: BlogPost;
 }
 
-export default function PostContent({ post }: PostContentProps) {
+export default function BlogContent({ post }: BlogContentProps) {
   return (
     <article className="min-h-screen bg-white">
       <div className="bg-[#f9fafb] pt-28 sm:pt-32 lg:pt-36 pb-10 sm:pb-14">
@@ -104,9 +105,8 @@ export default function PostContent({ post }: PostContentProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
           className="prose prose-lg prose-gray max-w-none"
-        >
-          {post.content}
-        </motion.div>
+          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+        />
       </div>
     </article>
   );

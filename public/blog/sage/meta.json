@@ -1,0 +1,13 @@
+{
+  "title": "SAGE: When One AI Isn't Enough",
+  "date": "2025-12-19",
+  "description": "A multi-agent framework where AI agents research, debate, and synthesize answers together.",
+  "excerpt": "Ask a language model a question and you get one answer. One perspective. One viewpoint. That works fine for simple queries. But complex problems like architecture decisions, security reviews, or research questions benefit from multiple angles. A single model, no matter how capable, has blind spots. SAGE takes a different approach. Instead of relying on one model's response, it puts together a team of specialized agents.",
+  "category": "Project",
+  "tags": ["LLMs", "Multi-Agent", "Python"],
+  "published": true,
+  "links": [
+    "https://github.com/najmulhasan-code/sage",
+    "https://pypi.org/project/agentsage/"
+  ]
+}

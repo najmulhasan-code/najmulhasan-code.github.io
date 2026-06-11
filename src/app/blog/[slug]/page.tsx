@@ -1,14 +1,14 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getAllPosts, getPostBySlug } from '@/data/posts';
-import PostContent from './PostContent';
+import { getAllBlogPosts, getBlogPostBySlug } from '@/data/blog';
+import BlogContent from './BlogContent';
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
-  const posts = getAllPosts();
+  const posts = getAllBlogPosts();
   return posts.map((post) => ({
     slug: post.slug,
   }));
@@ -16,7 +16,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = getBlogPostBySlug(slug);
 
   if (!post) {
     return { title: 'Post Not Found' };
@@ -48,11 +48,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = getBlogPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
-  return <PostContent post={post} />;
+  return <BlogContent post={post} />;
 }

@@ -23,6 +23,7 @@ export default function Navbar() {
     { label: 'Experience', href: '#experience', id: 'experience' },
     { label: 'Education', href: '#education', id: 'education' },
     { label: 'Awards', href: '#awards', id: 'awards' },
+    { label: 'Service', href: '#service', id: 'service' },
     { label: 'Blog', href: '#blog', id: 'blog' },
   ], []);
 

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Check, Copy } from 'lucide-react';
 import Image from 'next/image';
 import type { Paper } from '@/data/papers';
-import { PaperIcon, ExternalLinkIcon } from '@/components/icons';
+import { PaperIcon, PackageIcon, ExternalLinkIcon } from '@/components/icons';
 
 const AUTHOR_NAME = 'Najmul Hasan';
 
@@ -27,6 +27,9 @@ function getLinkMeta(url: string): LinkMeta {
   const domain = getDomain(url);
   if (domain.includes('arxiv')) return { label: 'arXiv', logo: '/logos/arxiv.png' };
   if (domain.includes('github')) return { label: 'View code', logo: '/logos/github.png' };
+  if (domain.includes('pypi')) return { label: 'PyPI', logo: '/logos/pypi.ico' };
+  if (domain.includes('npmjs')) return { label: 'npm', FallbackIcon: PackageIcon };
+  if (domain.includes('huggingface')) return { label: 'Hugging Face', FallbackIcon: PackageIcon };
   if (domain.includes('ieee')) return { label: 'IEEE Xplore', logo: '/logos/ieee.ico' };
   if (domain.includes('openreview')) return { label: 'OpenReview', FallbackIcon: PaperIcon };
   if (domain.includes('apartresearch')) return { label: 'Read paper', logo: '/logos/apart.png' };
@@ -121,7 +124,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
       : {}),
   };
 
-  const links = [paper.paperLink, paper.arxivLink, paper.doiLink, paper.codeLink]
+  const links = [paper.paperLink, paper.arxivLink, paper.doiLink, paper.codeLink, ...(paper.links ?? [])]
     .filter((link): link is string => !!link)
     .filter((link, idx, arr) => arr.indexOf(link) === idx);
 
@@ -222,50 +225,9 @@ export default function PaperContent({ paper }: { paper: Paper }) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.25 }}
-          >
-            <h2 className="text-xl font-medium text-gray-900 mb-4">Abstract</h2>
-            <p className="text-gray-600 leading-[1.7] text-[15px] sm:text-[16px]">
-              {paper.abstract}
-            </p>
-          </motion.div>
-
-          {paper.summary && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-              className="mt-10"
-            >
-              <h2 className="text-xl font-medium text-gray-900 mb-4">Summary</h2>
-              <p className="text-gray-600 leading-[1.7] text-[15px] sm:text-[16px]">
-                {paper.summary}
-              </p>
-            </motion.div>
-          )}
-
-          {paper.figures && paper.figures.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.35 }}
-              className="mt-10 space-y-8"
-            >
-              {paper.figures.map((fig, idx) => (
-                <figure key={idx}>
-                  <Image
-                    src={fig.src}
-                    alt={fig.caption}
-                    width={800}
-                    height={500}
-                    className="w-full h-auto"
-                  />
-                  <figcaption className="mt-3 text-sm text-gray-500 italic text-center">
-                    {fig.caption}
-                  </figcaption>
-                </figure>
-              ))}
-            </motion.div>
-          )}
+            className="prose prose-lg prose-gray max-w-none"
+            dangerouslySetInnerHTML={{ __html: paper.contentHtml }}
+          />
 
           {paper.bibtex && (
             <motion.div

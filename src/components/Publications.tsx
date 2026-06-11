@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 import { FileText, ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getAllPapers } from '@/data/papers';
+import type { Paper } from '@/data/papers';
 
 const AUTHOR_NAME = 'Najmul Hasan';
 
-export default function Publications() {
-  const publications = getAllPapers();
+export default function Publications({ papers }: { papers: Paper[] }) {
+  const publications = papers;
 
   const renderAuthors = (authors: string[]) => {
     return authors.map((author, idx) => (
