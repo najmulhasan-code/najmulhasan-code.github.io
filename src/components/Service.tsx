@@ -38,12 +38,12 @@ const serviceGroups: ServiceGroup[] = [
     category: 'Peer Review',
     items: [
       {
-        role: 'Reviewer, Generative and Agentic AI for Biology Workshop (GenBio)',
+        role: 'Reviewer, Generative and Agentic AI for Biology (GenBio) Workshop',
         organization: 'ICML 2026',
         date: '2026',
       },
       {
-        role: 'Reviewer, Muslims in ML Workshop (MusIML)',
+        role: 'Reviewer, Muslims in Machine Learning (MusIML) Workshop',
         organization: 'ICML 2026',
         date: '2026',
       },
