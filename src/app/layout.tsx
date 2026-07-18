@@ -1,17 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const SITE_DESCRIPTION =
   "Najmul Hasan is a researcher interested in language models and AI alignment, particularly the design and training of language models and how training choices shape their capabilities and behavior. He holds a B.S. in Computer Science with minors in Mathematics and Physics from UNC Pembroke.";
@@ -233,7 +222,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/profile-favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/profile-favicon.png" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#eef4f3" />
 
         <meta name="author" content="Najmul Hasan" />
         <meta name="language" content="English" />
@@ -248,7 +237,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className="antialiased">
         <Navbar />
         {children}
       </body>

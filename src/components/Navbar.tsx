@@ -133,7 +133,7 @@ export default function Navbar() {
       <nav className="fixed top-0 left-0 right-0 z-50">
         <motion.div
           aria-hidden
-          className="absolute inset-0 bg-[#f8fafa] pointer-events-none"
+          className="absolute inset-0 bg-surface/95 backdrop-blur-md pointer-events-none"
           style={{ opacity: bgOpacity, backdropFilter, WebkitBackdropFilter: backdropFilter, boxShadow }}
         />
         <motion.div
@@ -195,7 +195,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-14 sm:top-16 left-0 right-0 z-40 lg:hidden bg-[#f8fafa]/95 backdrop-blur-md border-b border-gray-200"
+            className="fixed top-14 sm:top-16 left-0 right-0 z-40 lg:hidden bg-surface/95 backdrop-blur-md border-b border-gray-200"
           >
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
               <div className="flex flex-col gap-1">

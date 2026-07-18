@@ -6,7 +6,7 @@ export default function BlogPage() {
   const posts = getAllBlogPosts();
 
   return (
-    <main className="min-h-screen bg-[#f8fafa]">
+    <main className="min-h-screen bg-background">
       <Blog posts={posts} />
       <Footer />
     </main>

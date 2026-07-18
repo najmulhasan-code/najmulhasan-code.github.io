@@ -37,7 +37,7 @@ export default async function LegacyPaperPage({ params }: Props) {
   const target = `/research/${slug}`;
 
   return (
-    <main className="min-h-[60vh] bg-[#f8fafa] flex items-center justify-center px-4">
+    <main className="min-h-[60vh] bg-background flex items-center justify-center px-4">
       <meta httpEquiv="refresh" content={`0; url=${target}`} />
       <script dangerouslySetInnerHTML={{ __html: `window.location.replace(${JSON.stringify(target)});` }} />
       <p className="text-sm text-gray-600">

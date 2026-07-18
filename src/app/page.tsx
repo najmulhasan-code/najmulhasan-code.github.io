@@ -16,7 +16,7 @@ export default function Home() {
   const posts = getAllBlogPosts();
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-background">
       <Hero />
       <News />
       <Publications papers={papers} />

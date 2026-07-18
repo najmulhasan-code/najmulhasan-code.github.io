@@ -34,7 +34,7 @@ const awards: Award[] = [
 
 export default function Awards() {
   return (
-    <section id="awards" className="py-12 sm:py-16 lg:py-20 bg-[#f8fafa]">
+    <section id="awards" className="py-12 sm:py-16 lg:py-20 bg-surface border-y border-gray-100">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

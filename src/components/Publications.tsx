@@ -25,7 +25,7 @@ export default function Publications({ papers }: { papers: Paper[] }) {
   };
 
   return (
-    <section id="research" className="py-12 sm:py-16 lg:py-20 bg-[#f8fafa]">
+    <section id="research" className="py-12 sm:py-16 lg:py-20 bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -59,7 +59,7 @@ export default function Publications({ papers }: { papers: Paper[] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="group relative bg-white rounded-md overflow-hidden border border-gray-200 hover:border-teal-600 shadow-[0_0_24px_rgba(0,0,0,0.06)] hover:shadow-[0_0_40px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col border-t-[6px] border-t-teal-600 cursor-pointer"
+                className="group relative bg-surface rounded-md overflow-hidden border border-gray-200 hover:border-teal-600 shadow-[0_12px_32px_rgba(23,43,49,0.05)] hover:shadow-[0_16px_40px_rgba(23,43,49,0.1)] transition-all duration-300 flex flex-col border-t-[5px] border-t-teal-600 cursor-pointer"
               >
                 <Link href={`/research/${pub.slug}`} className="absolute inset-0 z-10" aria-label={`Read more about ${pub.title}`} />
 

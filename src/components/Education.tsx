@@ -33,7 +33,7 @@ function formatDate(dateString: string): string {
 
 export default function Education() {
   return (
-    <section id="education" className="py-12 sm:py-16 lg:py-20 bg-[#f8fafa]">
+    <section id="education" className="py-12 sm:py-16 lg:py-20 bg-background">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -1,32 +1,53 @@
 @import "tailwindcss";
 
 :root {
-  --gray-50: #f9fafb;
-  --gray-100: #f3f4f6;
-  --gray-200: #e5e7eb;
-  --gray-400: #9ca3af;
-  --gray-500: #6b7280;
-  --gray-600: #4b5563;
-  --gray-700: #374151;
-  --gray-800: #1f2937;
-  --gray-900: #111827;
+  --gray-50: #f5f8f8;
+  --gray-100: #eaf0f0;
+  --gray-200: #d8e2e2;
+  --gray-400: #91a1a3;
+  --gray-500: #687b7e;
+  --gray-600: #506468;
+  --gray-700: #394e53;
+  --gray-800: #263b40;
+  --gray-900: #172b31;
 
-  --teal-100: #ccfbf1;
-  --teal-500: #14b8a6;
-  --teal-800: #115e59;
-  --teal-900: #134e4a;
+  --teal-100: #d9eeeb;
+  --teal-500: #4b9b94;
+  --teal-600: #2f837c;
+  --teal-700: #236f69;
+  --teal-800: #1c5c58;
+  --teal-900: #174b48;
 
-  --accent-primary: #0f766e;
-
-  --background: #ffffff;
+  --accent-primary: #236f69;
+  --background: #eef4f3;
+  --surface: #fbfdfc;
   --foreground: var(--gray-900);
+  --font-sans-local: "Avenir Next", "Segoe UI Variable Text", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-display-local: "Avenir Next", "Segoe UI Variable Display", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono-local: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-gray-50: var(--gray-50);
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+  --color-gray-600: var(--gray-600);
+  --color-gray-700: var(--gray-700);
+  --color-gray-800: var(--gray-800);
+  --color-gray-900: var(--gray-900);
+  --color-teal-100: var(--teal-100);
+  --color-teal-500: var(--teal-500);
+  --color-teal-600: var(--teal-600);
+  --color-teal-700: var(--teal-700);
+  --color-teal-800: var(--teal-800);
+  --color-teal-900: var(--teal-900);
+  --font-sans: var(--font-sans-local);
+  --font-mono: var(--font-mono-local);
 }
 
 * {
@@ -43,9 +64,23 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+  font-family: var(--font-sans-local);
   line-height: 1.7;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.008em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display-local);
+  letter-spacing: -0.025em;
+}
+
+.calm-hero {
+  background:
+    radial-gradient(circle at 18% 8%, rgb(75 155 148 / 10%), transparent 32rem),
+    var(--background);
 }
 
 ::-webkit-scrollbar {
@@ -136,7 +171,7 @@ body {
   color: var(--gray-800);
   padding: 0.2rem 0.4rem;
   border-radius: 0.25rem;
-  font-family: var(--font-geist-mono), monospace;
+  font-family: var(--font-mono-local);
   font-size: 0.875em;
 }
 

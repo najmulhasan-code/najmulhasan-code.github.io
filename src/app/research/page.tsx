@@ -15,7 +15,7 @@ export default function PapersPage() {
   const papers = getAllPapers();
 
   return (
-    <main className="min-h-screen bg-[#f8fafa]">
+    <main className="min-h-screen bg-background">
       <Publications papers={papers} />
       <Footer />
     </main>

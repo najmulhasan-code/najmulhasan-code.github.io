@@ -10,7 +10,7 @@ import type { BlogPost } from '@/data/blog';
 export default function Blog({ posts }: { posts: BlogPost[] }) {
 
   return (
-    <section id="blog" className="py-12 sm:py-16 lg:py-20 bg-[#f8fafa]">
+    <section id="blog" className="py-12 sm:py-16 lg:py-20 bg-surface border-y border-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,7 +43,7 @@ export default function Blog({ posts }: { posts: BlogPost[] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="group relative bg-white rounded-lg border border-gray-200 hover:border-teal-600 hover:shadow-[0_0_32px_rgba(0,0,0,0.08)] transition-all duration-300 cursor-pointer overflow-hidden flex flex-col"
+                className="group relative bg-surface rounded-lg border border-gray-200 hover:border-teal-600 hover:shadow-[0_16px_36px_rgba(23,43,49,0.09)] transition-all duration-300 cursor-pointer overflow-hidden flex flex-col"
               >
                 <Link
                   href={`/blog/${post.slug}`}

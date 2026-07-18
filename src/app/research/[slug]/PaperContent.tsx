@@ -54,7 +54,7 @@ function CopyBibtexButton({ bibtex }: { bibtex: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-gray-600 hover:text-teal-700 bg-white border border-gray-200 rounded-md hover:border-teal-300 transition-colors"
+      className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-gray-600 hover:text-teal-700 bg-surface border border-gray-200 rounded-md hover:border-teal-300 transition-colors"
       aria-label="Copy BibTeX"
     >
       {copied ? (
@@ -135,8 +135,8 @@ export default function PaperContent({ paper }: { paper: Paper }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <article className="min-h-screen bg-white">
-        <div className="bg-[#f9fafb] pt-12 sm:pt-16 lg:pt-20 pb-10 sm:pb-14">
+      <article className="min-h-screen bg-surface">
+        <div className="bg-background pt-12 sm:pt-16 lg:pt-20 pb-10 sm:pb-14">
           <div className="max-w-3xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 10 }}

@@ -1,22 +1,9 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { newsItems, formatMonthYear, groupByYear, NewsItem } from '@/data/news';
-
-const INITIAL_DISPLAY_COUNT = 6;
-
-function YearHeader({ year }: { year: string }) {
-  return (
-    <div className="flex items-center gap-4 mb-5">
-      <h3 className="text-xs font-semibold tracking-[0.15em] text-gray-500 uppercase">
-        {year}
-      </h3>
-      <div className="flex-1 h-px bg-gray-200" />
-    </div>
-  );
-}
 
 function NewsListItem({ item }: { item: NewsItem }) {
   const { month } = formatMonthYear(item.date);
@@ -50,125 +37,98 @@ function NewsListItem({ item }: { item: NewsItem }) {
   );
 }
 
-const collapseTransition = { duration: 0.45, ease: [0.04, 0.62, 0.23, 0.98] as [number, number, number, number] };
+interface NewsYearProps {
+  year: string;
+  items: NewsItem[];
+  isLatest: boolean;
+  isOpen: boolean;
+  onToggle: () => void;
+}
 
-export default function News() {
-  const [expanded, setExpanded] = useState(false);
-
-  const visibleItems = useMemo(() => newsItems.slice(0, INITIAL_DISPLAY_COUNT), []);
-  const extraItems = useMemo(() => newsItems.slice(INITIAL_DISPLAY_COUNT), []);
-
-  const visibleGrouped = useMemo(() => groupByYear(visibleItems), [visibleItems]);
-  const extraGrouped = useMemo(() => groupByYear(extraItems), [extraItems]);
-
-  const visibleYearsSet = useMemo(
-    () => new Set(visibleGrouped.map((g) => g.year)),
-    [visibleGrouped]
-  );
-  const freshYears = useMemo(
-    () => extraGrouped.filter((g) => !visibleYearsSet.has(g.year)),
-    [extraGrouped, visibleYearsSet]
-  );
-
-  const handleToggle = () => {
-    const willCollapse = expanded;
-    if (willCollapse) {
-      const section = document.getElementById('news');
-      if (section) {
-        const navbarHeight = 72;
-        const top = section.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
-      setTimeout(() => setExpanded(false), 250);
-    } else {
-      setExpanded(true);
-    }
-  };
+function NewsYear({ year, items, isLatest, isOpen, onToggle }: NewsYearProps) {
+  const reduceMotion = useReducedMotion();
+  const buttonId = `news-year-${year}-button`;
+  const panelId = `news-year-${year}-panel`;
 
   return (
-    <section id="news" className="py-12 sm:py-16 lg:py-20 bg-[#f8fafa]">
+    <div className="border-t border-gray-200 last:border-b">
+      <button
+        id={buttonId}
+        type="button"
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        onClick={onToggle}
+        className="group flex w-full items-center justify-between gap-4 py-4 text-left focus:outline-none focus-visible:outline-none"
+      >
+        <span className="flex items-center gap-3">
+          <span className="text-sm font-semibold text-gray-900">{year}</span>
+          {isLatest && (
+            <span className="rounded-full bg-teal-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-teal-800">
+              Latest
+            </span>
+          )}
+        </span>
+
+        <span className="flex items-center gap-3 text-xs text-gray-500">
+          <span>{items.length} {items.length === 1 ? 'update' : 'updates'}</span>
+          <ChevronDown
+            aria-hidden="true"
+            className={`h-4 w-4 transition-transform duration-300 group-hover:text-teal-700 ${isOpen ? 'rotate-180' : ''}`}
+          />
+        </span>
+      </button>
+
+      <motion.div
+        id={panelId}
+        role="region"
+        aria-labelledby={buttonId}
+        aria-hidden={!isOpen}
+        inert={!isOpen}
+        initial={false}
+        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+        transition={reduceMotion ? { duration: 0 } : { duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+        className="overflow-hidden"
+      >
+        <ul className="space-y-5 pb-7 pt-1">
+          {items.map((item, index) => (
+            <NewsListItem key={`${item.date}-${index}`} item={item} />
+          ))}
+        </ul>
+      </motion.div>
+    </div>
+  );
+}
+
+export default function News() {
+  const groupedNews = useMemo(() => groupByYear(newsItems), []);
+  const latestYear = groupedNews[0]?.year ?? null;
+  const [openYear, setOpenYear] = useState<string | null>(latestYear);
+
+  return (
+    <section id="news" className="pt-8 sm:pt-10 lg:pt-12 pb-12 sm:pb-16 lg:pb-20 bg-surface border-y border-gray-100">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-10"
+          className="mb-8"
         >
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">News</h2>
         </motion.div>
 
         <div>
-          {visibleGrouped.map(({ year, items }, yearIdx) => {
-            const continuation = extraGrouped.find((g) => g.year === year);
-            return (
-              <div key={year} className={yearIdx > 0 ? 'mt-10' : ''}>
-                <YearHeader year={year} />
-                <ul className="space-y-5">
-                  {items.map((item, idx) => (
-                    <NewsListItem key={`${item.date}-${idx}`} item={item} />
-                  ))}
-                </ul>
-
-                <AnimatePresence initial={false}>
-                  {expanded && continuation && (
-                    <motion.div
-                      key="continuation"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={collapseTransition}
-                      style={{ overflow: 'hidden' }}
-                    >
-                      <ul className="mt-5 space-y-5">
-                        {continuation.items.map((item, idx) => (
-                          <NewsListItem key={`${item.date}-ct-${idx}`} item={item} />
-                        ))}
-                      </ul>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
-
-          <AnimatePresence initial={false}>
-            {expanded &&
-              freshYears.map(({ year, items }) => (
-                <motion.div
-                  key={year}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={collapseTransition}
-                  style={{ overflow: 'hidden' }}
-                >
-                  <div className="mt-10">
-                    <YearHeader year={year} />
-                    <ul className="space-y-5">
-                      {items.map((item, idx) => (
-                        <NewsListItem key={`${item.date}-${idx}`} item={item} />
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              ))}
-          </AnimatePresence>
+          {groupedNews.map(({ year, items }) => (
+            <NewsYear
+              key={year}
+              year={year}
+              items={items}
+              isLatest={year === latestYear}
+              isOpen={year === openYear}
+              onToggle={() => setOpenYear((current) => current === year ? null : year)}
+            />
+          ))}
         </div>
-
-        {newsItems.length > INITIAL_DISPLAY_COUNT && (
-          <div className="mt-10">
-            <button
-              onClick={handleToggle}
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-teal-700 transition-colors focus:outline-none focus-visible:outline-none"
-            >
-              {expanded ? 'Show less' : 'Show all'}
-              <ChevronDown
-                className={`w-4 h-4 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}
-              />
-            </button>
-          </div>
-        )}
       </div>
     </section>
   );

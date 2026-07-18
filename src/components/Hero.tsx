@@ -13,7 +13,7 @@ export default function Hero() {
   ];
 
   return (
-    <section id="hero" className="py-12 sm:py-16 lg:py-20 bg-[#f8fafa]">
+    <section id="hero" className="calm-hero pt-12 sm:pt-16 lg:pt-20 pb-6 sm:pb-8 lg:pb-10">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col sm:flex-row gap-8 sm:gap-10 items-start">
 
@@ -28,7 +28,7 @@ export default function Hero() {
               alt="Najmul Hasan"
               width={400}
               height={400}
-              className="rounded-xl w-44 h-56 sm:w-52 sm:h-64 lg:w-60 lg:h-80 object-cover object-top shadow-lg ring-1 ring-gray-200"
+              className="rounded-xl w-44 h-56 sm:w-52 sm:h-64 lg:w-60 lg:h-80 object-cover object-top shadow-[0_18px_45px_rgba(23,43,49,0.12)] ring-1 ring-gray-200"
               priority
             />
 
