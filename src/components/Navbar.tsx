@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 interface NavLink {
   label: string;
@@ -11,6 +12,7 @@ interface NavLink {
 }
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [isScrolling, setIsScrolling] = useState(false);
@@ -73,6 +75,11 @@ export default function Navbar() {
   }, [isScrolling, navLinks]);
 
   const scrollToSection = useCallback((href: string) => {
+    if (pathname !== '/') {
+      window.location.href = `/${href}`;
+      return;
+    }
+
     const sectionId = href.replace('#', '');
     const element = document.getElementById(sectionId);
     if (!element) return;
@@ -93,14 +100,16 @@ export default function Navbar() {
     scrollTimeoutRef.current = setTimeout(() => {
       setIsScrolling(false);
     }, 1000);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
+    if (pathname !== '/') return;
+
     const hash = window.location.hash;
     if (hash) {
       setTimeout(() => scrollToSection(hash), 100);
     }
-  }, [scrollToSection]);
+  }, [pathname, scrollToSection]);
 
   useEffect(() => {
     return () => {
@@ -109,6 +118,11 @@ export default function Navbar() {
   }, []);
 
   const scrollToTop = () => {
+    if (pathname !== '/') {
+      window.location.href = '/';
+      return;
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setActiveSection('hero');
     window.history.pushState(null, '', window.location.pathname);

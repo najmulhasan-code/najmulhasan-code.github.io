@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,10 +14,10 @@ const geistMono = Geist_Mono({
 });
 
 const SITE_DESCRIPTION =
-  "Najmul Hasan is an undergraduate researcher at the University of North Carolina at Pembroke working at the intersection of AI safety & alignment and natural language processing. AI Safety Research Fellow at Algoverse. First-author work at NeurIPS 2025 LAW Workshop and IEEE CCWC 2026. PhD applicant for Fall 2026.";
+  "Najmul Hasan is a researcher interested in language models and AI alignment, particularly the design and training of language models and how training choices shape their capabilities and behavior. He holds a B.S. in Computer Science with minors in Mathematics and Physics from UNC Pembroke.";
 
 const SITE_SHORT_DESCRIPTION =
-  "Undergraduate researcher at UNC Pembroke working at the intersection of AI safety & alignment and natural language processing.";
+  "Researcher interested in language models, language-model training, and AI alignment.";
 
 export const metadata: Metadata = {
   title: "Najmul Hasan",
@@ -30,28 +31,30 @@ export const metadata: Metadata = {
     "Najmul Hasan AI safety",
     "Najmul Hasan researcher",
 
-    // Career stage
-    "undergraduate researcher",
-    "PhD applicant Fall 2026",
-    "PhD applicant computer science",
-    "PhD applicant machine learning",
-    "PhD applicant AI safety",
+    // Research profile
+    "AI alignment researcher",
+    "language model researcher",
+    "computer science researcher",
 
     // Primary research areas
-    "AI safety",
-    "AI alignment",
-    "AI safety research",
+    "large language models",
+    "language model training",
     "LLM agents",
     "multi-agent LLMs",
     "multi-agent systems",
     "LLM coordination",
     "LLM evaluation",
+    "AI alignment",
+    "AI safety",
+    "AI safety research",
     "adversarial robustness",
     "LLM security",
     "trustworthy AI",
     "AI control",
 
     // Methods
+    "language model pretraining",
+    "language model post-training",
     "reinforcement learning post-training",
     "GRPO",
     "QLoRA",
@@ -181,38 +184,24 @@ const personJsonLd = {
     "https://linkedin.com/in/najmulhasan-cs-math",
     "https://x.com/_najmulhasan",
   ],
-  jobTitle: "Undergraduate Researcher",
-  worksFor: [
-    {
-      "@type": "EducationalOrganization",
-      name: "University of North Carolina at Pembroke",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Pembroke",
-        addressRegion: "NC",
-        addressCountry: "US",
-      },
-    },
-    {
-      "@type": "Organization",
-      name: "Algoverse",
-    },
-  ],
+  jobTitle: "Researcher",
   alumniOf: {
     "@type": "CollegeOrUniversity",
     name: "University of North Carolina at Pembroke",
     sameAs: "https://www.uncp.edu",
   },
   knowsAbout: [
-    "AI Safety",
-    "AI Alignment",
+    "Large Language Models",
+    "Language Model Pretraining",
+    "Language Model Post-Training",
+    "Reinforcement Learning Post-Training",
     "LLM Agents",
     "Multi-Agent LLMs",
     "LLM Evaluation",
+    "AI Alignment",
+    "AI Safety",
     "Adversarial Robustness",
     "Natural Language Processing",
-    "Large Language Models",
-    "Reinforcement Learning Post-Training",
     "GRPO",
     "QLoRA",
     "Phishing Detection with LLMs",
@@ -220,23 +209,6 @@ const personJsonLd = {
     "Lightweight Cryptography",
   ],
   description: SITE_SHORT_DESCRIPTION,
-  memberOf: [
-    {
-      "@type": "Organization",
-      name: "AI@UNCP",
-      description: "AI student organization at UNC Pembroke, founded by Najmul Hasan",
-    },
-    {
-      "@type": "Organization",
-      name: "Esther G. Maynor Honors College",
-    },
-  ],
-  seeks: {
-    "@type": "EducationalOccupationalProgram",
-    name: "PhD in Computer Science",
-    programType: "Doctoral",
-    occupationalCategory: "Computer and Information Research Scientists",
-  },
 };
 
 const websiteJsonLd = {
@@ -246,7 +218,7 @@ const websiteJsonLd = {
   url: "https://najmulhasan-code.github.io",
   name: "Najmul Hasan",
   description:
-    "Academic portfolio of Najmul Hasan, undergraduate researcher working on AI safety and natural language processing.",
+    "Academic portfolio of Najmul Hasan, a researcher interested in language models and AI alignment.",
   inLanguage: "en-US",
   author: { "@id": "https://najmulhasan-code.github.io/#person" },
 };
@@ -259,8 +231,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.jpg" type="image/jpeg" />
-        <link rel="apple-touch-icon" href="/images/najmul_hasan.JPEG" />
+        <link rel="icon" href="/profile-favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/profile-favicon.png" />
         <meta name="theme-color" content="#ffffff" />
 
         <meta name="author" content="Najmul Hasan" />
@@ -277,6 +249,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Navbar />
         {children}
       </body>
     </html>

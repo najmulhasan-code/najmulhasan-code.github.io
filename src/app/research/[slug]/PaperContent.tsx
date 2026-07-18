@@ -136,7 +136,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
       />
 
       <article className="min-h-screen bg-white">
-        <div className="bg-[#f9fafb] pt-28 sm:pt-32 lg:pt-36 pb-10 sm:pb-14">
+        <div className="bg-[#f9fafb] pt-12 sm:pt-16 lg:pt-20 pb-10 sm:pb-14">
           <div className="max-w-3xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 10 }}

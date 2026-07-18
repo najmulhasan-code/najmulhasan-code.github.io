@@ -61,7 +61,7 @@ export default function Publications({ papers }: { papers: Paper[] }) {
                 transition={{ duration: 0.4, delay: index * 0.08 }}
                 className="group relative bg-white rounded-md overflow-hidden border border-gray-200 hover:border-teal-600 shadow-[0_0_24px_rgba(0,0,0,0.06)] hover:shadow-[0_0_40px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col border-t-[6px] border-t-teal-600 cursor-pointer"
               >
-                <Link href={`/papers/${pub.slug}`} className="absolute inset-0 z-10" aria-label={`Read more about ${pub.title}`} />
+                <Link href={`/research/${pub.slug}`} className="absolute inset-0 z-10" aria-label={`Read more about ${pub.title}`} />
 
                 {pub.thumbnail && (
                   <div className="aspect-[16/9] flex items-center justify-center overflow-hidden">
@@ -88,7 +88,7 @@ export default function Publications({ papers }: { papers: Paper[] }) {
                     {pub.abstract}
                   </p>
 
-                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100 relative z-20">
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100 relative z-20 pointer-events-none">
                     <span className="text-[11px] font-medium tracking-wide uppercase text-teal-700">
                       {pub.venueShort}
                     </span>

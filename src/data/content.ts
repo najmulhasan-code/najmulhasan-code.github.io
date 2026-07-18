@@ -19,7 +19,7 @@ export function resolveTeaser(dir: string, urlBase: string): string | undefined 
   return undefined;
 }
 
-// Read an index.html fragment, resolving relative image paths and lazy-loading images.
+// Read an HTML fragment, resolving relative image paths and lazy-loading images.
 export function readContentHtml(file: string, urlBase: string): string {
   let html = fs.readFileSync(file, 'utf8');
 

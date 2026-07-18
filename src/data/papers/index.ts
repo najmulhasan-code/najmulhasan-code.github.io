@@ -1,4 +1,4 @@
-// Loads papers from public/papers/<slug>/ (meta.json + index.html). Server-only.
+// Loads papers from public/papers/<slug>/ (meta.json + content.html). Server-only.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -37,7 +37,7 @@ function optionalString(value: unknown): string | undefined {
 function readPaper(slug: string): Paper | null {
   const dir = path.join(PAPERS_DIR, slug);
   const metaFile = path.join(dir, 'meta.json');
-  const htmlFile = path.join(dir, 'index.html');
+  const htmlFile = path.join(dir, 'content.html');
   if (!fs.existsSync(metaFile) || !fs.existsSync(htmlFile)) return null;
 
   const meta = JSON.parse(fs.readFileSync(metaFile, 'utf8'));

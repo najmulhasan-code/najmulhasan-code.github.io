@@ -24,7 +24,7 @@ export default function Hero() {
             transition={{ duration: 0.4 }}
           >
             <Image
-              src="/images/najmul_hasan.jpg"
+              src="/images/najmul_hasan.JPEG"
               alt="Najmul Hasan"
               width={400}
               height={400}
@@ -63,16 +63,16 @@ export default function Hero() {
             </h1>
 
             <div className="text-[14px] text-gray-600 leading-relaxed mb-5">
-              B.S. Computer Science · <span className="text-gray-800">University of North Carolina at Pembroke</span>
+              Language Models · <span className="text-gray-800">AI Alignment</span>
             </div>
 
             <div className="space-y-4 text-[15px] text-gray-700 leading-[1.7]">
               <p>
-                Hi <span className="mx-0.5" role="img" aria-label="waving hand">👋</span>! I work at the intersection of AI safety &amp; alignment and natural language processing. Read my latest work, <a href="https://arxiv.org/abs/2602.13255v2" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention</a>. I was advised by <a href="https://www.uncp.edu/about/directory/prashanth-busi_reddy_gari.html" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Prashanth BusiReddyGari</a>, previously worked with <a href="https://zhangshaohu.github.io/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Shaohu Zhang</a>, and was an AI Safety Research Fellow at <a href="https://algoverseairesearch.org" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Algoverse</a>.
+                My research interests center on language models and AI alignment. I am particularly interested in the design and training of language models, including how training choices shape their capabilities and behavior, and in developing models that are more capable, reliable, and aligned.
               </p>
 
               <p>
-                I also founded and run UNC Pembroke&apos;s AI student organization, AI@UNCP, and have organized <a href="https://hackuncp-2025.devpost.com/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">HackUNCP 2025</a> and <a href="https://hackuncp-2026.devpost.com/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">HackUNCP 2026</a>.
+                I completed a B.S. in Computer Science, with minors in Mathematics and Physics, at the University of North Carolina at Pembroke, where I worked with <a href="https://www.uncp.edu/about/directory/prashanth-busi_reddy_gari.html" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Prashanth BusiReddyGari</a> and <a href="https://zhangshaohu.github.io/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Shaohu Zhang</a>. I was an AI Safety Research Fellow at <a href="https://algoverseairesearch.org" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Algoverse</a>. I am currently participating in <a href="https://aialignment.mit.edu/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">MIT AI Alignment&apos;s AI Safety Fundamentals</a> program and have completed <a href="https://bluedot.org/courses/technical-ai-safety" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">BlueDot Impact&apos;s Technical AI Safety</a> course.
               </p>
             </div>
           </motion.div>
