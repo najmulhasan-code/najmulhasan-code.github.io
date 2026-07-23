@@ -25,7 +25,7 @@ type LinkMeta = {
 
 function getLinkMeta(url: string): LinkMeta {
   const domain = getDomain(url);
-  if (domain.includes('arxiv')) return { label: 'arXiv', logo: '/logos/arxiv.png' };
+  if (domain.includes('arxiv')) return { label: 'arXiv', FallbackIcon: PaperIcon };
   if (domain.includes('github')) return { label: 'View code', logo: '/logos/github.png' };
   if (domain.includes('pypi')) return { label: 'PyPI', logo: '/logos/pypi.ico' };
   if (domain.includes('npmjs')) return { label: 'npm', FallbackIcon: PackageIcon };
@@ -136,7 +136,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
       />
 
       <article className="min-h-screen bg-surface">
-        <div className="bg-background pt-12 sm:pt-16 lg:pt-20 pb-10 sm:pb-14">
+        <div className="bg-background pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
           <div className="max-w-3xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -203,20 +203,20 @@ export default function PaperContent({ paper }: { paper: Paper }) {
           </div>
         </div>
 
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
           {paper.thumbnail && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="mb-10"
+              className="max-w-4xl mx-auto mb-10 aspect-video flex items-center justify-center"
             >
               <Image
                 src={paper.thumbnail}
                 alt={`Figure from ${paper.title}`}
                 width={800}
                 height={500}
-                className="w-full h-auto"
+                className="w-full h-full object-contain"
               />
             </motion.div>
           )}
@@ -225,7 +225,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.25 }}
-            className="prose prose-lg prose-gray max-w-none"
+            className="prose prose-lg prose-gray mx-auto !max-w-[80ch]"
             dangerouslySetInnerHTML={{ __html: paper.contentHtml }}
           />
 
@@ -234,7 +234,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.4 }}
-              className="mt-10 pt-6 border-t border-gray-100"
+              className="max-w-4xl mx-auto mt-10 pt-6 border-t border-gray-100"
             >
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-sm font-semibold tracking-wide uppercase text-gray-500">

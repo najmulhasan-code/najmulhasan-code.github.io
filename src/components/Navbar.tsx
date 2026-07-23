@@ -29,6 +29,13 @@ export default function Navbar() {
     { label: 'Blog', href: '#blog', id: 'blog' },
   ], []);
 
+  const routeSection = pathname.startsWith('/research') || pathname.startsWith('/papers')
+    ? 'research'
+    : pathname.startsWith('/blog')
+      ? 'blog'
+      : null;
+  const currentSection = pathname === '/' ? activeSection : routeSection;
+
   const bgOpacity = useTransform(scrollY, [0, 80], [0, 0.85]);
   const blurAmount = useTransform(scrollY, [0, 80], [0, 12]);
   const backdropFilter = useTransform(blurAmount, (v) => `blur(${v}px)`);
@@ -40,6 +47,8 @@ export default function Navbar() {
   );
 
   useEffect(() => {
+    if (pathname !== '/') return;
+
     const observerOptions = {
       root: null,
       rootMargin: '-64px 0px -55% 0px',
@@ -72,7 +81,7 @@ export default function Navbar() {
       observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [isScrolling, navLinks]);
+  }, [isScrolling, navLinks, pathname]);
 
   const scrollToSection = useCallback((href: string) => {
     if (pathname !== '/') {
@@ -156,13 +165,13 @@ export default function Navbar() {
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
                   className={`relative text-[14px] font-medium transition-colors focus:outline-none focus-visible:outline-none ${
-                    activeSection === link.id
+                    currentSection === link.id
                       ? 'text-gray-900'
                       : 'text-gray-500 hover:text-gray-900'
                   }`}
                 >
                   {link.label}
-                  {activeSection === link.id && (
+                  {currentSection === link.id && (
                     <motion.div
                       layoutId="activeNavUnderline"
                       className="absolute -bottom-[6px] left-0 right-0 h-[2px] bg-teal-600"
@@ -204,7 +213,7 @@ export default function Navbar() {
                     key={link.href}
                     onClick={() => scrollToSection(link.href)}
                     className={`text-left py-2 text-[15px] font-medium transition-colors focus:outline-none focus-visible:outline-none ${
-                      activeSection === link.id
+                      currentSection === link.id
                         ? 'text-teal-700'
                         : 'text-gray-600 hover:text-gray-900'
                     }`}
