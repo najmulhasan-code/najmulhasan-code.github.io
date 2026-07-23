@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, ComponentType } from 'react';
+import { useEffect, useMemo, useState, ComponentType } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Copy } from 'lucide-react';
 import Image from 'next/image';
@@ -23,9 +23,14 @@ type LinkMeta = {
   FallbackIcon?: ComponentType<{ className?: string }>;
 };
 
+type SectionLink = {
+  id: string;
+  label: string;
+};
+
 function getLinkMeta(url: string): LinkMeta {
   const domain = getDomain(url);
-  if (domain.includes('arxiv')) return { label: 'arXiv', FallbackIcon: PaperIcon };
+  if (domain.includes('arxiv')) return { label: 'arXiv', logo: '/logos/arxiv.png' };
   if (domain.includes('github')) return { label: 'View code', logo: '/logos/github.png' };
   if (domain.includes('pypi')) return { label: 'PyPI', logo: '/logos/pypi.ico' };
   if (domain.includes('npmjs')) return { label: 'npm', FallbackIcon: PackageIcon };
@@ -36,6 +41,46 @@ function getLinkMeta(url: string): LinkMeta {
   if (domain.includes('doi.org')) return { label: 'DOI', FallbackIcon: PaperIcon };
   if (domain.includes('scholar.google')) return { label: 'Google Scholar', logo: '/logos/scholar.ico' };
   return { label: 'View', FallbackIcon: ExternalLinkIcon };
+}
+
+function buildSectionNavigation(contentHtml: string): {
+  html: string;
+  sections: SectionLink[];
+} {
+  const sections: SectionLink[] = [];
+  const usedIds = new Set<string>();
+
+  const html = contentHtml.replace(
+    /<h2([^>]*)>([\s\S]*?)<\/h2>/gi,
+    (heading, attributes: string, innerHtml: string) => {
+      const label = innerHtml
+        .replace(/<[^>]+>/g, '')
+        .replace(/&amp;/g, '&')
+        .replace(/&nbsp;/g, ' ')
+        .trim();
+      const existingId = attributes.match(/\sid=["']([^"']+)["']/i)?.[1];
+      const baseId = existingId || label
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+
+      let id = baseId || `section-${sections.length + 1}`;
+      let suffix = 2;
+      while (usedIds.has(id)) {
+        id = `${baseId}-${suffix}`;
+        suffix += 1;
+      }
+
+      usedIds.add(id);
+      sections.push({ id, label });
+
+      return existingId
+        ? heading
+        : `<h2${attributes} id="${id}">${innerHtml}</h2>`;
+    }
+  );
+
+  return { html, sections };
 }
 
 function CopyBibtexButton({ bibtex }: { bibtex: string }) {
@@ -71,6 +116,49 @@ function CopyBibtexButton({ bibtex }: { bibtex: string }) {
 }
 
 export default function PaperContent({ paper }: { paper: Paper }) {
+  const hasSectionNavigation = paper.slug === 'dpbench';
+  const sectionNavigation = useMemo(
+    () => hasSectionNavigation
+      ? buildSectionNavigation(paper.contentHtml)
+      : { html: paper.contentHtml, sections: [] },
+    [hasSectionNavigation, paper.contentHtml]
+  );
+  const [activeSectionId, setActiveSectionId] = useState(
+    sectionNavigation.sections[0]?.id ?? ''
+  );
+
+  useEffect(() => {
+    if (!hasSectionNavigation || sectionNavigation.sections.length === 0) return;
+
+    let frameId: number | null = null;
+
+    const updateActiveSection = () => {
+      let currentId = sectionNavigation.sections[0].id;
+
+      sectionNavigation.sections.forEach(({ id }) => {
+        const heading = document.getElementById(id);
+        if (heading && heading.getBoundingClientRect().top <= 112) {
+          currentId = id;
+        }
+      });
+
+      setActiveSectionId((current) => current === currentId ? current : currentId);
+      frameId = null;
+    };
+
+    const handleScroll = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+    };
+  }, [hasSectionNavigation, sectionNavigation.sections]);
+
   const renderAuthors = (authors: string[]) => {
     return authors.map((author, idx) => (
       <span key={idx}>
@@ -105,7 +193,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
         : {}),
     })),
     datePublished: paper.date,
-    publisher: { '@type': 'Organization', name: paper.venueShort },
+    publisher: { '@type': 'Organization', name: paper.publisher ?? paper.venueShort },
     isPartOf: { '@type': 'PublicationEvent', name: paper.venue },
     keywords: paper.keywords,
     ...(paper.paperLink ? { url: paper.paperLink } : {}),
@@ -144,9 +232,14 @@ export default function PaperContent({ paper }: { paper: Paper }) {
               transition={{ duration: 0.4 }}
               className="mb-4"
             >
-              <span className="text-xs font-medium tracking-wide uppercase text-teal-700">
-                {paper.venueShort}
+              <span className="block text-xs font-medium tracking-wide uppercase text-teal-700">
+                {paper.displayVenue ?? paper.venue}
               </span>
+              {paper.venueContext && (
+                <span className="mt-1.5 block max-w-2xl text-xs leading-relaxed text-gray-500">
+                  {paper.venueContext}
+                </span>
+              )}
             </motion.div>
 
             <motion.h1
@@ -203,7 +296,11 @@ export default function PaperContent({ paper }: { paper: Paper }) {
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+        <div
+          className={`mx-auto px-4 sm:px-6 py-10 sm:py-14 ${
+            hasSectionNavigation ? 'max-w-7xl' : 'max-w-5xl'
+          }`}
+        >
           {paper.thumbnail && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -221,13 +318,74 @@ export default function PaperContent({ paper }: { paper: Paper }) {
             </motion.div>
           )}
 
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.25 }}
-            className="prose prose-lg prose-gray mx-auto !max-w-[80ch]"
-            dangerouslySetInnerHTML={{ __html: paper.contentHtml }}
-          />
+          <div
+            className={
+              hasSectionNavigation
+                ? 'xl:grid xl:grid-cols-[minmax(10rem,1fr)_minmax(0,80ch)_minmax(10rem,1fr)] xl:gap-8 xl:items-start'
+                : ''
+            }
+          >
+            {hasSectionNavigation && (
+              <>
+                <aside className="hidden xl:block xl:col-start-1 xl:row-start-1 xl:self-stretch">
+                  <nav
+                    aria-label="DPBench sections"
+                    className="sticky top-24 ml-auto w-52 max-h-[calc(100vh-7rem)] overflow-y-auto pr-3"
+                  >
+                    <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
+                      On this page
+                    </p>
+                    <ol className="border-l border-gray-200">
+                      {sectionNavigation.sections.map((section) => (
+                        <li key={section.id}>
+                          <a
+                            href={`#${section.id}`}
+                            onClick={() => setActiveSectionId(section.id)}
+                            className={`block -ml-px border-l-2 py-1.5 pl-3 text-xs leading-relaxed transition-colors ${
+                              activeSectionId === section.id
+                                ? 'border-teal-600 text-teal-700'
+                                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-900'
+                            }`}
+                          >
+                            {section.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ol>
+                  </nav>
+                </aside>
+
+                <details className="mb-8 rounded-md border border-gray-200 bg-background px-4 py-3 xl:hidden">
+                  <summary className="cursor-pointer text-sm font-semibold text-gray-800">
+                    On this page
+                  </summary>
+                  <ol className="mt-3 space-y-2 border-l border-gray-200 pl-3">
+                    {sectionNavigation.sections.map((section) => (
+                      <li key={section.id}>
+                        <a
+                          href={`#${section.id}`}
+                          onClick={() => setActiveSectionId(section.id)}
+                          className="text-sm leading-relaxed text-gray-600 hover:text-teal-700"
+                        >
+                          {section.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ol>
+                </details>
+              </>
+            )}
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className={`prose prose-lg prose-gray mx-auto !max-w-[80ch] ${
+                hasSectionNavigation ? 'xl:col-start-2 xl:row-start-1' : ''
+              }`}
+              dangerouslySetInnerHTML={{ __html: sectionNavigation.html }}
+            />
+          </div>
 
           {paper.bibtex && (
             <motion.div

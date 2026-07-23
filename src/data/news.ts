@@ -8,6 +8,13 @@ export interface NewsItem {
 export const newsItems: NewsItem[] = [
   {
     date: '2026-06',
+    title: 'Presented LLM-PEA at DSML 2026',
+    description:
+      'Presented "LLM-PEA: Leveraging Large Language Models Against Phishing Email Attacks" at the Dependable and Secure Machine Learning (DSML 2026) workshop, co-located with the 56th IEEE/IFIP International Conference on Dependable Systems and Networks (DSN 2026) in Charlotte, North Carolina.',
+    link: 'https://dependablesecureml.github.io/',
+  },
+  {
+    date: '2026-06',
     title: 'Reviewer for the MusIML Workshop at ICML 2026',
     description:
       'Reviewed submissions for the Muslims in ML (MusIML) Workshop at the International Conference on Machine Learning (ICML 2026).',

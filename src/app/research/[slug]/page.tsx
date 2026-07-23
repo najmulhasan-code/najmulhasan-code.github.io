@@ -48,9 +48,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       'citation_author': paper.authors,
       'citation_publication_date': paper.year,
       'citation_abstract': paper.abstract,
+      ...(paper.publisher ? { 'citation_publisher': paper.publisher } : {}),
       ...(paper.arxivLink ? { 'citation_arxiv_id': paper.arxivLink.replace('https://arxiv.org/abs/', '') } : {}),
       ...(paper.doiLink ? { 'citation_doi': paper.doiLink.replace('https://doi.org/', '') } : {}),
-      ...(paper.venueShort.includes('IEEE') || paper.venueShort.includes('NeurIPS')
+      ...(paper.venue.includes('IEEE') || paper.venueShort.includes('NeurIPS')
         ? { 'citation_conference_title': paper.venue }
         : {}),
     },

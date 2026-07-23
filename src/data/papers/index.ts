@@ -11,6 +11,9 @@ export interface Paper {
   keywords: string[];
   venue: string;
   venueShort: string;
+  displayVenue?: string;
+  venueContext?: string;
+  publisher?: string;
   year: string;
   date: string;
   abstract: string;
@@ -50,6 +53,9 @@ function readPaper(slug: string): Paper | null {
     keywords: asStringArray(meta.keywords),
     venue: String(meta.venue ?? ''),
     venueShort: String(meta.venueShort ?? ''),
+    displayVenue: optionalString(meta.displayVenue),
+    venueContext: optionalString(meta.venueContext),
+    publisher: optionalString(meta.publisher),
     year: String(meta.year ?? ''),
     date: String(meta.date ?? ''),
     abstract: String(meta.abstract ?? ''),

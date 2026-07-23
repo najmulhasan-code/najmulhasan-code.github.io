@@ -16,7 +16,7 @@
 
 - [Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists](https://najmulhasan-code.github.io/research/nist-crypto): Symbolic model decomposing NIST lightweight cryptography finalists into initialization, data-processing, and finalization phases for formal time-complexity derivation. IEEE CCWC 2026. [DOI](https://doi.org/10.1109/CCWC67433.2026.11393752) | [arXiv](https://arxiv.org/abs/2602.05641)
 
-- [Phishing Email Detection Using Large Language Models](https://najmulhasan-code.github.io/research/phishing-email-detection): LLM-PEA framework evaluating three frontier LLMs against adversarial, prompt injection, and cross-lingual phishing attacks across 4,000+ email samples; revealed up to 904% false positive rate increase in non-English settings. arXiv preprint, Dec 2025. [arXiv](https://arxiv.org/abs/2512.10104)
+- [LLM-PEA: Leveraging Large Language Models Against Phishing Email Attacks](https://najmulhasan-code.github.io/research/phishing-email-detection): An evaluation of GPT-4o, Claude Sonnet 4, and Grok-3 against adversarial rephrasing, prompt injection, and cross-lingual phishing attacks. Published in the 2026 56th Annual IEEE International Conference on Dependable Systems and Networks Workshops (DSN-W), pages 114-120. [IEEE Xplore](https://ieeexplore.ieee.org/document/11594513) | [DOI](https://doi.org/10.1109/DSN-W70714.2026.00038) | [arXiv preprint](https://arxiv.org/abs/2512.10104) | [DSML 2026 workshop](https://dependablesecureml.github.io/)
 
 ## Service
 

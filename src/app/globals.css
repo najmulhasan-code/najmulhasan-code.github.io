@@ -139,6 +139,11 @@ h4 {
   line-height: 1.4;
 }
 
+.prose h2[id],
+.prose h3[id] {
+  scroll-margin-top: 6rem;
+}
+
 .prose ul, .prose ol {
   margin-bottom: 1.5rem;
   padding-left: 1.5rem;
