@@ -52,18 +52,26 @@ export default function Blog({ posts }: { posts: BlogPost[] }) {
                 />
 
                 {post.thumbnail && (
-                  <div className="flex items-center justify-center overflow-hidden bg-gray-50 border-b border-gray-100">
+                  <div
+                    className="aspect-video flex items-center justify-center overflow-hidden border-b border-gray-100"
+                    style={{ backgroundColor: post.thumbnailBackground ?? 'var(--gray-50)' }}
+                  >
                     <Image
                       src={post.thumbnail}
                       alt={post.title}
                       width={1200}
                       height={630}
-                      className="w-full h-auto object-contain group-hover:scale-[1.02] transition-transform duration-300"
+                      className={`w-full h-full group-hover:scale-[1.02] transition-transform duration-300 ${
+                        post.thumbnailFit === 'cover' ? 'object-cover' : 'object-contain'
+                      }`}
                     />
                   </div>
                 )}
 
                 <div className="p-4 sm:p-6 flex flex-col flex-1">
+                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-teal-700">
+                    {post.category}
+                  </div>
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-snug mb-2 group-hover:text-teal-800 transition-colors">
                     {post.title}
                   </h3>

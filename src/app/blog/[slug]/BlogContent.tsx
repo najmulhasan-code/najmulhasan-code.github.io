@@ -1,7 +1,8 @@
 'use client';
 
-import { ComponentType } from 'react';
+import { ComponentType, useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { formatDate } from '@/lib/format';
 import type { BlogPost } from '@/data/blog';
 import { PaperIcon, PackageIcon, ExternalLinkIcon } from '@/components/icons';
@@ -22,6 +23,51 @@ type LinkMeta = {
   FallbackIcon?: ComponentType<{ className?: string }>;
 };
 
+type SectionLink = {
+  id: string;
+  label: string;
+};
+
+function buildSectionNavigation(contentHtml: string): {
+  html: string;
+  sections: SectionLink[];
+} {
+  const sections: SectionLink[] = [];
+  const usedIds = new Set<string>();
+
+  const html = contentHtml.replace(
+    /<h2([^>]*)>([\s\S]*?)<\/h2>/gi,
+    (heading, attributes: string, innerHtml: string) => {
+      const label = innerHtml
+        .replace(/<[^>]+>/g, '')
+        .replace(/&amp;/g, '&')
+        .replace(/&nbsp;/g, ' ')
+        .trim();
+      const existingId = attributes.match(/\sid=["']([^"']+)["']/i)?.[1];
+      const baseId = existingId || label
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+
+      let id = baseId || `section-${sections.length + 1}`;
+      let suffix = 2;
+      while (usedIds.has(id)) {
+        id = `${baseId}-${suffix}`;
+        suffix += 1;
+      }
+
+      usedIds.add(id);
+      sections.push({ id, label });
+
+      return existingId
+        ? heading
+        : `<h2${attributes} id="${id}">${innerHtml}</h2>`;
+    }
+  );
+
+  return { html, sections };
+}
+
 function getLinkMeta(url: string): LinkMeta {
   const domain = getDomain(url);
   if (domain.includes('github')) return { label: 'View code', logo: '/logos/github.png' };
@@ -40,6 +86,48 @@ interface BlogContentProps {
 }
 
 export default function BlogContent({ post }: BlogContentProps) {
+  const sectionNavigation = useMemo(
+    () => buildSectionNavigation(post.contentHtml),
+    [post.contentHtml]
+  );
+  const hasSectionNavigation = sectionNavigation.sections.length >= 3;
+  const [activeSectionId, setActiveSectionId] = useState(
+    sectionNavigation.sections[0]?.id ?? ''
+  );
+
+  useEffect(() => {
+    if (!hasSectionNavigation) return;
+
+    let frameId: number | null = null;
+
+    const updateActiveSection = () => {
+      let currentId = sectionNavigation.sections[0].id;
+
+      sectionNavigation.sections.forEach(({ id }) => {
+        const heading = document.getElementById(id);
+        if (heading && heading.getBoundingClientRect().top <= 112) {
+          currentId = id;
+        }
+      });
+
+      setActiveSectionId((current) => current === currentId ? current : currentId);
+      frameId = null;
+    };
+
+    const handleScroll = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+    };
+  }, [hasSectionNavigation, sectionNavigation.sections]);
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -55,6 +143,8 @@ export default function BlogContent({ post }: BlogContentProps) {
     ...(post.updatedDate ? { dateModified: post.updatedDate } : {}),
     inLanguage: 'en',
     keywords: post.tags,
+    articleSection: post.category,
+    isAccessibleForFree: true,
     author: {
       '@type': 'Person',
       '@id': `${SITE_URL}/#person`,
@@ -105,74 +195,169 @@ export default function BlogContent({ post }: BlogContentProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <article className="min-h-screen bg-surface">
-      <div className="bg-background pt-12 sm:pt-16 lg:pt-20 pb-10 sm:pb-14">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <motion.h1
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-medium text-gray-900 leading-tight mb-5"
-          >
-            {post.title}
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.05 }}
-            className="text-gray-500 text-sm"
-          >
-            {formatDate(post.date)}
-            {post.updatedDate && ` · Updated ${formatDate(post.updatedDate)}`}
-          </motion.p>
-
-          {post.links && post.links.length > 0 && (
+        <div className="bg-background pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="flex flex-wrap gap-x-5 gap-y-2 mt-6"
+              transition={{ duration: 0.4 }}
+              className="mb-4 text-xs font-medium uppercase tracking-wide text-teal-700"
             >
-              {post.links.map((link) => {
-                const { label, logo, FallbackIcon } = getLinkMeta(link);
-                return (
-                  <a
-                    key={link}
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-1.5 text-sm font-medium text-gray-700 hover:text-teal-700 transition-colors"
-                  >
-                    {logo ? (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img
-                        src={logo}
-                        alt=""
-                        width={16}
-                        height={16}
-                        className="w-4 h-4 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
-                      />
-                    ) : FallbackIcon ? (
-                      <FallbackIcon className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" />
-                    ) : null}
-                    <span className="group-hover:underline underline-offset-2">{label}</span>
-                  </a>
-                );
-              })}
+              {post.category}
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.05 }}
+              className="text-2xl sm:text-3xl lg:text-4xl font-medium text-gray-900 leading-tight mb-5"
+            >
+              {post.title}
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="text-gray-500 text-sm"
+            >
+              <span className="text-teal-700">Najmul Hasan</span>
+              {' · '}
+              {formatDate(post.date)}
+              {post.updatedDate && ` · Updated ${formatDate(post.updatedDate)}`}
+            </motion.p>
+
+            {post.links && post.links.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.15 }}
+                className="flex flex-wrap gap-x-5 gap-y-2 mt-6"
+              >
+                {post.links.map((link) => {
+                  const { label, logo, FallbackIcon } = getLinkMeta(link);
+                  return (
+                    <a
+                      key={link}
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1.5 text-sm font-medium text-gray-700 hover:text-teal-700 transition-colors"
+                    >
+                      {logo ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          src={logo}
+                          alt=""
+                          width={16}
+                          height={16}
+                          className="w-4 h-4 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                        />
+                      ) : FallbackIcon ? (
+                        <FallbackIcon className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" />
+                      ) : null}
+                      <span className="group-hover:underline underline-offset-2">{label}</span>
+                    </a>
+                  );
+                })}
+              </motion.div>
+            )}
+          </div>
+        </div>
+
+        <div
+          className={`mx-auto px-4 sm:px-6 py-10 sm:py-14 ${
+            hasSectionNavigation ? 'max-w-7xl' : 'max-w-5xl'
+          }`}
+        >
+          {post.thumbnail && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="max-w-4xl mx-auto mb-10 flex items-center justify-center overflow-hidden rounded-md ring-1 ring-gray-100"
+              style={{ backgroundColor: post.thumbnailBackground ?? 'var(--gray-50)' }}
+            >
+              <Image
+                src={post.thumbnail}
+                alt={`Teaser for ${post.title}`}
+                width={1200}
+                height={400}
+                className="w-full h-auto object-contain"
+                priority
+              />
             </motion.div>
           )}
-        </div>
-      </div>
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="prose prose-lg prose-gray max-w-none"
-          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-        />
-      </div>
+          <div
+            className={
+              hasSectionNavigation
+                ? 'xl:grid xl:grid-cols-[minmax(10rem,1fr)_minmax(0,80ch)_minmax(10rem,1fr)] xl:gap-8 xl:items-start'
+                : ''
+            }
+          >
+            {hasSectionNavigation && (
+              <>
+                <aside className="hidden xl:block xl:col-start-1 xl:row-start-1 xl:self-stretch">
+                  <nav
+                    aria-label="Blog post sections"
+                    className="sticky top-24 ml-auto w-52 max-h-[calc(100vh-7rem)] overflow-y-auto pr-3"
+                  >
+                    <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
+                      On this page
+                    </p>
+                    <ol className="border-l border-gray-200">
+                      {sectionNavigation.sections.map((section) => (
+                        <li key={section.id}>
+                          <a
+                            href={`#${section.id}`}
+                            onClick={() => setActiveSectionId(section.id)}
+                            className={`block -ml-px border-l-2 py-1.5 pl-3 text-xs leading-relaxed transition-colors ${
+                              activeSectionId === section.id
+                                ? 'border-teal-600 text-teal-700'
+                                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-900'
+                            }`}
+                          >
+                            {section.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ol>
+                  </nav>
+                </aside>
+
+                <details className="mb-8 rounded-md border border-gray-200 bg-background px-4 py-3 xl:hidden">
+                  <summary className="cursor-pointer text-sm font-semibold text-gray-800">
+                    On this page
+                  </summary>
+                  <ol className="mt-3 space-y-2 border-l border-gray-200 pl-3">
+                    {sectionNavigation.sections.map((section) => (
+                      <li key={section.id}>
+                        <a
+                          href={`#${section.id}`}
+                          onClick={() => setActiveSectionId(section.id)}
+                          className="text-sm leading-relaxed text-gray-600 hover:text-teal-700"
+                        >
+                          {section.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ol>
+                </details>
+              </>
+            )}
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className={`prose prose-lg prose-gray mx-auto !max-w-[80ch] ${
+                hasSectionNavigation ? 'xl:col-start-2 xl:row-start-1' : ''
+              }`}
+              dangerouslySetInnerHTML={{ __html: sectionNavigation.html }}
+            />
+          </div>
+        </div>
       </article>
     </>
   );

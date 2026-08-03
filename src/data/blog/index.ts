@@ -15,6 +15,8 @@ export interface BlogPost {
   tags: string[];
   published: boolean;
   thumbnail?: string;
+  thumbnailFit?: 'contain' | 'cover';
+  thumbnailBackground?: string;
   links?: string[];
   contentHtml: string;
 }
@@ -45,6 +47,8 @@ function readBlogPost(slug: string): BlogPost | null {
     tags: asStringArray(meta.tags),
     published: meta.published !== false,
     thumbnail: resolveTeaser(dir, urlBase),
+    thumbnailFit: meta.thumbnailFit === 'cover' ? 'cover' : 'contain',
+    thumbnailBackground: meta.thumbnailBackground ? String(meta.thumbnailBackground) : undefined,
     links: meta.links ? asStringArray(meta.links) : undefined,
     contentHtml: readContentHtml(htmlFile, urlBase),
   };

@@ -80,11 +80,11 @@ export default function Publications({ papers }: { papers: Paper[] }) {
                     {pub.title}
                   </h3>
 
-                  <p className="text-[12.5px] sm:text-[13px] text-gray-500 mb-2 line-clamp-1">
+                  <p className="text-[13.5px] sm:text-sm text-gray-500 mb-2 line-clamp-1">
                     {renderAuthors(pub.authors)}
                   </p>
 
-                  <p className="text-[12.5px] sm:text-[13px] text-gray-400 leading-relaxed line-clamp-3 flex-1">
+                  <p className="text-[13.5px] sm:text-sm text-gray-500 leading-relaxed line-clamp-3 flex-1">
                     {pub.abstract}
                   </p>
 
@@ -92,7 +92,7 @@ export default function Publications({ papers }: { papers: Paper[] }) {
                     <span className="text-[11px] font-medium tracking-wide uppercase text-teal-700">
                       {pub.venueShort}
                     </span>
-                    <span className="inline-flex items-center gap-1 text-[13px] font-medium text-gray-600 group-hover:text-teal-700 transition-colors cursor-pointer">
+                    <span className="inline-flex items-center gap-1 text-sm font-medium text-gray-600 group-hover:text-teal-700 transition-colors cursor-pointer">
                       Read more <ArrowUpRight size={13} />
                     </span>
                   </div>

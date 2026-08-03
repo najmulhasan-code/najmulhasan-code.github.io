@@ -41,7 +41,7 @@ export default function Footer() {
             })}
           </div>
 
-          <div className="text-xs text-gray-400">
+          <div className="text-xs text-gray-500">
             © {currentYear} Najmul Hasan
           </div>
         </motion.div>

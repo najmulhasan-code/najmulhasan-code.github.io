@@ -5,7 +5,7 @@
   --gray-100: #eaf0f0;
   --gray-200: #d8e2e2;
   --gray-400: #91a1a3;
-  --gray-500: #687b7e;
+  --gray-500: #5f7275;
   --gray-600: #506468;
   --gray-700: #394e53;
   --gray-800: #263b40;
@@ -137,6 +137,21 @@ h4 {
   margin-top: 2rem;
   margin-bottom: 0.75rem;
   line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 .prose h2[id],

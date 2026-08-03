@@ -64,6 +64,13 @@ function hasLink(html, attributes) {
 
 const homepage = requireHtml('/');
 if (!homepage.includes('"@type":"ProfilePage"')) errors.push('/: missing ProfilePage structured data.');
+if (!homepage.includes('/images/najmul_hasan.webp')) errors.push('/: missing optimized profile image.');
+if (!homepage.includes('/images/najmul_hasan-social.jpg')) errors.push('/: missing social-preview image metadata.');
+if (homepage.includes('/images/najmul_hasan.JPEG')) errors.push('/: references the superseded profile image.');
+
+for (const asset of ['images/najmul_hasan.webp', 'images/najmul_hasan-social.jpg', 'profile-favicon.png']) {
+  if (!fs.existsSync(path.join(out, ...asset.split('/')))) errors.push(`Missing exported visual asset: /${asset}.`);
+}
 
 for (const paper of content.papers) {
   const route = `/research/${paper.slug}`;
@@ -100,6 +107,17 @@ for (const post of content.posts) {
   const route = `/blog/${post.slug}`;
   const html = requireHtml(route);
   if (!html.includes('"@type":"BlogPosting"')) errors.push(`${route}: missing BlogPosting structured data.`);
+  if (!html.includes('"@type":"BreadcrumbList"')) errors.push(`${route}: missing breadcrumb structured data.`);
+  if (!hasLink(html, { rel: 'canonical', href: post.canonicalUrl })) errors.push(`${route}: canonical link mismatch.`);
+  if (post.thumbnailUrl && !html.includes(post.thumbnailUrl.replace(SITE_URL, ''))) {
+    errors.push(`${route}: missing teaser image.`);
+  }
+
+  const source = fs.readFileSync(path.join(post.sourceDirectory, 'index.html'), 'utf8');
+  const sectionCount = [...source.matchAll(/<h2\b[^>]*>/gi)].length;
+  if (sectionCount >= 3 && !html.includes('On this page')) {
+    errors.push(`${route}: missing section navigation for a long post.`);
+  }
 }
 
 const sitemapFile = path.join(out, 'sitemap.xml');

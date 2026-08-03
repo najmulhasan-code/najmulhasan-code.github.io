@@ -13,18 +13,13 @@ export default function Hero() {
   ];
 
   return (
-    <section id="hero" className="calm-hero pt-12 sm:pt-16 lg:pt-20 pb-6 sm:pb-8 lg:pb-10">
+    <section id="hero" className="calm-hero pt-8 sm:pt-16 lg:pt-20 pb-6 sm:pb-8 lg:pb-10">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col sm:flex-row gap-8 sm:gap-10 items-start">
+        <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
 
-          <motion.div
-            className="flex-shrink-0 flex flex-col items-center sm:items-start"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
+          <div className="w-full sm:w-auto flex-shrink-0 flex flex-col items-center sm:items-start">
             <Image
-              src="/images/najmul_hasan.JPEG"
+              src="/images/najmul_hasan.webp"
               alt="Najmul Hasan"
               width={400}
               height={400}
@@ -32,7 +27,7 @@ export default function Hero() {
               priority
             />
 
-            <div className="mt-5 flex items-center justify-center gap-4 w-44 sm:w-52 lg:w-60">
+            <div className="mt-5 flex items-center justify-center gap-1 sm:gap-3 w-44 sm:w-52 lg:w-60">
               {socialLinks.map((social) => {
                 const Icon = social.Icon;
                 return (
@@ -43,36 +38,36 @@ export default function Hero() {
                     rel="noopener noreferrer"
                     aria-label={social.label}
                     title={social.label}
-                    className="inline-flex items-center justify-center w-8 h-8 rounded-md text-gray-500 hover:text-teal-700 hover:bg-gray-100 transition-colors"
+                    className="inline-flex items-center justify-center w-10 h-10 rounded-md text-gray-500 hover:text-teal-700 hover:bg-gray-100 transition-colors"
                   >
                     <Icon className="w-[18px] h-[18px]" />
                   </a>
                 );
               })}
             </div>
-          </motion.div>
+          </div>
 
           <motion.div
-            className="flex-1 min-w-0"
+            className="w-full flex-1 min-w-0"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-bold text-gray-900 tracking-tight leading-[1.1] mb-3">
+            <h1 className="text-center sm:text-left text-3xl sm:text-4xl lg:text-[40px] font-bold text-gray-900 tracking-tight leading-[1.1] mb-3">
               Najmul Hasan
             </h1>
 
-            <div className="text-[14px] text-gray-600 leading-relaxed mb-5">
+            <div className="text-center sm:text-left text-[14px] text-gray-600 leading-relaxed mb-5">
               Language Models · <span className="text-gray-800">AI Alignment</span>
             </div>
 
-            <div className="space-y-4 text-[15px] text-gray-700 leading-[1.7]">
+            <div className="space-y-4 text-base text-gray-700 leading-[1.7]">
               <p>
-                My research interests center on language models and AI alignment. I am particularly interested in the design and training of language models, including how training choices shape their capabilities and behavior, and in developing models that are more capable, reliable, and aligned.
+                My research centers on language models and AI alignment. I am particularly interested in how model design and training choices shape capabilities and behavior, and in developing models that are more capable, reliable, and aligned.
               </p>
 
               <p>
-                I completed a B.S. in Computer Science, with minors in Mathematics and Physics, at the University of North Carolina at Pembroke, where I worked with <a href="https://www.uncp.edu/about/directory/prashanth-busi_reddy_gari.html" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Prashanth BusiReddyGari</a> and <a href="https://zhangshaohu.github.io/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Shaohu Zhang</a>. I was an AI Safety Research Fellow at <a href="https://algoverseairesearch.org" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Algoverse</a>. I am currently participating in <a href="https://aialignment.mit.edu/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">MIT AI Alignment&apos;s AI Safety Fundamentals</a> program and have completed <a href="https://bluedot.org/courses/technical-ai-safety" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">BlueDot Impact&apos;s Technical AI Safety</a> course.
+                I hold a B.S. in Computer Science, with minors in Mathematics and Physics, from the University of North Carolina at Pembroke, where I worked with <a href="https://www.uncp.edu/about/directory/prashanth-busi_reddy_gari.html" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Prashanth BusiReddyGari</a> and <a href="https://zhangshaohu.github.io/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Shaohu Zhang</a>. I was an AI Safety Research Fellow at <a href="https://algoverseairesearch.org" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Algoverse</a>. I also completed <a href="https://aialignment.mit.edu/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">MIT AI Alignment&apos;s AI Safety Fundamentals</a> program and <a href="https://bluedot.org/courses/technical-ai-safety" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">BlueDot Impact&apos;s Technical AI Safety</a> course.
               </p>
             </div>
           </motion.div>

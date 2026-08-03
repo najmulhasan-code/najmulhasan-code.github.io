@@ -5,6 +5,8 @@
   "excerpt": "Ask a language model a question and you get one answer. One perspective. One viewpoint. That works fine for simple queries. But complex problems like architecture decisions, security reviews, or research questions benefit from multiple angles. A single model, no matter how capable, has blind spots. SAGE takes a different approach. Instead of relying on one model's response, it puts together a team of specialized agents.",
   "category": "Project",
   "tags": ["LLMs", "Multi-Agent", "Python"],
+  "thumbnailFit": "contain",
+  "thumbnailBackground": "#0f172a",
   "published": true,
   "links": [
     "https://github.com/najmulhasan-code/sage",

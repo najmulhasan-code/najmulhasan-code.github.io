@@ -26,7 +26,7 @@ export default function Navbar() {
     { label: 'Experience', href: '#experience', id: 'experience' },
     { label: 'Education', href: '#education', id: 'education' },
     { label: 'Awards', href: '#awards', id: 'awards' },
-    { label: 'Service', href: '#service', id: 'service' },
+    { label: 'Activities', href: '#service', id: 'service' },
     { label: 'Blog', href: '#blog', id: 'blog' },
   ], []);
 
@@ -155,7 +155,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-14 sm:h-16">
             <button
               onClick={scrollToTop}
-              className="text-[15px] sm:text-base font-semibold text-gray-900 hover:text-teal-700 transition-colors tracking-tight focus:outline-none focus-visible:outline-none"
+              className="min-h-11 text-[15px] sm:text-base font-semibold text-gray-900 hover:text-teal-700 transition-colors tracking-tight focus:outline-none focus-visible:outline-none"
             >
               Najmul Hasan
             </button>
@@ -189,8 +189,10 @@ export default function Navbar() {
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-1.5 text-gray-700 hover:text-gray-900 transition-colors focus:outline-none focus-visible:outline-none"
+              className="lg:hidden inline-flex h-11 w-11 items-center justify-center text-gray-700 hover:text-gray-900 transition-colors focus:outline-none focus-visible:outline-none"
               aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -201,6 +203,7 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -213,7 +216,7 @@ export default function Navbar() {
                   <button
                     key={link.href}
                     onClick={() => scrollToSection(link.href)}
-                    className={`text-left py-2 text-[15px] font-medium transition-colors focus:outline-none focus-visible:outline-none ${
+                    className={`min-h-11 text-left py-2.5 text-[15px] font-medium transition-colors focus:outline-none focus-visible:outline-none ${
                       currentSection === link.id
                         ? 'text-teal-700'
                         : 'text-gray-600 hover:text-gray-900'

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+import MotionProvider from "@/components/MotionProvider";
 import "./globals.css";
 
 const SITE_DESCRIPTION =
@@ -129,8 +130,8 @@ export const metadata: Metadata = {
     siteName: "Najmul Hasan",
     images: [
       {
-        url: "https://najmulhasan-code.github.io/images/najmul_hasan.JPEG",
-        secureUrl: "https://najmulhasan-code.github.io/images/najmul_hasan.JPEG",
+        url: "https://najmulhasan-code.github.io/images/najmul_hasan-social.jpg",
+        secureUrl: "https://najmulhasan-code.github.io/images/najmul_hasan-social.jpg",
         width: 1200,
         height: 630,
         alt: "Najmul Hasan",
@@ -145,7 +146,7 @@ export const metadata: Metadata = {
     title: "Najmul Hasan",
     description: SITE_SHORT_DESCRIPTION,
     images: {
-      url: "https://najmulhasan-code.github.io/images/najmul_hasan.JPEG",
+      url: "https://najmulhasan-code.github.io/images/najmul_hasan-social.jpg",
       alt: "Najmul Hasan",
     },
   },
@@ -167,7 +168,7 @@ const personJsonLd = {
   givenName: "Najmul",
   familyName: "Hasan",
   url: "https://najmulhasan-code.github.io",
-  image: "https://najmulhasan-code.github.io/images/najmul_hasan.JPEG",
+  image: "https://najmulhasan-code.github.io/images/najmul_hasan.webp",
   sameAs: [
     "https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en",
     "https://github.com/najmulhasan-code",
@@ -239,8 +240,10 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <Navbar />
-        {children}
+        <MotionProvider>
+          <Navbar />
+          {children}
+        </MotionProvider>
       </body>
     </html>
   );

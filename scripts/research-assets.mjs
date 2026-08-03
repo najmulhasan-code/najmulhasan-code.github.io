@@ -310,7 +310,25 @@ export function validateResearchContent(content) {
 
   for (const post of content.posts) {
     if (!post.title || !post.date || !post.description) errors.push(`${post.slug}: incomplete blog metadata.`);
-    if (!fs.existsSync(path.join(post.sourceDirectory, 'index.html'))) errors.push(`${post.slug}: missing blog index.html.`);
+    const postHtmlFile = path.join(post.sourceDirectory, 'index.html');
+    if (!fs.existsSync(postHtmlFile)) {
+      errors.push(`${post.slug}: missing blog index.html.`);
+    } else {
+      const postHtml = fs.readFileSync(postHtmlFile, 'utf8');
+      if (/<img\b[^>]+src=["'][^"']*teaser\.[^"']+["']/i.test(postHtml)) {
+        errors.push(`${post.slug}: the teaser is rendered by the article template and must not be repeated in index.html.`);
+      }
+    }
+    if (!post.thumbnailUrl) errors.push(`${post.slug}: missing blog teaser image.`);
+    if (post.thumbnailFit && !['contain', 'cover'].includes(post.thumbnailFit)) {
+      errors.push(`${post.slug}: thumbnailFit must be contain or cover.`);
+    }
+    if (post.thumbnailBackground && !/^#[0-9a-f]{6}$/i.test(post.thumbnailBackground)) {
+      errors.push(`${post.slug}: thumbnailBackground must be a six-digit hex color.`);
+    }
+    for (const url of post.links ?? []) {
+      if (!/^https:\/\//.test(url)) errors.push(`${post.slug}: non-HTTPS blog URL ${url}.`);
+    }
   }
   return errors;
 }
