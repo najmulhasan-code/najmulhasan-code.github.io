@@ -1,0 +1,21 @@
+TY  - RPRT
+T1  - GRPO Does Not Close the Multi-Agent Coordination Gap
+AU  - Najmul Hasan
+AU  - Prashanth BusiReddyGari
+PY  - 2026
+DA  - 2026-06-05
+T2  - arXiv preprint arXiv:2606.07845, Jun. 2026
+AB  - We measure how well current large language models coordinate as multiple agents sharing a common resource, using the dining philosophers problem as a clean test bed. Across 630 episodes spanning seven models and three philosopher counts, four frontier closed-source systems reach mean reward 0.45 to 0.87 and Mistral-Small 24B reaches 0.83 to 0.99, while Qwen3-14B reaches 0.13 to 0.35. We then ask whether group relative policy optimization (GRPO) on rollouts from the task itself can close the gap and find that it cannot: a Welch's t-test on per-episode reward at five philosophers gives p = 0.66 and a Hedges' g of -0.11, with no statistically significant change at ten or fifteen philosophers either. Two further observations qualify the result. The training reward of both 8B and 14B runs peaked at step nine and then declined, so the default saved checkpoint at step 15 is strictly worse than several earlier ones. The four-term reward we use admits a degenerate maximum at zero actions, which DeepSeek-R1-Distill-Qwen-7B and Mistral-Small 24B at five philosophers both inhabit, with mean reward 1.0 and 0.83 respectively at zero meals. The bottleneck for an open-weight 14B model on multi-agent coordination is not training compute but training methodology: reward shaping that does not collapse to a no-action maximum, checkpoint discipline that does not depend on the final step, and curriculum across problem scales.
+KW  - large language models
+KW  - multi-agent coordination
+KW  - reinforcement learning
+KW  - GRPO
+KW  - reward shaping
+KW  - checkpoint selection
+KW  - Dining Philosophers
+KW  - Qwen3
+KW  - LoRA
+UR  - https://najmulhasan-code.github.io/research/grpo-coordination
+L1  - https://arxiv.org/pdf/2606.07845
+L2  - https://github.com/najmulhasan-code/dpmarl
+ER  -

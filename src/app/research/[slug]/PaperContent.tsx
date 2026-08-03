@@ -8,6 +8,7 @@ import type { Paper } from '@/data/papers';
 import { PaperIcon, PackageIcon, ExternalLinkIcon } from '@/components/icons';
 
 const AUTHOR_NAME = 'Najmul Hasan';
+const SITE_URL = 'https://najmulhasan-code.github.io';
 
 function getDomain(url: string): string {
   try {
@@ -175,16 +176,23 @@ export default function PaperContent({ paper }: { paper: Paper }) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ScholarlyArticle',
+    '@id': `${SITE_URL}/research/${paper.slug}#article`,
     headline: paper.title,
     name: paper.title,
     abstract: paper.abstract,
+    url: `${SITE_URL}/research/${paper.slug}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/research/${paper.slug}`,
+    },
+    inLanguage: 'en',
     author: paper.authors.map((name) => ({
       '@type': 'Person',
       name,
       ...(name === AUTHOR_NAME
         ? {
-            '@id': 'https://najmulhasan-code.github.io/#person',
-            url: 'https://najmulhasan-code.github.io',
+            '@id': `${SITE_URL}/#person`,
+            url: SITE_URL,
             affiliation: {
               '@type': 'EducationalOrganization',
               name: 'University of North Carolina at Pembroke',
@@ -196,20 +204,57 @@ export default function PaperContent({ paper }: { paper: Paper }) {
     publisher: { '@type': 'Organization', name: paper.publisher ?? paper.venueShort },
     isPartOf: { '@type': 'PublicationEvent', name: paper.venue },
     keywords: paper.keywords,
-    ...(paper.paperLink ? { url: paper.paperLink } : {}),
-    ...(paper.arxivLink ? { sameAs: paper.arxivLink } : {}),
-    ...(paper.doiLink
+    sameAs: [paper.paperLink, paper.arxivLink, paper.doiLink]
+      .filter((link): link is string => !!link),
+    encoding: [
+      {
+        '@type': 'MediaObject',
+        encodingFormat: 'application/x-bibtex',
+        contentUrl: `${SITE_URL}/papers/${paper.slug}/citation.bib`,
+      },
+      {
+        '@type': 'MediaObject',
+        encodingFormat: 'application/x-research-info-systems',
+        contentUrl: `${SITE_URL}/papers/${paper.slug}/citation.ris`,
+      },
+    ],
+    ...(paper.doi
       ? {
           identifier: {
             '@type': 'PropertyValue',
             propertyID: 'DOI',
-            value: paper.doiLink.replace('https://doi.org/', ''),
+            value: paper.doi,
           },
         }
       : {}),
     ...(paper.thumbnail
-      ? { image: `https://najmulhasan-code.github.io${paper.thumbnail}` }
+      ? { image: `${SITE_URL}${paper.thumbnail}` }
       : {}),
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Najmul Hasan',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Research',
+        item: `${SITE_URL}/research`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: paper.title,
+        item: `${SITE_URL}/research/${paper.slug}`,
+      },
+    ],
   };
 
   const links = [paper.paperLink, paper.arxivLink, paper.doiLink, paper.codeLink, ...(paper.links ?? [])]
@@ -221,6 +266,10 @@ export default function PaperContent({ paper }: { paper: Paper }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       <article className="min-h-screen bg-surface">

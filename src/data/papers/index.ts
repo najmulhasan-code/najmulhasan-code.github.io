@@ -21,6 +21,7 @@ export interface Paper {
   paperLink?: string;
   arxivLink?: string;
   doiLink?: string;
+  doi?: string;
   codeLink?: string;
   links?: string[];
   bibtex?: string;
@@ -37,6 +38,12 @@ function optionalString(value: unknown): string | undefined {
   return value ? String(value) : undefined;
 }
 
+function resolveDoi(doiLink?: string, bibtex?: string): string | undefined {
+  const linkedDoi = doiLink?.match(/doi\.org\/(.+)$/i)?.[1];
+  if (linkedDoi) return linkedDoi;
+  return bibtex?.match(/\bdoi\s*=\s*[{"]([^}"]+)/i)?.[1];
+}
+
 function readPaper(slug: string): Paper | null {
   const dir = path.join(PAPERS_DIR, slug);
   const metaFile = path.join(dir, 'meta.json');
@@ -45,6 +52,8 @@ function readPaper(slug: string): Paper | null {
 
   const meta = JSON.parse(fs.readFileSync(metaFile, 'utf8'));
   const urlBase = `/papers/${slug}`;
+  const doiLink = optionalString(meta.doiLink);
+  const bibtex = optionalString(meta.bibtex);
 
   return {
     slug,
@@ -62,10 +71,11 @@ function readPaper(slug: string): Paper | null {
     thumbnail: resolveTeaser(dir, urlBase),
     paperLink: optionalString(meta.paperLink),
     arxivLink: optionalString(meta.arxivLink),
-    doiLink: optionalString(meta.doiLink),
+    doiLink,
+    doi: resolveDoi(doiLink, bibtex),
     codeLink: optionalString(meta.codeLink),
     links: meta.links ? asStringArray(meta.links) : undefined,
-    bibtex: optionalString(meta.bibtex),
+    bibtex,
     contentHtml: readContentHtml(htmlFile, urlBase),
   };
 }

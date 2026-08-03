@@ -7,6 +7,17 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+const SITE_URL = 'https://najmulhasan-code.github.io';
+
+function getArxivId(url?: string): string | undefined {
+  return url?.match(/arxiv\.org\/abs\/([^?#]+)/i)?.[1]?.replace(/v\d+$/i, '');
+}
+
+function getArxivPdfUrl(url?: string): string | undefined {
+  const id = url?.match(/arxiv\.org\/abs\/([^?#]+)/i)?.[1];
+  return id ? `https://arxiv.org/pdf/${id}` : undefined;
+}
+
 export function generateStaticParams() {
   const papers = getAllPapers();
   return papers.map((paper) => ({
@@ -22,35 +33,54 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Paper Not Found' };
   }
 
+  const canonical = `${SITE_URL}/research/${paper.slug}`;
+  const description = paper.abstract.length > 200
+    ? `${paper.abstract.slice(0, 197).trimEnd()}...`
+    : paper.abstract;
+  const image = paper.thumbnail ? `${SITE_URL}${paper.thumbnail}` : undefined;
+  const arxivId = getArxivId(paper.arxivLink);
+  const pdfUrl = getArxivPdfUrl(paper.arxivLink);
+
   return {
     title: `${paper.title} | Najmul Hasan`,
-    description: paper.abstract.slice(0, 200) + '...',
+    description,
     keywords: paper.keywords,
     alternates: {
-      canonical: `https://najmulhasan-code.github.io/research/${paper.slug}`,
+      canonical,
+      types: {
+        'application/x-bibtex': `${SITE_URL}/papers/${paper.slug}/citation.bib`,
+        'application/x-research-info-systems': `${SITE_URL}/papers/${paper.slug}/citation.ris`,
+      },
     },
     openGraph: {
       title: paper.title,
-      description: paper.abstract.slice(0, 200) + '...',
+      description,
       type: 'article',
       publishedTime: paper.date,
       authors: paper.authors,
       tags: paper.keywords,
-      url: `https://najmulhasan-code.github.io/research/${paper.slug}`,
+      url: canonical,
+      ...(image ? { images: [{ url: image, alt: paper.title }] } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title: paper.title,
-      description: paper.abstract.slice(0, 200) + '...',
+      description,
+      ...(image ? { images: [image] } : {}),
     },
     other: {
       'citation_title': paper.title,
       'citation_author': paper.authors,
       'citation_publication_date': paper.year,
+      'citation_online_date': paper.date,
       'citation_abstract': paper.abstract,
+      'citation_keywords': paper.keywords.join('; '),
+      'citation_language': 'en',
+      'citation_public_url': canonical,
       ...(paper.publisher ? { 'citation_publisher': paper.publisher } : {}),
-      ...(paper.arxivLink ? { 'citation_arxiv_id': paper.arxivLink.replace('https://arxiv.org/abs/', '') } : {}),
-      ...(paper.doiLink ? { 'citation_doi': paper.doiLink.replace('https://doi.org/', '') } : {}),
+      ...(arxivId ? { 'citation_arxiv_id': arxivId } : {}),
+      ...(pdfUrl ? { 'citation_pdf_url': pdfUrl } : {}),
+      ...(paper.doi ? { 'citation_doi': paper.doi } : {}),
       ...(paper.venue.includes('IEEE') || paper.venueShort.includes('NeurIPS')
         ? { 'citation_conference_title': paper.venue }
         : {}),

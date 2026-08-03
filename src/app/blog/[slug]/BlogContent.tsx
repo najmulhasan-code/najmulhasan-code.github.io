@@ -6,6 +6,8 @@ import { formatDate } from '@/lib/format';
 import type { BlogPost } from '@/data/blog';
 import { PaperIcon, PackageIcon, ExternalLinkIcon } from '@/components/icons';
 
+const SITE_URL = 'https://najmulhasan-code.github.io';
+
 function getDomain(url: string): string {
   try {
     return new URL(url).hostname;
@@ -38,8 +40,71 @@ interface BlogContentProps {
 }
 
 export default function BlogContent({ post }: BlogContentProps) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${SITE_URL}/blog/${post.slug}#article`,
+    headline: post.title,
+    description: post.description,
+    url: `${SITE_URL}/blog/${post.slug}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/blog/${post.slug}`,
+    },
+    datePublished: post.date,
+    ...(post.updatedDate ? { dateModified: post.updatedDate } : {}),
+    inLanguage: 'en',
+    keywords: post.tags,
+    author: {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#person`,
+      name: 'Najmul Hasan',
+      url: SITE_URL,
+    },
+    publisher: {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#person`,
+      name: 'Najmul Hasan',
+    },
+    ...(post.thumbnail ? { image: `${SITE_URL}${post.thumbnail}` } : {}),
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Najmul Hasan',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: `${SITE_URL}/blog`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: `${SITE_URL}/blog/${post.slug}`,
+      },
+    ],
+  };
+
   return (
-    <article className="min-h-screen bg-surface">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <article className="min-h-screen bg-surface">
       <div className="bg-background pt-12 sm:pt-16 lg:pt-20 pb-10 sm:pb-14">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <motion.h1
@@ -108,6 +173,7 @@ export default function BlogContent({ post }: BlogContentProps) {
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         />
       </div>
-    </article>
+      </article>
+    </>
   );
 }

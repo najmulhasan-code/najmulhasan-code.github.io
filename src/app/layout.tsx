@@ -9,6 +9,7 @@ const SITE_SHORT_DESCRIPTION =
   "Researcher interested in language models, language-model training, and AI alignment.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://najmulhasan-code.github.io"),
   title: "Najmul Hasan",
   description: SITE_DESCRIPTION,
   keywords: [
@@ -218,7 +219,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
         <link rel="icon" href="/profile-favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/profile-favicon.png" />

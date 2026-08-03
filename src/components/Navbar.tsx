@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface NavLink {
   label: string;
@@ -13,6 +13,7 @@ interface NavLink {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [isScrolling, setIsScrolling] = useState(false);
@@ -85,7 +86,7 @@ export default function Navbar() {
 
   const scrollToSection = useCallback((href: string) => {
     if (pathname !== '/') {
-      window.location.href = `/${href}`;
+      router.push(`/${href}`);
       return;
     }
 
@@ -109,7 +110,7 @@ export default function Navbar() {
     scrollTimeoutRef.current = setTimeout(() => {
       setIsScrolling(false);
     }, 1000);
-  }, [pathname]);
+  }, [pathname, router]);
 
   useEffect(() => {
     if (pathname !== '/') return;
@@ -128,7 +129,7 @@ export default function Navbar() {
 
   const scrollToTop = () => {
     if (pathname !== '/') {
-      window.location.href = '/';
+      router.push('/');
       return;
     }
 

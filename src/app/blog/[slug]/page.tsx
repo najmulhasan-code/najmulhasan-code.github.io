@@ -7,6 +7,8 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+const SITE_URL = 'https://najmulhasan-code.github.io';
+
 export function generateStaticParams() {
   const posts = getAllBlogPosts();
   return posts.map((post) => ({
@@ -22,12 +24,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Post Not Found' };
   }
 
+  const canonical = `${SITE_URL}/blog/${post.slug}`;
+  const image = post.thumbnail ? `${SITE_URL}${post.thumbnail}` : undefined;
+
   return {
     title: `${post.title} | Najmul Hasan`,
     description: post.description,
     keywords: post.tags,
     alternates: {
-      canonical: `https://najmulhasan-code.github.io/blog/${post.slug}`,
+      canonical,
     },
     openGraph: {
       title: post.title,
@@ -36,12 +41,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.date,
       authors: ['Najmul Hasan'],
       tags: post.tags,
-      url: `https://najmulhasan-code.github.io/blog/${post.slug}`,
+      url: canonical,
+      ...(post.updatedDate ? { modifiedTime: post.updatedDate } : {}),
+      ...(image ? { images: [{ url: image, alt: post.title }] } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
+      ...(image ? { images: [image] } : {}),
     },
   };
 }

@@ -1,0 +1,18 @@
+TY  - CONF
+T1  - Benchmarking Large Language Models for Zero-shot and Few-shot Phishing URL Detection
+AU  - Najmul Hasan
+AU  - Prashanth BusiReddyGari
+PY  - 2025
+DA  - 2025-12-01
+T2  - LAW 2025 Workshop, 39th Conference on Neural Information Processing Systems (NeurIPS 2025)
+AB  - The Uniform Resource Locator (URL), introduced in a connectivity-first era to define access and locate resources, remains historically limited, lacking future-proof mechanisms for security, trust, or resilience against fraud and abuse, despite the introduction of reactive protections like HTTPS during the cybersecurity era. In the current AI-first threatscape, deceptive URLs have reached unprecedented sophistication due to the widespread use of generative AI by cybercriminals and the AI-vs-AI arms race to produce context-aware phishing websites and URLs that are virtually indistinguishable to both users and traditional detection tools. Although AI-generated phishing accounted for a small fraction of filter-bypassing attacks in 2024, phishing volume has escalated over 4,000% since 2022, with nearly 50% more attacks evading detection. At the rate the threatscape is escalating, and phishing tactics are emerging faster than labeled data can be produced, zero-shot and few-shot learning with large language models (LLMs) offers a timely and adaptable solution, enabling generalization with minimal supervision. Given the critical importance of phishing URL detection in large-scale cybersecurity defense systems, we present a comprehensive benchmark of LLMs under a unified zero-shot and few-shot prompting framework and reveal operational trade-offs. Our evaluation uses a balanced dataset with consistent prompts, offering detailed analysis of performance, generalization, and model efficacy, quantified by accuracy, precision, recall, F1 score, AUROC, and AUPRC, to reflect both classification quality and practical utility in threat detection settings. We conclude few-shot prompting improves performance across multiple LLMs.
+KW  - phishing detection
+KW  - large language models
+KW  - zero-shot learning
+KW  - few-shot learning
+KW  - cybersecurity
+KW  - URL classification
+KW  - NLP
+UR  - https://najmulhasan-code.github.io/research/phishing-url-detection
+L1  - https://arxiv.org/pdf/2602.02641
+ER  -

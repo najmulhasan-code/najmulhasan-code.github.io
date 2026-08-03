@@ -3,26 +3,31 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "generate:research": "node scripts/generate-research-assets.mjs",
+    "check:research": "node scripts/check-research-assets.mjs",
+    "predev": "npm run generate:research",
     "dev": "next dev",
+    "prebuild": "npm run generate:research && npm run check:research",
     "build": "next build",
+    "postbuild": "node scripts/check-static-export.mjs",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "verify": "npm run lint && npm run build"
   },
   "dependencies": {
     "framer-motion": "^12.23.16",
     "lucide-react": "^0.544.0",
-    "next": "^15.5.15",
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "next": "^16.3.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.5.3",
+    "eslint-config-next": "16.3.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
