@@ -6,6 +6,8 @@ import { readContentHtml, resolveTeaser } from '../content';
 
 export interface Paper {
   slug: string;
+  published: boolean;
+  researchOrder?: number;
   title: string;
   authors: string[];
   keywords: string[];
@@ -57,6 +59,8 @@ function readPaper(slug: string): Paper | null {
 
   return {
     slug,
+    published: meta.published !== false,
+    researchOrder: typeof meta.researchOrder === 'number' ? meta.researchOrder : undefined,
     title: String(meta.title ?? ''),
     authors: asStringArray(meta.authors),
     keywords: asStringArray(meta.keywords),
@@ -80,7 +84,7 @@ function readPaper(slug: string): Paper | null {
   };
 }
 
-export function getAllPapers(): Paper[] {
+export function getAllPapers(options: { includeUnpublished?: boolean } = {}): Paper[] {
   if (!fs.existsSync(PAPERS_DIR)) return [];
 
   return fs
@@ -88,7 +92,12 @@ export function getAllPapers(): Paper[] {
     .filter((entry) => entry.isDirectory())
     .map((entry) => readPaper(entry.name))
     .filter((paper): paper is Paper => paper !== null)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .filter((paper) => options.includeUnpublished || paper.published)
+    .sort((a, b) => {
+      const orderDifference = (a.researchOrder ?? Number.POSITIVE_INFINITY) - (b.researchOrder ?? Number.POSITIVE_INFINITY);
+      if (orderDifference !== 0) return orderDifference;
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
 }
 
 export function getPaperBySlug(slug: string): Paper | undefined {

@@ -1,4 +1,5 @@
 {
+  "researchOrder": 1,
   "title": "DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention",
   "authors": ["Najmul Hasan", "Prashanth BusiReddyGari"],
   "keywords": ["multi-agent systems", "large language models", "benchmark", "coordination", "deadlock", "Dining Philosophers", "distributed systems"],

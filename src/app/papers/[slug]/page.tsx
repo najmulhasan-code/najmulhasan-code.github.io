@@ -7,7 +7,7 @@ type Props = {
 };
 
 export function generateStaticParams() {
-  return getAllPapers().map((paper) => ({ slug: paper.slug }));
+  return getAllPapers({ includeUnpublished: true }).map((paper) => ({ slug: paper.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

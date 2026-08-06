@@ -19,7 +19,7 @@ function getArxivPdfUrl(url?: string): string | undefined {
 }
 
 export function generateStaticParams() {
-  const papers = getAllPapers();
+  const papers = getAllPapers({ includeUnpublished: true });
   return papers.map((paper) => ({
     slug: paper.slug,
   }));
@@ -68,6 +68,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       ...(image ? { images: [image] } : {}),
     },
+    ...(paper.published ? {} : { robots: { index: false, follow: true } }),
     other: {
       'citation_title': paper.title,
       'citation_author': paper.authors,

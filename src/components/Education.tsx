@@ -28,67 +28,82 @@ const education: EducationEntry[] = [
 function formatDate(dateString: string): string {
   const [year, month] = dateString.split('-');
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-  return `${monthNames[parseInt(month) - 1]} ${year}`;
+  return monthNames[parseInt(month) - 1] + ' ' + year;
+}
+
+function formatDateRange(entry: EducationEntry): string {
+  const end = entry.expected ? 'Expected ' + formatDate(entry.endDate) : formatDate(entry.endDate);
+  return formatDate(entry.startDate) + ' ' + String.fromCharCode(0x2013) + ' ' + end;
 }
 
 export default function Education() {
   return (
-    <section id="education" className="py-12 sm:py-16 lg:py-20 bg-background">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+    <section id="education" className="bg-background py-12 sm:py-16 lg:py-20">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-10"
+          className="mb-8 sm:mb-10"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-            Education
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">Education</h2>
         </motion.div>
 
-        <div className="space-y-10">
-          {education.map((edu, index) => (
-            <motion.div
-              key={`${edu.institution}-${index}`}
-              initial={{ opacity: 0, y: 20 }}
+        <div className="border-y border-gray-200">
+          {education.map((entry, index) => (
+            <motion.article
+              key={entry.institution + '-' + index}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-5 lg:gap-10"
+              className="py-6 sm:py-8"
             >
-              <div className="flex items-start gap-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/logos/uncp.ico"
-                  alt=""
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 flex-shrink-0 rounded object-contain mt-0.5"
-                />
-                <div className="min-w-0">
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight">
-                    {edu.institution}
+              <header className="flex items-start gap-4">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-surface p-2 sm:h-12 sm:w-12">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/logos/uncp.ico"
+                    alt=""
+                    width={32}
+                    height={32}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+                <div className="min-w-0 pt-0.5">
+                  <h3 className="text-base font-bold leading-snug text-gray-900 sm:text-[17px]">
+                    {entry.institution}
                   </h3>
-                  <div className="text-sm text-gray-500 mt-1">{edu.location}</div>
+                  <p className="mt-1 text-sm text-gray-500">{entry.location}</p>
                 </div>
-              </div>
+              </header>
 
-              <div>
-                <div className="font-medium text-gray-900">{edu.degree}</div>
-                {edu.minors.length > 0 && (
-                  <div className="text-sm text-gray-600 mt-1">
-                    Minors in {edu.minors.join(' and ')}
+              <div className="mt-7 sm:ml-16">
+                <div className="grid gap-6 sm:grid-cols-[minmax(0,1fr)_220px] sm:gap-10">
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">
+                      Degree
+                    </p>
+                    <h4 className="mt-2 text-lg font-semibold leading-snug text-gray-900 sm:text-xl">
+                      {entry.degree}
+                    </h4>
+                    <p className="mt-4 max-w-2xl text-sm leading-relaxed text-gray-700">
+                      Minors in {entry.minors.join(' and ')}; member of {entry.honors}, where I completed the honors curriculum.
+                    </p>
                   </div>
-                )}
-                {edu.honors && (
-                  <div className="text-sm text-gray-600 mt-1">{edu.honors}</div>
-                )}
-                <div className="text-sm text-gray-500 mt-1">
-                  {formatDate(edu.startDate)} – {edu.expected ? `Expected ${formatDate(edu.endDate)}` : formatDate(edu.endDate)}
+
+                  <div className="border-t border-gray-200 pt-5 sm:border-l sm:border-t-0 sm:pl-8 sm:pt-0">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">
+                      Dates
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-gray-700">
+                      {formatDateRange(entry)}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>

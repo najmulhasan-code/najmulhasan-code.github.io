@@ -75,7 +75,12 @@ export function loadResearchContent(root = process.cwd()) {
       arxiv: resolveArxiv(meta),
       sourceDirectory: directory,
     };
-  }).sort((a, b) => b.date.localeCompare(a.date));
+  }).filter((paper) => paper.published !== false)
+    .sort((a, b) => {
+      const orderDifference = (a.researchOrder ?? Number.POSITIVE_INFINITY) - (b.researchOrder ?? Number.POSITIVE_INFINITY);
+      if (orderDifference !== 0) return orderDifference;
+      return b.date.localeCompare(a.date);
+    });
 
   const posts = directoriesIn(blogDirectory).map((slug) => {
     const directory = path.join(blogDirectory, slug);
@@ -99,6 +104,10 @@ export function loadResearchContent(root = process.cwd()) {
 
 function oneLine(value) {
   return String(value).replace(/\s+/g, ' ').trim();
+}
+
+function normalizeBibtex(value) {
+  return String(value).split('\n').map((line) => line.trimEnd()).join('\n').trim();
 }
 
 function risType(paper) {
@@ -178,7 +187,7 @@ function researchJson(papers) {
       citation: {
         bibtexUrl: `${SITE_URL}/papers/${paper.slug}/citation.bib`,
         risUrl: `${SITE_URL}/papers/${paper.slug}/citation.ris`,
-        bibtex: paper.bibtex,
+        bibtex: normalizeBibtex(paper.bibtex),
       },
     })),
   };
@@ -262,14 +271,14 @@ function llmsText(papers, posts) {
 
 export function buildResearchAssets(content = loadResearchContent()) {
   const assets = new Map();
-  const allBibtex = content.papers.map((paper) => paper.bibtex.trim()).join('\n\n');
+  const allBibtex = content.papers.map((paper) => normalizeBibtex(paper.bibtex)).join('\n\n');
 
   assets.set('public/papers.bib', `${allBibtex}\n`);
   assets.set('public/research.json', researchJson(content.papers));
   assets.set('public/llms.txt', llmsText(content.papers, content.posts));
 
   for (const paper of content.papers) {
-    assets.set(`public/papers/${paper.slug}/citation.bib`, `${paper.bibtex.trim()}\n`);
+    assets.set(`public/papers/${paper.slug}/citation.bib`, `${normalizeBibtex(paper.bibtex)}\n`);
     assets.set(`public/papers/${paper.slug}/citation.ris`, paperRis(paper));
   }
 

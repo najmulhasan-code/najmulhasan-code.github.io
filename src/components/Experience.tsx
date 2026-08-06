@@ -11,8 +11,14 @@ interface Role {
   advisor?: string;
 }
 
+interface Organization {
+  institution: string;
+  location: string;
+  roles: Role[];
+}
+
 const INSTITUTION_LOGOS: Record<string, string> = {
-  'Algoverse': '/logos/algoverse.ico',
+  Algoverse: '/logos/algoverse.ico',
   'UNC Pembroke': '/logos/uncp.ico',
   'Pembroke Undergraduate Research and Creativity (PURC) Center': '/logos/uncp.ico',
   'Emerging Technology Institute': '/logos/eti.png',
@@ -74,51 +80,41 @@ const roles: Role[] = [
   },
 ];
 
-interface OrgGroup {
-  institution: string;
-  location: string;
-  roles: Role[];
-}
-
-function groupByOrganization(items: Role[]): OrgGroup[] {
-  const groups = new Map<string, OrgGroup>();
-  for (const role of items) {
-    const key = role.institution;
-    if (!groups.has(key)) {
-      groups.set(key, {
-        institution: role.institution,
-        location: role.location,
-        roles: [],
-      });
-    }
-    groups.get(key)!.roles.push(role);
-  }
-  return Array.from(groups.values());
-}
-
 function roleEndTime(role: Role): number {
   return role.endDate ? new Date(role.endDate).getTime() : Infinity;
 }
 
 function sortRolesByRecency(items: Role[]): Role[] {
   return [...items].sort((a, b) => {
-    const aEnd = roleEndTime(a);
-    const bEnd = roleEndTime(b);
-    if (aEnd !== bEnd) return bEnd - aEnd;
+    const endDifference = roleEndTime(b) - roleEndTime(a);
+    if (endDifference !== 0) return endDifference;
     return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
   });
 }
 
-function sortGroupsByRecency(groups: OrgGroup[]): OrgGroup[] {
-  return [...groups]
-    .map((g) => ({ ...g, roles: sortRolesByRecency(g.roles) }))
+function groupByOrganization(items: Role[]): Organization[] {
+  const organizations = new Map<string, Organization>();
+
+  for (const role of items) {
+    if (!organizations.has(role.institution)) {
+      organizations.set(role.institution, {
+        institution: role.institution,
+        location: role.location,
+        roles: [],
+      });
+    }
+    organizations.get(role.institution)!.roles.push(role);
+  }
+
+  return Array.from(organizations.values())
+    .map((organization) => ({
+      ...organization,
+      roles: sortRolesByRecency(organization.roles),
+    }))
     .sort((a, b) => {
-      const aLatest = Math.max(...a.roles.map(roleEndTime));
-      const bLatest = Math.max(...b.roles.map(roleEndTime));
-      if (aLatest !== bLatest) return bLatest - aLatest;
-      const aStart = Math.max(...a.roles.map((r) => new Date(r.startDate).getTime()));
-      const bStart = Math.max(...b.roles.map((r) => new Date(r.startDate).getTime()));
-      return bStart - aStart;
+      const latestA = Math.max(...a.roles.map(roleEndTime));
+      const latestB = Math.max(...b.roles.map(roleEndTime));
+      return latestB - latestA;
     });
 }
 
@@ -135,70 +131,75 @@ function formatRange(role: Role): string {
 }
 
 export default function Experience() {
-  const groups = sortGroupsByRecency(groupByOrganization(roles));
+  const organizations = groupByOrganization(roles);
 
   return (
-    <section id="experience" className="py-12 sm:py-16 lg:py-20 bg-surface border-y border-gray-100">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+    <section id="experience" className="border-y border-gray-100 bg-surface py-12 sm:py-16 lg:py-20">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-10"
+          className="mb-8 sm:mb-10"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-            Experience
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">Experience</h2>
         </motion.div>
 
-        <div className="space-y-10">
-          {groups.map((group, groupIndex) => (
-            <motion.div
-              key={group.institution}
-              initial={{ opacity: 0, y: 20 }}
+        <div className="border-y border-gray-200">
+          {organizations.map((organization, organizationIndex) => (
+            <motion.article
+              key={organization.institution}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: groupIndex * 0.05 }}
-              className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-5 lg:gap-10"
+              transition={{ duration: 0.4, delay: Math.min(organizationIndex * 0.05, 0.15) }}
+              className="border-b border-gray-200 py-6 last:border-b-0 sm:py-7"
             >
-              <div className="flex items-start gap-3">
-                {INSTITUTION_LOGOS[group.institution] && (
-                  /* eslint-disable-next-line @next/next/no-img-element */
+              <header className="flex items-start gap-4">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-background p-2 sm:h-12 sm:w-12">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={INSTITUTION_LOGOS[group.institution]}
+                    src={INSTITUTION_LOGOS[organization.institution]}
                     alt=""
                     width={32}
                     height={32}
-                    className="w-8 h-8 flex-shrink-0 rounded object-contain mt-0.5"
+                    className="h-full w-full object-contain"
                   />
-                )}
-                <div className="min-w-0">
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight">
-                    {group.institution}
-                  </h3>
-                  <div className="text-sm text-gray-500 mt-1">{group.location}</div>
                 </div>
-              </div>
+                <div className="min-w-0 pt-0.5">
+                  <h3 className="text-base font-bold leading-snug text-gray-900 sm:text-[17px]">
+                    {organization.institution}
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">{organization.location}</p>
+                </div>
+              </header>
 
-              <div className="space-y-4 border-l-2 border-gray-100 pl-5">
-                {group.roles.map((role, roleIndex) => (
-                  <div key={`${role.position}-${role.startDate}-${roleIndex}`} className="relative">
-                    <div className="absolute -left-[calc(1.25rem+1px)] top-1.5 w-2 h-2 rounded-full bg-teal-600" />
-                    <div className="font-medium text-gray-900">{role.position}</div>
-                    <div className="text-sm text-gray-500 mt-0.5">
-                      {formatRange(role)}
-                      {role.advisor && (
-                        <>
-                          {' · '}
-                          <span>Advised by {role.advisor}</span>
-                        </>
-                      )}
+              <div className="ml-[21px] mt-5 border-l border-gray-200 pl-[38px] sm:ml-6 sm:pl-10">
+                {organization.roles.map((role, roleIndex) => (
+                  <div
+                    key={`${role.position}-${role.startDate}`}
+                    className="relative border-b border-gray-100 pb-5 last:border-b-0 last:pb-0 [&:not(:first-child)]:pt-5"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={`absolute -left-[43px] h-2 w-2 rounded-full border-2 border-surface bg-teal-600 ring-1 ring-teal-600 sm:-left-[45px] ${roleIndex === 0 ? 'top-[0.45rem]' : 'top-[1.7rem]'}`}
+                    />
+                    <div className="grid gap-1 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-8">
+                      <h4 className="font-semibold leading-snug text-gray-900">{role.position}</h4>
+                      <p className="text-sm text-gray-500 sm:whitespace-nowrap">
+                        {formatRange(role)}
+                      </p>
                     </div>
+                    {role.advisor && (
+                      <p className="mt-2 text-sm leading-relaxed text-gray-500">
+                        Advised by {role.advisor}
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>

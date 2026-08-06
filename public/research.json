@@ -14,6 +14,43 @@
   },
   "papers": [
     {
+      "slug": "dpbench",
+      "title": "DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention",
+      "authors": [
+        "Najmul Hasan",
+        "Prashanth BusiReddyGari"
+      ],
+      "date": "2026-06-03",
+      "year": "2026",
+      "venue": "arXiv preprint arXiv:2602.13255, Jun. 2026",
+      "venueShort": "arXiv 2026",
+      "abstract": "We present DPBench, a benchmark for evaluating coordination in multi-agent systems built from large language models. Existing benchmarks measure task-level success under a fixed protocol; the structural conditions under which coordination succeeds or fails at all have not been characterised. DPBench adapts the Dining Philosophers problem into a controlled testbed where the action protocol, the communication structure, the prompting strategy, and the group size each vary independently. We evaluate five frontier LLMs (GPT-5.2, Claude Opus 4.5, Grok 4.1, Gemini 2.5 Flash, Llama 4 Maverick) against a uniform-random baseline. Under simultaneous action at N=5 with the default prompt, deadlock ranges from 25.0% (95% Wilson CI [11.2, 46.9]) for GPT-5.2 to 90.0% [74.4, 96.5] for Gemini 2.5 Flash; sequential action is solved by three of the five LLMs plus the random baseline. Holding the model fixed at Gemini 2.5 Flash, three protocol variables drive deadlock from 90% to a 0% point estimate (Wilson upper bound 16.1% at n=20): three rounds of pre-commitment communication (vs. single-round 86.7%), a prompt encoding a classical concurrency primitive (0.0% for resource-ordering and symmetry-breaking, against 100% for the minimal prompt), or doubling the group from N=5 to N=10 (90.0% to 10.0%). Single-round messaging and memory of past timesteps do not change the rate at the sample size we ran. On the model that fails most, whether it coordinates or deadlocks is determined by the protocol, not by raw capability.",
+      "keywords": [
+        "multi-agent systems",
+        "large language models",
+        "benchmark",
+        "coordination",
+        "deadlock",
+        "Dining Philosophers",
+        "distributed systems"
+      ],
+      "canonicalUrl": "https://najmulhasan-code.github.io/research/dpbench",
+      "thumbnailUrl": "https://najmulhasan-code.github.io/papers/dpbench/teaser.png",
+      "identifiers": {
+        "arxiv": "2602.13255"
+      },
+      "links": [
+        "https://arxiv.org/abs/2602.13255v2",
+        "https://github.com/najmulhasan-code/dpbench",
+        "https://pypi.org/project/dpbench/"
+      ],
+      "citation": {
+        "bibtexUrl": "https://najmulhasan-code.github.io/papers/dpbench/citation.bib",
+        "risUrl": "https://najmulhasan-code.github.io/papers/dpbench/citation.ris",
+        "bibtex": "@misc{hasan2026dpbenchstructuraldeterminantsmultiagent,\n      title={DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention},\n      author={Najmul Hasan and Prashanth BusiReddyGari},\n      year={2026},\n      eprint={2602.13255},\n      archivePrefix={arXiv},\n      primaryClass={cs.AI},\n      url={https://arxiv.org/abs/2602.13255},\n}"
+      }
+    },
+    {
       "slug": "phishing-email-detection",
       "title": "LLM-PEA: Leveraging Large Language Models Against Phishing Email Attacks",
       "authors": [
@@ -52,82 +89,7 @@
       "citation": {
         "bibtexUrl": "https://najmulhasan-code.github.io/papers/phishing-email-detection/citation.bib",
         "risUrl": "https://najmulhasan-code.github.io/papers/phishing-email-detection/citation.ris",
-        "bibtex": "@INPROCEEDINGS{11594513,\n  author={Hasan, Najmul and BusiReddyGari, Prashanth and Zhao, Haitao and Ren, Yihao and Xu, Jinsheng and Zhang, Shaohu},\n  booktitle={2026 56th Annual IEEE International Conference on Dependable Systems and Networks Workshops (DSN-W)}, \n  title={LLM-PEA: Leveraging Large Language Models Against Phishing Email Attacks}, \n  year={2026},\n  volume={},\n  number={},\n  pages={114-120},\n  keywords={Electronic mail;Modeling;Phishing;Multilingual;Signal detection;Large language models;Printing;Generative Pre-trained transformer;Poles and zeros;Conferences;Phishing email attack;LLM;prompt injection},\n  doi={10.1109/DSN-W70714.2026.00038}}"
-      }
-    },
-    {
-      "slug": "grpo-coordination",
-      "title": "GRPO Does Not Close the Multi-Agent Coordination Gap",
-      "authors": [
-        "Najmul Hasan",
-        "Prashanth BusiReddyGari"
-      ],
-      "date": "2026-06-05",
-      "year": "2026",
-      "venue": "arXiv preprint arXiv:2606.07845, Jun. 2026",
-      "venueShort": "arXiv 2026",
-      "abstract": "We measure how well current large language models coordinate as multiple agents sharing a common resource, using the dining philosophers problem as a clean test bed. Across 630 episodes spanning seven models and three philosopher counts, four frontier closed-source systems reach mean reward 0.45 to 0.87 and Mistral-Small 24B reaches 0.83 to 0.99, while Qwen3-14B reaches 0.13 to 0.35. We then ask whether group relative policy optimization (GRPO) on rollouts from the task itself can close the gap and find that it cannot: a Welch's t-test on per-episode reward at five philosophers gives p = 0.66 and a Hedges' g of -0.11, with no statistically significant change at ten or fifteen philosophers either. Two further observations qualify the result. The training reward of both 8B and 14B runs peaked at step nine and then declined, so the default saved checkpoint at step 15 is strictly worse than several earlier ones. The four-term reward we use admits a degenerate maximum at zero actions, which DeepSeek-R1-Distill-Qwen-7B and Mistral-Small 24B at five philosophers both inhabit, with mean reward 1.0 and 0.83 respectively at zero meals. The bottleneck for an open-weight 14B model on multi-agent coordination is not training compute but training methodology: reward shaping that does not collapse to a no-action maximum, checkpoint discipline that does not depend on the final step, and curriculum across problem scales.",
-      "keywords": [
-        "large language models",
-        "multi-agent coordination",
-        "reinforcement learning",
-        "GRPO",
-        "reward shaping",
-        "checkpoint selection",
-        "Dining Philosophers",
-        "Qwen3",
-        "LoRA"
-      ],
-      "canonicalUrl": "https://najmulhasan-code.github.io/research/grpo-coordination",
-      "thumbnailUrl": "https://najmulhasan-code.github.io/papers/grpo-coordination/teaser.png",
-      "identifiers": {
-        "arxiv": "2606.07845"
-      },
-      "links": [
-        "https://arxiv.org/abs/2606.07845",
-        "https://github.com/najmulhasan-code/dpmarl"
-      ],
-      "citation": {
-        "bibtexUrl": "https://najmulhasan-code.github.io/papers/grpo-coordination/citation.bib",
-        "risUrl": "https://najmulhasan-code.github.io/papers/grpo-coordination/citation.ris",
-        "bibtex": "@misc{hasan2026grpodoesclosemultiagent,\n      title={GRPO Does Not Close the Multi-Agent Coordination Gap}, \n      author={Najmul Hasan and Prashanth BusiReddyGari},\n      year={2026},\n      eprint={2606.07845},\n      archivePrefix={arXiv},\n      primaryClass={cs.MA},\n      url={https://arxiv.org/abs/2606.07845}, \n}"
-      }
-    },
-    {
-      "slug": "dpbench",
-      "title": "DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention",
-      "authors": [
-        "Najmul Hasan",
-        "Prashanth BusiReddyGari"
-      ],
-      "date": "2026-06-03",
-      "year": "2026",
-      "venue": "arXiv preprint arXiv:2602.13255, Jun. 2026",
-      "venueShort": "arXiv 2026",
-      "abstract": "We present DPBench, a benchmark for evaluating coordination in multi-agent systems built from large language models. Existing benchmarks measure task-level success under a fixed protocol; the structural conditions under which coordination succeeds or fails at all have not been characterised. DPBench adapts the Dining Philosophers problem into a controlled testbed where the action protocol, the communication structure, the prompting strategy, and the group size each vary independently. We evaluate five frontier LLMs (GPT-5.2, Claude Opus 4.5, Grok 4.1, Gemini 2.5 Flash, Llama 4 Maverick) against a uniform-random baseline. Under simultaneous action at N=5 with the default prompt, deadlock ranges from 25.0% (95% Wilson CI [11.2, 46.9]) for GPT-5.2 to 90.0% [74.4, 96.5] for Gemini 2.5 Flash; sequential action is solved by three of the five LLMs plus the random baseline. Holding the model fixed at Gemini 2.5 Flash, three protocol variables drive deadlock from 90% to a 0% point estimate (Wilson upper bound 16.1% at n=20): three rounds of pre-commitment communication (vs. single-round 86.7%), a prompt encoding a classical concurrency primitive (0.0% for resource-ordering and symmetry-breaking, against 100% for the minimal prompt), or doubling the group from N=5 to N=10 (90.0% to 10.0%). Single-round messaging and memory of past timesteps do not change the rate at the sample size we ran. On the model that fails most, whether it coordinates or deadlocks is determined by the protocol, not by raw capability.",
-      "keywords": [
-        "multi-agent systems",
-        "large language models",
-        "benchmark",
-        "coordination",
-        "deadlock",
-        "Dining Philosophers",
-        "distributed systems"
-      ],
-      "canonicalUrl": "https://najmulhasan-code.github.io/research/dpbench",
-      "thumbnailUrl": "https://najmulhasan-code.github.io/papers/dpbench/teaser.png",
-      "identifiers": {
-        "arxiv": "2602.13255"
-      },
-      "links": [
-        "https://arxiv.org/abs/2602.13255v2",
-        "https://github.com/najmulhasan-code/dpbench",
-        "https://pypi.org/project/dpbench/"
-      ],
-      "citation": {
-        "bibtexUrl": "https://najmulhasan-code.github.io/papers/dpbench/citation.bib",
-        "risUrl": "https://najmulhasan-code.github.io/papers/dpbench/citation.ris",
-        "bibtex": "@misc{hasan2026dpbenchstructuraldeterminantsmultiagent,\n      title={DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention}, \n      author={Najmul Hasan and Prashanth BusiReddyGari},\n      year={2026},\n      eprint={2602.13255},\n      archivePrefix={arXiv},\n      primaryClass={cs.AI},\n      url={https://arxiv.org/abs/2602.13255}, \n}"
+        "bibtex": "@INPROCEEDINGS{11594513,\n  author={Hasan, Najmul and BusiReddyGari, Prashanth and Zhao, Haitao and Ren, Yihao and Xu, Jinsheng and Zhang, Shaohu},\n  booktitle={2026 56th Annual IEEE International Conference on Dependable Systems and Networks Workshops (DSN-W)},\n  title={LLM-PEA: Leveraging Large Language Models Against Phishing Email Attacks},\n  year={2026},\n  volume={},\n  number={},\n  pages={114-120},\n  keywords={Electronic mail;Modeling;Phishing;Multilingual;Signal detection;Large language models;Printing;Generative Pre-trained transformer;Poles and zeros;Conferences;Phishing email attack;LLM;prompt injection},\n  doi={10.1109/DSN-W70714.2026.00038}}"
       }
     },
     {
@@ -136,10 +98,10 @@
       "authors": [
         "Najmul Hasan"
       ],
-      "date": "2026-04-30",
+      "date": "2026-06-14",
       "year": "2026",
-      "venue": "arXiv preprint arXiv:2605.00074, Apr. 2026",
-      "venueShort": "arXiv 2026",
+      "venue": "6th Muslims in ML (MusIML) Workshop at ICML 2026",
+      "venueShort": "MusIML Workshop @ ICML 2026",
       "abstract": "DNA-synthesis providers screen incoming orders by searching the requested sequence against curated hazard lists. We show that this baseline collapses to a 100% false-flag rate when the hazardous sequence comes from a taxonomic family absent from the reference set: under Conformal Risk Control's certified miss-rate constraint, a low-discrimination signal forces the threshold below the entire test-benign mass. We compose three signals derived from a synthesis order's public annotation: k-mer Jaccard similarity to known toxins, the trimmed-mean score of a five-LLM judge panel, and cosine similarity to clustered embedding centroids. Fused under a monotone logistic aggregator and calibrated by Conformal Risk Control, the resulting screener certifies E[FNR] ≤ α. Across ten leave-one-taxonomic-family-out folds at α = 0.05 on UniProt KW-0800 reviewed toxins, the calibrated screener achieves 0% test miss rate on every fold and 0% test false-flag rate on nine of ten folds. The bound's finite-sample slack 1/(n_cal + 1) caps the certifiable miss rate at 1.77% on our 200-hazard subsample; reaching procurement-grade α = 10⁻³ requires an 18× larger calibration set, which the full reviewed UniProt KW-0800 corpus is large enough to deliver. The binding constraint on certifiable DNA-synthesis screening is calibration data, not algorithms.",
       "keywords": [
         "DNA synthesis screening",
@@ -163,7 +125,7 @@
       "citation": {
         "bibtexUrl": "https://najmulhasan-code.github.io/papers/crc-screen/citation.bib",
         "risUrl": "https://najmulhasan-code.github.io/papers/crc-screen/citation.ris",
-        "bibtex": "@misc{hasan2026crcscreencertifieddnasynthesishazard,\n  title         = {CRC-Screen: Certified DNA-Synthesis Hazard Screening Under Taxonomic Shift},\n  author        = {Hasan, Najmul},\n  year          = {2026},\n  eprint        = {2605.00074},\n  archivePrefix = {arXiv},\n  primaryClass  = {q-bio.GN},\n  url           = {https://arxiv.org/abs/2605.00074}\n}"
+        "bibtex": "@misc{hasan2026crcscreencertifieddnasynthesishazard,\n  title         = {CRC-Screen: Certified DNA-Synthesis Hazard Screening Under Taxonomic Shift},\n  author        = {Hasan, Najmul},\n  year          = {2026},\n  note          = {Accepted at the 6th Muslims in ML (MusIML) Workshop at ICML 2026},\n  eprint        = {2605.00074},\n  archivePrefix = {arXiv},\n  primaryClass  = {q-bio.GN},\n  url           = {https://arxiv.org/abs/2605.00074}\n}"
       }
     },
     {
@@ -202,42 +164,6 @@
       }
     },
     {
-      "slug": "nist-crypto",
-      "title": "Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists",
-      "authors": [
-        "Najmul Hasan",
-        "Prashanth BusiReddyGari"
-      ],
-      "date": "2026-01-05",
-      "year": "2026",
-      "venue": "2026 IEEE 16th Annual Computing and Communication Workshop and Conference (CCWC), Las Vegas, NV, pp. 1193-1196",
-      "venueShort": "IEEE CCWC 2026",
-      "abstract": "Lightweight cryptography is becoming essential as emerging technologies in digital identity systems and Internet of Things verification continue to demand strong cryptographic assurance on devices with limited processing power, memory, and energy resources. As these technologies move into routine use, they demand cryptographic primitives that maintain strong security and deliver predictable performance through clear theoretical models of time complexity. Although NIST's lightweight cryptography project provides empirical evaluations of the ten finalist algorithms, a unified theoretical understanding of their time-complexity behavior remains absent. This work introduces a symbolic model that decomposes each scheme into initialization, data-processing, and finalization phases, enabling formal time-complexity derivation for all ten finalists. The results clarify how design parameters shape computational scaling on constrained mobile and embedded environments. The framework provides a foundation needed to distinguish algorithmic efficiency and guides the choice of primitives capable of supporting security systems in constrained environments.",
-      "keywords": [
-        "lightweight cryptography",
-        "NIST",
-        "time complexity",
-        "IoT security",
-        "embedded systems",
-        "cryptographic algorithms"
-      ],
-      "canonicalUrl": "https://najmulhasan-code.github.io/research/nist-crypto",
-      "thumbnailUrl": "https://najmulhasan-code.github.io/papers/nist-crypto/teaser.png",
-      "identifiers": {
-        "doi": "10.1109/CCWC67433.2026.11393752",
-        "arxiv": "2602.05641"
-      },
-      "links": [
-        "https://arxiv.org/abs/2602.05641",
-        "https://ieeexplore.ieee.org/document/11393752"
-      ],
-      "citation": {
-        "bibtexUrl": "https://najmulhasan-code.github.io/papers/nist-crypto/citation.bib",
-        "risUrl": "https://najmulhasan-code.github.io/papers/nist-crypto/citation.ris",
-        "bibtex": "@inproceedings{hasan2026time,\n  title         = {Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists},\n  author        = {Hasan, Najmul and BusiReddyGari, Prashanth},\n  booktitle     = {2026 IEEE 16th Annual Computing and Communication Workshop and Conference (CCWC)},\n  year          = {2026},\n  pages         = {1193--1196},\n  address       = {Las Vegas, NV, USA},\n  publisher     = {IEEE},\n  doi           = {10.1109/CCWC67433.2026.11393752},\n  eprint        = {2602.05641},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.CR}\n}"
-      }
-    },
-    {
       "slug": "phishing-url-detection",
       "title": "Benchmarking Large Language Models for Zero-shot and Few-shot Phishing URL Detection",
       "authors": [
@@ -271,6 +197,42 @@
         "bibtexUrl": "https://najmulhasan-code.github.io/papers/phishing-url-detection/citation.bib",
         "risUrl": "https://najmulhasan-code.github.io/papers/phishing-url-detection/citation.ris",
         "bibtex": "@inproceedings{hasan2025benchmarking,\n  title         = {Benchmarking Large Language Models for Zero-shot and Few-shot Phishing URL Detection},\n  author        = {Hasan, Najmul and BusiReddyGari, Prashanth},\n  booktitle     = {LAW Workshop at the 39th Conference on Neural Information Processing Systems (NeurIPS 2025)},\n  year          = {2025},\n  eprint        = {2602.02641},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.CR},\n  url           = {https://openreview.net/forum?id=COmhlLFVk9}\n}"
+      }
+    },
+    {
+      "slug": "nist-crypto",
+      "title": "Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists",
+      "authors": [
+        "Najmul Hasan",
+        "Prashanth BusiReddyGari"
+      ],
+      "date": "2026-01-05",
+      "year": "2026",
+      "venue": "2026 IEEE 16th Annual Computing and Communication Workshop and Conference (CCWC), Las Vegas, NV, pp. 1193-1196",
+      "venueShort": "IEEE CCWC 2026",
+      "abstract": "Lightweight cryptography is becoming essential as emerging technologies in digital identity systems and Internet of Things verification continue to demand strong cryptographic assurance on devices with limited processing power, memory, and energy resources. As these technologies move into routine use, they demand cryptographic primitives that maintain strong security and deliver predictable performance through clear theoretical models of time complexity. Although NIST's lightweight cryptography project provides empirical evaluations of the ten finalist algorithms, a unified theoretical understanding of their time-complexity behavior remains absent. This work introduces a symbolic model that decomposes each scheme into initialization, data-processing, and finalization phases, enabling formal time-complexity derivation for all ten finalists. The results clarify how design parameters shape computational scaling on constrained mobile and embedded environments. The framework provides a foundation needed to distinguish algorithmic efficiency and guides the choice of primitives capable of supporting security systems in constrained environments.",
+      "keywords": [
+        "lightweight cryptography",
+        "NIST",
+        "time complexity",
+        "IoT security",
+        "embedded systems",
+        "cryptographic algorithms"
+      ],
+      "canonicalUrl": "https://najmulhasan-code.github.io/research/nist-crypto",
+      "thumbnailUrl": "https://najmulhasan-code.github.io/papers/nist-crypto/teaser.png",
+      "identifiers": {
+        "doi": "10.1109/CCWC67433.2026.11393752",
+        "arxiv": "2602.05641"
+      },
+      "links": [
+        "https://arxiv.org/abs/2602.05641",
+        "https://ieeexplore.ieee.org/document/11393752"
+      ],
+      "citation": {
+        "bibtexUrl": "https://najmulhasan-code.github.io/papers/nist-crypto/citation.bib",
+        "risUrl": "https://najmulhasan-code.github.io/papers/nist-crypto/citation.ris",
+        "bibtex": "@inproceedings{hasan2026time,\n  title         = {Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists},\n  author        = {Hasan, Najmul and BusiReddyGari, Prashanth},\n  booktitle     = {2026 IEEE 16th Annual Computing and Communication Workshop and Conference (CCWC)},\n  year          = {2026},\n  pages         = {1193--1196},\n  address       = {Las Vegas, NV, USA},\n  publisher     = {IEEE},\n  doi           = {10.1109/CCWC67433.2026.11393752},\n  eprint        = {2602.05641},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.CR}\n}"
       }
     }
   ]
