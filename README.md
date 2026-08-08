@@ -2,7 +2,7 @@
 
 Language Models · AI Alignment
 
-[Website](https://najmulhasan-code.github.io) · [Google Scholar](https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en) · [GitHub](https://github.com/najmulhasan-code) · [LinkedIn](https://linkedin.com/in/najmulhasan-cs-math) · [X](https://x.com/_najmulhasan)
+[Website](https://najmulhasan-code.github.io) · [Google Scholar](https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en) · [LinkedIn](https://linkedin.com/in/najmulhasan-cs-math) · [X](https://x.com/_najmulhasan)
 
 My research interests center on language models and AI alignment. I am particularly interested in the design and training of language models, including how training choices shape their capabilities and behavior, and in developing models that are more capable, reliable, and aligned.
 
