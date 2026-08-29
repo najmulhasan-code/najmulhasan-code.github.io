@@ -64,11 +64,9 @@ function hasLink(html, attributes) {
 
 const homepage = requireHtml('/');
 if (!homepage.includes('"@type":"ProfilePage"')) errors.push('/: missing ProfilePage structured data.');
-if (!homepage.includes('/images/najmul_hasan.webp')) errors.push('/: missing optimized profile image.');
-if (!homepage.includes('/images/najmul_hasan-social.jpg')) errors.push('/: missing social-preview image metadata.');
-if (homepage.includes('/images/najmul_hasan.JPEG')) errors.push('/: references the superseded profile image.');
-
-for (const asset of ['images/najmul_hasan.webp', 'images/najmul_hasan-social.jpg', 'profile-favicon.png']) {
+if (!homepage.includes('/images/najmul-hasan-profile.webp')) errors.push('/: missing optimized profile image.');
+if (!homepage.includes('/images/najmul-hasan-social.jpg')) errors.push('/: missing social-preview image metadata.');
+for (const asset of ['images/najmul-hasan-profile.webp', 'images/najmul-hasan-social.jpg', 'najmul-hasan-favicon.png']) {
   if (!fs.existsSync(path.join(out, ...asset.split('/')))) errors.push(`Missing exported visual asset: /${asset}.`);
 }
 

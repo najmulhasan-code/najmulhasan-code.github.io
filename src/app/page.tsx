@@ -46,7 +46,7 @@ export default function Home() {
       '@id': `${SITE_URL}/#person`,
       name: 'Najmul Hasan',
       url: SITE_URL,
-      image: `${SITE_URL}/images/najmul_hasan.webp`,
+      image: `${SITE_URL}/images/najmul-hasan-profile.webp`,
       sameAs: [
         'https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en',
         'https://github.com/najmulhasan-code',

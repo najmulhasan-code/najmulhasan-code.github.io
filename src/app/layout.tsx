@@ -130,8 +130,8 @@ export const metadata: Metadata = {
     siteName: "Najmul Hasan",
     images: [
       {
-        url: "https://najmulhasan-code.github.io/images/najmul_hasan-social.jpg",
-        secureUrl: "https://najmulhasan-code.github.io/images/najmul_hasan-social.jpg",
+        url: "https://najmulhasan-code.github.io/images/najmul-hasan-social.jpg",
+        secureUrl: "https://najmulhasan-code.github.io/images/najmul-hasan-social.jpg",
         width: 1200,
         height: 630,
         alt: "Najmul Hasan",
@@ -146,7 +146,7 @@ export const metadata: Metadata = {
     title: "Najmul Hasan",
     description: SITE_SHORT_DESCRIPTION,
     images: {
-      url: "https://najmulhasan-code.github.io/images/najmul_hasan-social.jpg",
+      url: "https://najmulhasan-code.github.io/images/najmul-hasan-social.jpg",
       alt: "Najmul Hasan",
     },
   },
@@ -168,7 +168,7 @@ const personJsonLd = {
   givenName: "Najmul",
   familyName: "Hasan",
   url: "https://najmulhasan-code.github.io",
-  image: "https://najmulhasan-code.github.io/images/najmul_hasan.webp",
+  image: "https://najmulhasan-code.github.io/images/najmul-hasan-profile.webp",
   sameAs: [
     "https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en",
     "https://github.com/najmulhasan-code",
@@ -222,8 +222,8 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head>
-        <link rel="icon" href="/profile-favicon.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/profile-favicon.png" />
+        <link rel="icon" href="/najmul-hasan-favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/najmul-hasan-favicon.png" />
         <meta name="theme-color" content="#eef4f3" />
 
         <meta name="author" content="Najmul Hasan" />

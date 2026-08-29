@@ -19,15 +19,15 @@ export default function Hero() {
 
           <div className="w-full sm:w-auto flex-shrink-0 flex flex-col items-center sm:items-start">
             <Image
-              src="/images/najmul_hasan.webp"
+              src="/images/najmul-hasan-profile.webp"
               alt="Najmul Hasan"
-              width={400}
-              height={400}
-              className="rounded-xl w-44 h-56 sm:w-52 sm:h-64 lg:w-60 lg:h-80 object-cover object-top shadow-[0_18px_45px_rgba(23,43,49,0.12)] ring-1 ring-gray-200"
+              width={720}
+              height={960}
+              className="rounded-xl w-48 h-auto sm:w-52 lg:w-60 object-cover object-top shadow-[0_18px_45px_rgba(23,43,49,0.12)] ring-1 ring-gray-200"
               priority
             />
 
-            <div className="mt-5 flex items-center justify-center gap-1 sm:gap-3 w-44 sm:w-52 lg:w-60">
+            <div className="mt-5 flex items-center justify-center gap-1 sm:gap-3 w-48 sm:w-52 lg:w-60">
               {socialLinks.map((social) => {
                 const Icon = social.Icon;
                 return (
@@ -67,7 +67,7 @@ export default function Hero() {
               </p>
 
               <p>
-                I hold a B.S. in Computer Science, with minors in Mathematics and Physics, from the University of North Carolina at Pembroke, where I worked with <a href="https://www.uncp.edu/about/directory/prashanth-busi_reddy_gari.html" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Prashanth BusiReddyGari</a> and <a href="https://zhangshaohu.github.io/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Shaohu Zhang</a>. I was an AI Safety Research Fellow at <a href="https://algoverseairesearch.org" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Algoverse</a>. I completed the AI Safety Fundamentals Fellowship (AISF) with <a href="https://aialignment.mit.edu/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">MIT AI Alignment (MAIA)</a> and <a href="https://bluedot.org/courses/technical-ai-safety" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">BlueDot Impact&apos;s Technical AI Safety course</a>.
+                I hold a B.S. in Computer Science, with minors in Mathematics and Physics, from the University of North Carolina at Pembroke, where I worked with <a href="https://www.uncp.edu/about/directory/prashanth-busi_reddy_gari.html" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Prashanth BusiReddyGari</a> and <a href="https://zhangshaohu.github.io/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Shaohu Zhang</a>. I was an AI Safety Research Fellow at <a href="https://algoverseairesearch.org" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Algoverse</a>. I completed the AI Safety Fundamentals Fellowship (AISF) with <a href="https://aialignment.mit.edu/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">MIT AI Alignment (MAIA)</a> and <a href="https://bluedot.org/courses/technical-ai-safety" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">BlueDot Impact&apos;s Technical AI Safety course</a>. I am currently participating in BlueDot Impact&apos;s <a href="https://bluedot.org/courses/technical-ai-safety-project" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Technical AI Safety Project Sprint</a>, where I am working on language-model alignment during pretraining.
               </p>
             </div>
           </motion.div>
