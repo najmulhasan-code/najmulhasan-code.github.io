@@ -254,6 +254,28 @@ h4 {
   text-align: center;
 }
 
+.prose .figure-caption {
+  margin-top: -0.75rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  font-style: normal;
+  line-height: 1.6;
+  color: var(--gray-500);
+  text-align: left;
+}
+
+.prose .article-figure {
+  margin: 2rem 0;
+}
+
+.prose .article-figure img {
+  margin: 0 auto;
+}
+
+.prose .article-figure .figure-caption {
+  margin: 0.75rem 0 0;
+}
+
 .prose table {
   width: 100%;
   border-collapse: collapse;
