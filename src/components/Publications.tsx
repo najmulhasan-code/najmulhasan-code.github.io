@@ -25,7 +25,7 @@ export default function Publications({ papers }: { papers: Paper[] }) {
   };
 
   return (
-    <section id="research" className="py-12 sm:py-16 lg:py-20 bg-background">
+    <section id="research" className="watercolor-section watercolor-paper py-12 sm:py-16 lg:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -34,7 +34,7 @@ export default function Publications({ papers }: { papers: Paper[] }) {
           transition={{ duration: 0.6 }}
           className="mb-10"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+          <h2 className="section-heading text-2xl sm:text-3xl font-bold text-gray-900">
             Research
           </h2>
         </motion.div>
@@ -59,9 +59,9 @@ export default function Publications({ papers }: { papers: Paper[] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="group relative bg-surface rounded-md overflow-hidden border border-gray-200 hover:border-teal-600 shadow-[0_12px_32px_rgba(23,43,49,0.05)] hover:shadow-[0_16px_40px_rgba(23,43,49,0.1)] transition-all duration-300 flex flex-col border-t-[5px] border-t-teal-600 cursor-pointer"
+                className="watercolor-card group relative rounded-md overflow-hidden border hover:border-teal-600 transition-all duration-300 flex flex-col cursor-pointer"
               >
-                <Link href={`/research/${pub.slug}`} className="absolute inset-0 z-10" aria-label={`Read more about ${pub.title}`} />
+                <Link href={`/research/${pub.slug}`} className="absolute inset-0 z-10 focus-visible:outline-none" aria-label={`Read more about ${pub.title}`} />
 
                 {pub.thumbnail && (
                   <div className="aspect-[16/9] flex items-center justify-center overflow-hidden">

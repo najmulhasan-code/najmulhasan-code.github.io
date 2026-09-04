@@ -58,7 +58,7 @@ function NewsYear({ year, items, isLatest, isOpen, onToggle }: NewsYearProps) {
         aria-expanded={isOpen}
         aria-controls={panelId}
         onClick={onToggle}
-        className="group flex w-full items-center justify-between gap-4 py-4 text-left focus:outline-none focus-visible:outline-none"
+        className="group flex w-full items-center justify-between gap-4 rounded-sm py-4 text-left focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
       >
         <span className="flex items-center gap-3">
           <span className="text-sm font-semibold text-gray-900">{year}</span>
@@ -102,10 +102,24 @@ function NewsYear({ year, items, isLatest, isOpen, onToggle }: NewsYearProps) {
 export default function News() {
   const groupedNews = useMemo(() => groupByYear(newsItems), []);
   const latestYear = groupedNews[0]?.year ?? null;
-  const [openYear, setOpenYear] = useState<string | null>(latestYear);
+  const [openYears, setOpenYears] = useState<Set<string>>(
+    () => new Set(latestYear ? [latestYear] : [])
+  );
+
+  const toggleYear = (year: string) => {
+    setOpenYears((current) => {
+      const next = new Set(current);
+      if (next.has(year)) {
+        next.delete(year);
+      } else {
+        next.add(year);
+      }
+      return next;
+    });
+  };
 
   return (
-    <section id="news" className="pt-8 sm:pt-10 lg:pt-12 pb-12 sm:pb-16 lg:pb-20 bg-surface border-y border-gray-100">
+    <section id="news" className="watercolor-section watercolor-mist pt-8 sm:pt-10 lg:pt-12 pb-12 sm:pb-16 lg:pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -114,7 +128,7 @@ export default function News() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">News</h2>
+          <h2 className="section-heading text-2xl sm:text-3xl font-bold text-gray-900">News</h2>
         </motion.div>
 
         <div>
@@ -124,8 +138,8 @@ export default function News() {
               year={year}
               items={items}
               isLatest={year === latestYear}
-              isOpen={year === openYear}
-              onToggle={() => setOpenYear((current) => current === year ? null : year)}
+              isOpen={openYears.has(year)}
+              onToggle={() => toggleYear(year)}
             />
           ))}
         </div>

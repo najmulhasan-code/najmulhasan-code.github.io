@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 920" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <filter id="w" x="-30%" y="-25%" width="160%" height="150%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.02" numOctaves="3" seed="19" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="74" xChannelSelector="R" yChannelSelector="G" result="d"/><feGaussianBlur in="d" stdDeviation="5" result="b"/><feBlend in="b" in2="d" mode="multiply"/>
+    </filter>
+    <radialGradient id="a"><stop stop-color="#70a89f" stop-opacity=".2"/><stop offset=".7" stop-color="#70a89f" stop-opacity=".06"/><stop offset="1" stop-color="#70a89f" stop-opacity="0"/></radialGradient>
+    <radialGradient id="b"><stop stop-color="#8ab4bd" stop-opacity=".17"/><stop offset=".68" stop-color="#8ab4bd" stop-opacity=".05"/><stop offset="1" stop-color="#8ab4bd" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g filter="url(#w)"><path d="M-183 19C-17-72 225-4 286 151c60 151-25 341-173 425-142 80-330 38-393-99-68-147-25-422 97-458Z" fill="url(#a)"/><path d="M1362 453c117-92 305-54 375 75 77 141 17 343-117 422-137 81-321 15-371-128-48-139 9-288 113-369Z" fill="url(#b)"/></g>
+</svg>

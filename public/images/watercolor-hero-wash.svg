@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 720" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <filter id="w" x="-25%" y="-30%" width="150%" height="160%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.009 0.017" numOctaves="3" seed="31" result="n" />
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="62" xChannelSelector="R" yChannelSelector="B" result="d" />
+      <feGaussianBlur in="d" stdDeviation="3.5" result="b" />
+      <feBlend in="b" in2="d" mode="multiply" />
+    </filter>
+    <radialGradient id="t"><stop stop-color="#5e9f96" stop-opacity=".32"/><stop offset=".58" stop-color="#75aaa2" stop-opacity=".16"/><stop offset="1" stop-color="#75aaa2" stop-opacity="0"/></radialGradient>
+    <radialGradient id="b"><stop stop-color="#7da9b2" stop-opacity=".2"/><stop offset=".62" stop-color="#91b7bd" stop-opacity=".09"/><stop offset="1" stop-color="#91b7bd" stop-opacity="0"/></radialGradient>
+    <radialGradient id="s"><stop stop-color="#d4b481" stop-opacity=".2"/><stop offset=".58" stop-color="#cda69d" stop-opacity=".1"/><stop offset="1" stop-color="#cda69d" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g filter="url(#w)">
+    <path d="M-155 87C-20-42 273-21 396 102c116 116 82 344-47 439C202 649-52 612-143 480-230 354-253 180-155 87Z" fill="url(#t)"/>
+    <path d="M1347 105c140-99 353-32 411 124 59 160-36 377-198 432-162 55-356-40-395-194-38-148 50-270 182-362Z" fill="url(#b)"/>
+    <path d="M841-123c105-68 328-13 385 102 54 109-31 239-161 271-133 32-301-37-333-142-31-101 26-178 109-231Z" fill="url(#s)"/>
+    <path d="M756 535c116-61 292-34 351 54 58 86-24 193-149 207-124 13-284-55-286-141-2-54 34-94 84-120Z" fill="url(#t)" opacity=".42"/>
+  </g>
+</svg>

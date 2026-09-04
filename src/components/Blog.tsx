@@ -10,7 +10,7 @@ import type { BlogPost } from '@/data/blog';
 export default function Blog({ posts }: { posts: BlogPost[] }) {
 
   return (
-    <section id="blog" className="py-12 sm:py-16 lg:py-20 bg-surface border-y border-gray-100">
+    <section id="blog" className="watercolor-section watercolor-paper py-12 sm:py-16 lg:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -19,7 +19,7 @@ export default function Blog({ posts }: { posts: BlogPost[] }) {
           transition={{ duration: 0.6 }}
           className="mb-10"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+          <h2 className="section-heading text-2xl sm:text-3xl font-bold text-gray-900">
             Blog
           </h2>
         </motion.div>
@@ -43,11 +43,11 @@ export default function Blog({ posts }: { posts: BlogPost[] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="group relative bg-surface rounded-lg border border-gray-200 hover:border-teal-600 hover:shadow-[0_16px_36px_rgba(23,43,49,0.09)] transition-all duration-300 cursor-pointer overflow-hidden flex flex-col"
+                className="watercolor-card group relative rounded-lg border hover:border-teal-600 transition-all duration-300 cursor-pointer overflow-hidden flex flex-col"
               >
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="absolute inset-0 z-10"
+                  className="absolute inset-0 z-10 focus-visible:outline-none"
                   aria-label={`Read ${post.title}`}
                 />
 

@@ -26,7 +26,17 @@ This file indexes the public research and project materials on this site. Use ea
 - Records and resources: [IEEE Xplore](https://ieeexplore.ieee.org/document/11594513) | [arXiv](https://arxiv.org/abs/2512.10104) | [DOI](https://doi.org/10.1109/DSN-W70714.2026.00038)
 - Citation files: [BibTeX](https://najmulhasan-code.github.io/papers/phishing-email-detection/citation.bib) | [RIS](https://najmulhasan-code.github.io/papers/phishing-email-detection/citation.ris)
 
-### 3. [CRC-Screen: Certified DNA-Synthesis Hazard Screening Under Taxonomic Shift](https://najmulhasan-code.github.io/research/crc-screen)
+### 3. [Benchmarking Large Language Models for Zero-shot and Few-shot Phishing URL Detection](https://najmulhasan-code.github.io/research/phishing-url-detection)
+
+- Authors: Najmul Hasan, Prashanth BusiReddyGari
+- Published: 2025-12-01
+- Venue: LAW 2025 Workshop, 39th Conference on Neural Information Processing Systems (NeurIPS 2025)
+- Keywords: phishing detection, large language models, zero-shot learning, few-shot learning, cybersecurity, URL classification, NLP
+- Abstract: The Uniform Resource Locator (URL), introduced in a connectivity-first era to define access and locate resources, remains historically limited, lacking future-proof mechanisms for security, trust, or resilience against fraud and abuse, despite the introduction of reactive protections like HTTPS during the cybersecurity era. In the current AI-first threatscape, deceptive URLs have reached unprecedented sophistication due to the widespread use of generative AI by cybercriminals and the AI-vs-AI arms race to produce context-aware phishing websites and URLs that are virtually indistinguishable to both users and traditional detection tools. Although AI-generated phishing accounted for a small fraction of filter-bypassing attacks in 2024, phishing volume has escalated over 4,000% since 2022, with nearly 50% more attacks evading detection. At the rate the threatscape is escalating, and phishing tactics are emerging faster than labeled data can be produced, zero-shot and few-shot learning with large language models (LLMs) offers a timely and adaptable solution, enabling generalization with minimal supervision. Given the critical importance of phishing URL detection in large-scale cybersecurity defense systems, we present a comprehensive benchmark of LLMs under a unified zero-shot and few-shot prompting framework and reveal operational trade-offs. Our evaluation uses a balanced dataset with consistent prompts, offering detailed analysis of performance, generalization, and model efficacy, quantified by accuracy, precision, recall, F1 score, AUROC, and AUPRC, to reflect both classification quality and practical utility in threat detection settings. We conclude few-shot prompting improves performance across multiple LLMs.
+- Records and resources: [OpenReview](https://openreview.net/forum?id=COmhlLFVk9) | [arXiv](https://arxiv.org/abs/2602.02641)
+- Citation files: [BibTeX](https://najmulhasan-code.github.io/papers/phishing-url-detection/citation.bib) | [RIS](https://najmulhasan-code.github.io/papers/phishing-url-detection/citation.ris)
+
+### 4. [CRC-Screen: Certified DNA-Synthesis Hazard Screening Under Taxonomic Shift](https://najmulhasan-code.github.io/research/crc-screen)
 
 - Authors: Najmul Hasan
 - Published: 2026-06-14
@@ -36,7 +46,7 @@ This file indexes the public research and project materials on this site. Use ea
 - Records and resources: [arXiv](https://arxiv.org/abs/2605.00074) | [Code](https://github.com/najmulhasan-code/crc-screen)
 - Citation files: [BibTeX](https://najmulhasan-code.github.io/papers/crc-screen/citation.bib) | [RIS](https://najmulhasan-code.github.io/papers/crc-screen/citation.ris)
 
-### 4. [Honeypot Protocol](https://najmulhasan-code.github.io/research/honeypot-protocol)
+### 5. [Honeypot Protocol](https://najmulhasan-code.github.io/research/honeypot-protocol)
 
 - Authors: Najmul Hasan
 - Published: 2026-03-01
@@ -45,16 +55,6 @@ This file indexes the public research and project materials on this site. Use ea
 - Abstract: Trusted monitoring, the standard defense in AI control, is vulnerable to adaptive attacks, collusion, and strategic attack selection. All of these exploit the fact that monitoring is passive: it observes model behavior but never probes whether the model would behave differently under different perceived conditions. We introduce the honeypot protocol, which tests for context-dependent behavior by varying only the system prompt across three conditions (evaluation, synthetic deployment, explicit no-monitoring) while holding the task, environment, and scoring identical. We evaluate Claude Opus 4.6 in BashArena across all three conditions in both honest and attack modes. The model achieved 100% main task success and triggered zero side tasks uniformly across conditions, providing a baseline for future comparisons with stronger attack policies and additional models.
 - Records and resources: [Apart Research](https://apartresearch.com/project/honeypot-protocol-hmsb) | [arXiv](https://arxiv.org/abs/2604.13301) | [Code](https://github.com/najmulhasan-code/honeypot-protocol)
 - Citation files: [BibTeX](https://najmulhasan-code.github.io/papers/honeypot-protocol/citation.bib) | [RIS](https://najmulhasan-code.github.io/papers/honeypot-protocol/citation.ris)
-
-### 5. [Benchmarking Large Language Models for Zero-shot and Few-shot Phishing URL Detection](https://najmulhasan-code.github.io/research/phishing-url-detection)
-
-- Authors: Najmul Hasan, Prashanth BusiReddyGari
-- Published: 2025-12-01
-- Venue: LAW 2025 Workshop, 39th Conference on Neural Information Processing Systems (NeurIPS 2025)
-- Keywords: phishing detection, large language models, zero-shot learning, few-shot learning, cybersecurity, URL classification, NLP
-- Abstract: The Uniform Resource Locator (URL), introduced in a connectivity-first era to define access and locate resources, remains historically limited, lacking future-proof mechanisms for security, trust, or resilience against fraud and abuse, despite the introduction of reactive protections like HTTPS during the cybersecurity era. In the current AI-first threatscape, deceptive URLs have reached unprecedented sophistication due to the widespread use of generative AI by cybercriminals and the AI-vs-AI arms race to produce context-aware phishing websites and URLs that are virtually indistinguishable to both users and traditional detection tools. Although AI-generated phishing accounted for a small fraction of filter-bypassing attacks in 2024, phishing volume has escalated over 4,000% since 2022, with nearly 50% more attacks evading detection. At the rate the threatscape is escalating, and phishing tactics are emerging faster than labeled data can be produced, zero-shot and few-shot learning with large language models (LLMs) offers a timely and adaptable solution, enabling generalization with minimal supervision. Given the critical importance of phishing URL detection in large-scale cybersecurity defense systems, we present a comprehensive benchmark of LLMs under a unified zero-shot and few-shot prompting framework and reveal operational trade-offs. Our evaluation uses a balanced dataset with consistent prompts, offering detailed analysis of performance, generalization, and model efficacy, quantified by accuracy, precision, recall, F1 score, AUROC, and AUPRC, to reflect both classification quality and practical utility in threat detection settings. We conclude few-shot prompting improves performance across multiple LLMs.
-- Records and resources: [OpenReview](https://openreview.net/forum?id=COmhlLFVk9) | [arXiv](https://arxiv.org/abs/2602.02641)
-- Citation files: [BibTeX](https://najmulhasan-code.github.io/papers/phishing-url-detection/citation.bib) | [RIS](https://najmulhasan-code.github.io/papers/phishing-url-detection/citation.ris)
 
 ### 6. [Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists](https://najmulhasan-code.github.io/research/nist-crypto)
 

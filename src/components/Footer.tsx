@@ -14,7 +14,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-background border-t border-gray-200">
+    <footer className="watercolor-footer border-t border-gray-200">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-12">
         <motion.div
           initial={{ opacity: 0, y: 10 }}

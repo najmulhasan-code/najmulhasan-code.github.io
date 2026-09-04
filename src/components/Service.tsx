@@ -67,7 +67,7 @@ const serviceGroups: ServiceGroup[] = [
 
 export default function Service() {
   return (
-    <section id="service" className="py-12 sm:py-16 lg:py-20 bg-background">
+    <section id="service" className="watercolor-section watercolor-mist py-12 sm:py-16 lg:py-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -76,7 +76,7 @@ export default function Service() {
           transition={{ duration: 0.6 }}
           className="mb-10"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Professional Activities</h2>
+          <h2 className="section-heading text-2xl sm:text-3xl font-bold text-gray-900">Professional Activities</h2>
         </motion.div>
 
         <div className="space-y-10">

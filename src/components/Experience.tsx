@@ -134,7 +134,7 @@ export default function Experience() {
   const organizations = groupByOrganization(roles);
 
   return (
-    <section id="experience" className="border-y border-gray-100 bg-surface py-12 sm:py-16 lg:py-20">
+    <section id="experience" className="watercolor-section watercolor-paper py-12 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -143,7 +143,7 @@ export default function Experience() {
           transition={{ duration: 0.6 }}
           className="mb-8 sm:mb-10"
         >
-          <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">Experience</h2>
+          <h2 className="section-heading text-2xl font-bold text-gray-900 sm:text-3xl">Experience</h2>
         </motion.div>
 
         <div className="border-y border-gray-200">

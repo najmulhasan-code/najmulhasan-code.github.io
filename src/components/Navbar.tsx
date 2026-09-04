@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { useState, useEffect, useLayoutEffect, useCallback, useRef, useMemo } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -18,16 +18,19 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('hero');
   const [isScrolling, setIsScrolling] = useState(false);
   const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const handledInitialNavigationRef = useRef(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const firstMobileLinkRef = useRef<HTMLButtonElement>(null);
   const { scrollY } = useScroll();
 
   const navLinks: NavLink[] = useMemo(() => [
-    { label: 'News', href: '#news', id: 'news' },
     { label: 'Research', href: '#research', id: 'research' },
     { label: 'Experience', href: '#experience', id: 'experience' },
+    { label: 'Blog', href: '#blog', id: 'blog' },
+    { label: 'News', href: '#news', id: 'news' },
     { label: 'Education', href: '#education', id: 'education' },
     { label: 'Awards', href: '#awards', id: 'awards' },
     { label: 'Activities', href: '#service', id: 'service' },
-    { label: 'Blog', href: '#blog', id: 'blog' },
   ], []);
 
   const routeSection = pathname.startsWith('/research') || pathname.startsWith('/papers')
@@ -74,7 +77,7 @@ export default function Navbar() {
     const handleScroll = () => {
       if (isScrolling) return;
       const scrolledToBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 100;
-      if (scrolledToBottom) setActiveSection('blog');
+      if (scrolledToBottom) setActiveSection('service');
     };
     window.addEventListener('scroll', handleScroll);
 
@@ -102,24 +105,43 @@ export default function Navbar() {
     const navbarHeight = 64;
     const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
     const offsetPosition = elementPosition - navbarHeight;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    window.scrollTo({ top: offsetPosition, behavior: reduceMotion ? 'auto' : 'smooth' });
     setActiveSection(sectionId);
-    window.history.pushState(null, '', href);
+    window.history.pushState(window.history.state, '', href);
 
     scrollTimeoutRef.current = setTimeout(() => {
       setIsScrolling(false);
-    }, 1000);
+    }, reduceMotion ? 0 : 1000);
   }, [pathname, router]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (!handledInitialNavigationRef.current) {
+      handledInitialNavigationRef.current = true;
+      const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+
+      if (pathname === '/' && navigationEntry?.type === 'reload') {
+        const cleanUrl = `${window.location.pathname}${window.location.search}`;
+        window.history.replaceState(window.history.state, '', cleanUrl);
+        window.scrollTo({ top: 0, behavior: 'auto' });
+        return;
+      }
+    }
+
     if (pathname !== '/') return;
 
     const hash = window.location.hash;
-    if (hash) {
-      setTimeout(() => scrollToSection(hash), 100);
-    }
-  }, [pathname, scrollToSection]);
+    if (!hash) return;
+
+    const sectionId = hash.slice(1);
+    const element = document.getElementById(sectionId);
+    if (!element) return;
+
+    const navbarHeight = 64;
+    const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: elementPosition - navbarHeight, behavior: 'auto' });
+  }, [pathname]);
 
   useEffect(() => {
     return () => {
@@ -127,15 +149,33 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const focusFrame = window.requestAnimationFrame(() => firstMobileLinkRef.current?.focus());
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setIsMobileMenuOpen(false);
+      window.requestAnimationFrame(() => menuButtonRef.current?.focus());
+    };
+
+    document.addEventListener('keydown', closeOnEscape);
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      document.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [isMobileMenuOpen]);
+
   const scrollToTop = () => {
     if (pathname !== '/') {
       router.push('/');
       return;
     }
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
     setActiveSection('hero');
-    window.history.pushState(null, '', window.location.pathname);
+    window.history.pushState(window.history.state, '', window.location.pathname);
   };
 
   return (
@@ -143,7 +183,7 @@ export default function Navbar() {
       <nav className="fixed top-0 left-0 right-0 z-50">
         <motion.div
           aria-hidden
-          className="absolute inset-0 bg-surface/95 backdrop-blur-md pointer-events-none"
+          className="watercolor-nav-surface absolute inset-0 backdrop-blur-md pointer-events-none"
           style={{ opacity: bgOpacity, backdropFilter, WebkitBackdropFilter: backdropFilter, boxShadow }}
         />
         <motion.div
@@ -155,7 +195,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-14 sm:h-16">
             <button
               onClick={scrollToTop}
-              className="min-h-11 text-[15px] sm:text-base font-semibold text-gray-900 hover:text-teal-700 transition-colors tracking-tight focus:outline-none focus-visible:outline-none"
+              className="min-h-11 rounded-sm text-[15px] sm:text-base font-semibold text-gray-900 hover:text-teal-700 transition-colors tracking-tight focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
             >
               Najmul Hasan
             </button>
@@ -165,7 +205,8 @@ export default function Navbar() {
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className={`relative text-[14px] font-medium transition-colors focus:outline-none focus-visible:outline-none ${
+                  aria-current={currentSection === link.id ? 'location' : undefined}
+                  className={`relative rounded-sm text-[14px] font-medium transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700 ${
                     currentSection === link.id
                       ? 'text-gray-900'
                       : 'text-gray-500 hover:text-gray-900'
@@ -188,9 +229,10 @@ export default function Navbar() {
             </div>
 
             <button
+              ref={menuButtonRef}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden inline-flex h-11 w-11 items-center justify-center text-gray-700 hover:text-gray-900 transition-colors focus:outline-none focus-visible:outline-none"
-              aria-label="Toggle menu"
+              className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-sm text-gray-700 hover:text-gray-900 transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+              aria-label={isMobileMenuOpen ? 'Close navigation' : 'Open navigation'}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-navigation"
             >
@@ -208,15 +250,17 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-14 sm:top-16 left-0 right-0 z-40 lg:hidden bg-surface/95 backdrop-blur-md border-b border-gray-200"
+            className="watercolor-nav-surface fixed top-14 sm:top-16 left-0 right-0 z-40 lg:hidden backdrop-blur-md border-b border-gray-200"
           >
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
               <div className="flex flex-col gap-1">
-                {navLinks.map((link) => (
+                {navLinks.map((link, index) => (
                   <button
                     key={link.href}
+                    ref={index === 0 ? firstMobileLinkRef : undefined}
                     onClick={() => scrollToSection(link.href)}
-                    className={`min-h-11 text-left py-2.5 text-[15px] font-medium transition-colors focus:outline-none focus-visible:outline-none ${
+                    aria-current={currentSection === link.id ? 'location' : undefined}
+                    className={`min-h-11 rounded-sm text-left py-2.5 text-[15px] font-medium transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700 ${
                       currentSection === link.id
                         ? 'text-teal-700'
                         : 'text-gray-600 hover:text-gray-900'

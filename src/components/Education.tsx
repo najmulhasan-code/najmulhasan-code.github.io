@@ -38,7 +38,7 @@ function formatDateRange(entry: EducationEntry): string {
 
 export default function Education() {
   return (
-    <section id="education" className="bg-background py-12 sm:py-16 lg:py-20">
+    <section id="education" className="watercolor-section watercolor-sage py-12 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -47,7 +47,7 @@ export default function Education() {
           transition={{ duration: 0.6 }}
           className="mb-8 sm:mb-10"
         >
-          <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">Education</h2>
+          <h2 className="section-heading text-2xl font-bold text-gray-900 sm:text-3xl">Education</h2>
         </motion.div>
 
         <div className="border-y border-gray-200">

@@ -272,8 +272,8 @@ export default function PaperContent({ paper }: { paper: Paper }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      <article className="min-h-screen bg-surface">
-        <div className="bg-background pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
+      <article id="main-content" tabIndex={-1} className="watercolor-article min-h-screen bg-surface">
+        <div className="watercolor-article-hero pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
           <div className="max-w-3xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 10 }}

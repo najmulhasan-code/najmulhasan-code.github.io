@@ -220,11 +220,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en">
       <head>
         <link rel="icon" href="/najmul-hasan-favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/najmul-hasan-favicon.png" />
-        <meta name="theme-color" content="#eef4f3" />
+        <meta name="theme-color" content="#f1f6f4" />
 
         <meta name="author" content="Najmul Hasan" />
         <meta name="language" content="English" />
@@ -240,6 +240,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <MotionProvider>
           <Navbar />
           {children}

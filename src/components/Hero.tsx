@@ -13,19 +13,21 @@ export default function Hero() {
   ];
 
   return (
-    <section id="hero" className="calm-hero pt-8 sm:pt-16 lg:pt-20 pb-6 sm:pb-8 lg:pb-10">
+    <section id="hero" className="watercolor-section watercolor-hero pt-8 sm:pt-16 lg:pt-20 pb-6 sm:pb-8 lg:pb-10">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
 
           <div className="w-full sm:w-auto flex-shrink-0 flex flex-col items-center sm:items-start">
-            <Image
-              src="/images/najmul-hasan-profile.webp"
-              alt="Najmul Hasan"
-              width={720}
-              height={960}
-              className="rounded-xl w-48 h-auto sm:w-52 lg:w-60 object-cover object-top shadow-[0_18px_45px_rgba(23,43,49,0.12)] ring-1 ring-gray-200"
-              priority
-            />
+            <div className="portrait-wash">
+              <Image
+                src="/images/najmul-hasan-profile.webp"
+                alt="Najmul Hasan"
+                width={720}
+                height={960}
+                className="rounded-xl w-48 h-auto sm:w-52 lg:w-60 object-cover object-top shadow-[0_18px_45px_rgba(23,43,49,0.12)] ring-1 ring-gray-200"
+                preload
+              />
+            </div>
 
             <div className="mt-5 flex items-center justify-center gap-1 sm:gap-3 w-48 sm:w-52 lg:w-60">
               {socialLinks.map((social) => {
@@ -38,7 +40,7 @@ export default function Hero() {
                     rel="noopener noreferrer"
                     aria-label={social.label}
                     title={social.label}
-                    className="inline-flex items-center justify-center w-10 h-10 rounded-md text-gray-500 hover:text-teal-700 hover:bg-gray-100 transition-colors"
+                    className="inline-flex items-center justify-center w-11 h-11 rounded-md text-gray-500 hover:text-teal-700 hover:bg-gray-100 transition-colors"
                   >
                     <Icon className="w-[18px] h-[18px]" />
                   </a>

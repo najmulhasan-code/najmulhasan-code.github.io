@@ -19,8 +19,8 @@
   --teal-900: #174b48;
 
   --accent-primary: #236f69;
-  --background: #eef4f3;
-  --surface: #fbfdfc;
+  --background: #f1f6f4;
+  --surface: #fcfdfb;
   --foreground: var(--gray-900);
   --font-sans-local: "Avenir Next", "Segoe UI Variable Text", "Segoe UI", Helvetica, Arial, sans-serif;
   --font-display-local: "Avenir Next", "Segoe UI Variable Display", "Segoe UI", Helvetica, Arial, sans-serif;
@@ -55,14 +55,16 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 72px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at 12% 4%, rgb(117 170 162 / 8%), transparent 28rem),
+    radial-gradient(circle at 92% 22%, rgb(145 183 189 / 7%), transparent 30rem),
+    var(--background);
   color: var(--foreground);
   font-family: var(--font-sans-local);
   line-height: 1.7;
@@ -77,10 +79,244 @@ h4 {
   letter-spacing: -0.025em;
 }
 
-.calm-hero {
+.watercolor-page {
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  overflow-x: clip;
+  background: var(--background);
+  animation: page-reveal 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.watercolor-section {
+  --section-paper: rgb(248 250 247 / 90%);
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  overflow-x: clip;
+  background-color: var(--section-paper);
+}
+
+.watercolor-section::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -8% -3%;
+  pointer-events: none;
+  background: url("/images/watercolor-cool-wash.svg") center / 100% 100% no-repeat;
+  opacity: 0.9;
+}
+
+.watercolor-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.watercolor-hero {
+  --section-paper: #eef5f2;
+}
+
+.watercolor-hero::before {
+  inset: -8% -3%;
   background:
-    radial-gradient(circle at 18% 8%, rgb(75 155 148 / 10%), transparent 32rem),
+    url("/images/watercolor-hero-wash.svg") center / 100% 100% no-repeat,
+    radial-gradient(ellipse 28% 44% at 47% 88%, rgb(168 188 161 / 11%), transparent 70%);
+  filter: none;
+  transform: none;
+}
+
+.watercolor-paper {
+  --section-paper: rgb(252 253 251 / 94%);
+}
+
+.watercolor-paper::before {
+  opacity: 0.58;
+}
+
+.watercolor-mist {
+  --section-paper: rgb(241 246 244 / 92%);
+}
+
+.watercolor-mist::before {
+  opacity: 0.86;
+  transform: scaleX(-1);
+}
+
+.watercolor-sage {
+  --section-paper: rgb(245 248 243 / 94%);
+}
+
+.watercolor-sage::before {
+  background-image: url("/images/watercolor-warm-wash.svg");
+  opacity: 0.82;
+}
+
+.section-heading {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+}
+
+.section-heading::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.13em;
+  right: -0.2em;
+  bottom: -0.02em;
+  height: 0.5em;
+  background: url("/images/watercolor-brush.svg") center / 100% 100% no-repeat;
+  opacity: 0.82;
+}
+
+.watercolor-card {
+  position: relative;
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 93%), rgb(249 252 250 / 86%));
+  border-color: rgb(129 157 154 / 30%);
+  box-shadow: 0 14px 38px rgb(23 43 49 / 5%);
+}
+
+.watercolor-card::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 68%;
+  height: 7px;
+  pointer-events: none;
+  opacity: 0.88;
+  background: url("/images/watercolor-brush.svg") left top / 100% 100% no-repeat;
+}
+
+.watercolor-card:hover {
+  box-shadow: 0 18px 44px rgb(23 43 49 / 9%);
+}
+
+.watercolor-card:has(a:focus-visible) {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
+.watercolor-card:focus-within {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
+.portrait-wash {
+  position: relative;
+  isolation: isolate;
+}
+
+.portrait-wash::before,
+.portrait-wash::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.portrait-wash::before {
+  inset: -1.5rem -1.65rem -1.35rem -1.4rem;
+  background: url("/images/watercolor-portrait-wash.svg") center / 100% 100% no-repeat;
+}
+
+.portrait-wash::after {
+  inset: 54% -1.25rem -0.9rem 42%;
+  border-radius: 48% 52% 57% 43%;
+  background: radial-gradient(ellipse, rgb(213 185 143 / 19%), transparent 70%);
+  filter: blur(5px);
+}
+
+.watercolor-nav-surface {
+  background:
+    linear-gradient(100deg, rgb(248 251 249 / 97%), rgb(238 246 243 / 95%) 48%, rgb(246 249 247 / 97%));
+}
+
+.watercolor-article {
+  background:
+    url("/images/watercolor-cool-wash.svg") top center / 100% 58rem no-repeat,
+    url("/images/watercolor-warm-wash.svg") bottom center / 100% 62rem no-repeat,
+    var(--surface);
+  animation: page-reveal 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes page-reveal {
+  from {
+    opacity: 0.94;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.watercolor-article-hero {
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  overflow-x: clip;
+  background:
+    url("/images/watercolor-hero-wash.svg") center / 100% 100% no-repeat,
     var(--background);
+}
+
+.watercolor-footer {
+  position: relative;
+  background:
+    url("/images/watercolor-cool-wash.svg") center / 100% 100% no-repeat,
+    var(--background);
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 0.75rem;
+  left: 0.75rem;
+  transform: translateY(-180%);
+  border-radius: 0.375rem;
+  background: var(--gray-900);
+  color: white;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: transform 150ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+#main-content:focus {
+  outline: none;
+}
+
+@media (max-width: 640px) {
+  .watercolor-section::before {
+    inset: 0 -20%;
+    filter: none;
+  }
+
+}
+
+@media (forced-colors: active) {
+  .watercolor-section::before,
+  .section-heading::after,
+  .watercolor-card::before,
+  .portrait-wash::before,
+  .portrait-wash::after {
+    display: none;
+  }
+
+  .watercolor-card:has(a:focus-visible) {
+    outline-color: Highlight;
+  }
+
+  *:focus-visible,
+  .watercolor-card:focus-within {
+    outline-color: Highlight;
+  }
 }
 
 ::-webkit-scrollbar {

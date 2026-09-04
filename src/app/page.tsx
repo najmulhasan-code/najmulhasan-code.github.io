@@ -76,19 +76,19 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-background">
+    <main id="main-content" tabIndex={-1} className="watercolor-page min-h-screen bg-background">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageJsonLd) }}
       />
       <Hero />
-      <News />
       <Publications papers={papers} />
       <Experience />
+      <Blog posts={posts} />
+      <News />
       <Education />
       <Awards />
       <Service />
-      <Blog posts={posts} />
       <Footer />
     </main>
   );

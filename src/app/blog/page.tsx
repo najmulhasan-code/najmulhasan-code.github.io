@@ -30,7 +30,7 @@ export default function BlogPage() {
   };
 
   return (
-    <main className="min-h-screen bg-background">
+    <main id="main-content" tabIndex={-1} className="watercolor-page min-h-screen bg-background">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
