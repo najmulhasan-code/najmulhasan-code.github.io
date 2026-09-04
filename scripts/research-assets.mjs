@@ -195,6 +195,7 @@ function researchJson(papers) {
 }
 
 function llmsText(papers, posts) {
+  const refusalPost = posts.find((post) => post.slug === 'refusal-to-redirection');
   const lines = [
     `# ${AUTHOR_NAME}`,
     '',
@@ -240,6 +241,13 @@ function llmsText(papers, posts) {
 
   lines.push(
     '## Open-source projects',
+    '',
+    '### [Refusal-to-Redirection](https://github.com/najmulhasan-code/refusal-to-redirection)',
+    '',
+    '- QLoRA case study of how safety fine-tuning shifted responses from refusal toward redirection, and why behavioral-label agreement should be evaluated separately from substantive safety.',
+    ...(refusalPost
+      ? [`- Research note: [${refusalPost.title}](${refusalPost.canonicalUrl})`]
+      : []),
     '',
     '### [SAGE](https://github.com/najmulhasan-code/sage)',
     '',

@@ -58,9 +58,10 @@ export default function Blog({ posts }: { posts: BlogPost[] }) {
                   >
                     <Image
                       src={post.thumbnail}
-                      alt={post.title}
-                      width={1200}
-                      height={630}
+                      alt=""
+                      width={post.thumbnailWidth ?? 1200}
+                      height={post.thumbnailHeight ?? 630}
+                      sizes="(max-width: 767px) calc(100vw - 2rem), (max-width: 1152px) calc(50vw - 2rem), 544px"
                       className={`w-full h-full group-hover:scale-[1.02] transition-transform duration-300 ${
                         post.thumbnailFit === 'cover' ? 'object-cover' : 'object-contain'
                       }`}

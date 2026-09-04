@@ -43,7 +43,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       tags: post.tags,
       url: canonical,
       ...(post.updatedDate ? { modifiedTime: post.updatedDate } : {}),
-      ...(image ? { images: [{ url: image, alt: post.title }] } : {}),
+      ...(image ? {
+        images: [{
+          url: image,
+          alt: post.thumbnailAlt ?? post.title,
+          ...(post.thumbnailWidth ? { width: post.thumbnailWidth } : {}),
+          ...(post.thumbnailHeight ? { height: post.thumbnailHeight } : {}),
+        }],
+      } : {}),
     },
     twitter: {
       card: 'summary_large_image',

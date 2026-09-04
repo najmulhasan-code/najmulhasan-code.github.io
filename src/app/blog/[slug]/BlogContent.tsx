@@ -271,22 +271,34 @@ export default function BlogContent({ post }: BlogContentProps) {
           }`}
         >
           {post.thumbnail && (
-            <motion.div
+            <motion.figure
+              id="figure-1"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="max-w-4xl mx-auto mb-10 flex items-center justify-center overflow-hidden rounded-md ring-1 ring-gray-100"
-              style={{ backgroundColor: post.thumbnailBackground ?? 'var(--gray-50)' }}
+              className="min-w-0 mx-auto mb-10"
+              style={{ width: 'min(100%, 56rem)' }}
             >
-              <Image
-                src={post.thumbnail}
-                alt={`Teaser for ${post.title}`}
-                width={1200}
-                height={400}
-                className="w-full h-auto object-contain"
-                priority
-              />
-            </motion.div>
+              <div
+                className="w-full min-w-0 overflow-hidden rounded-md ring-1 ring-gray-100"
+                style={{ backgroundColor: post.thumbnailBackground ?? 'var(--gray-50)' }}
+              >
+                <Image
+                  src={post.thumbnail}
+                  alt={post.thumbnailAlt ?? `Teaser for ${post.title}`}
+                  width={post.thumbnailWidth ?? 1200}
+                  height={post.thumbnailHeight ?? 630}
+                  sizes="(max-width: 768px) calc(100vw - 2rem), 896px"
+                  className="block w-full min-w-0 max-w-full h-auto object-contain"
+                  priority
+                />
+              </div>
+              {post.thumbnailCaption && (
+                <figcaption className="mt-3 text-left text-sm leading-relaxed text-gray-500">
+                  {post.thumbnailCaption}
+                </figcaption>
+              )}
+            </motion.figure>
           )}
 
           <div
@@ -351,7 +363,7 @@ export default function BlogContent({ post }: BlogContentProps) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.25 }}
-              className={`prose prose-lg prose-gray mx-auto !max-w-[80ch] ${
+              className={`prose prose-lg prose-gray mx-auto !max-w-[72ch] text-base sm:text-[1.0625rem] ${
                 hasSectionNavigation ? 'xl:col-start-2 xl:row-start-1' : ''
               }`}
               dangerouslySetInnerHTML={{ __html: sectionNavigation.html }}

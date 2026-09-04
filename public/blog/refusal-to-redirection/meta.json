@@ -1,0 +1,18 @@
+{
+  "title": "From Refusal to Redirection After Safety Fine-Tuning",
+  "date": "2026-09-03",
+  "description": "A QLoRA experiment with Llama 3.2 3B Instruct examining a refusal-to-redirection shift and a mismatch between data labels and the evaluation rubric.",
+  "excerpt": "Exact behavioral-label agreement fell after fine-tuning. Of the 487 fine-tuned mismatches, 481 occurred when REFUSE was expected and the judge assigned REDIRECT.",
+  "category": "Research Note",
+  "tags": ["AI Alignment", "Language Model Safety", "Safety Fine-Tuning", "LLM Evaluation", "QLoRA"],
+  "thumbnailFit": "contain",
+  "thumbnailBackground": "#ffffff",
+  "thumbnailAlt": "Stacked bars show baseline responses dominated by REFUSE at 72.2 percent and fine-tuned responses dominated by REDIRECT at 80.2 percent across 910 evaluation prompts.",
+  "thumbnailWidth": 1929,
+  "thumbnailHeight": 1030,
+  "thumbnailCaption": "Figure 1. Distribution of behavioral labels assigned by GPT-5.6-Terra to baseline and fine-tuned Llama 3.2 3B Instruct responses across 910 evaluation prompts. Bars show percentages for ANSWER, REFUSE, REDIRECT, and OTHER. The labels describe response style, not substantive safety.",
+  "published": true,
+  "links": [
+    "https://github.com/najmulhasan-code/refusal-to-redirection"
+  ]
+}

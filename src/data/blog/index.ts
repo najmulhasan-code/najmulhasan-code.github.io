@@ -17,6 +17,10 @@ export interface BlogPost {
   thumbnail?: string;
   thumbnailFit?: 'contain' | 'cover';
   thumbnailBackground?: string;
+  thumbnailAlt?: string;
+  thumbnailWidth?: number;
+  thumbnailHeight?: number;
+  thumbnailCaption?: string;
   links?: string[];
   contentHtml: string;
 }
@@ -49,6 +53,10 @@ function readBlogPost(slug: string): BlogPost | null {
     thumbnail: resolveTeaser(dir, urlBase),
     thumbnailFit: meta.thumbnailFit === 'cover' ? 'cover' : 'contain',
     thumbnailBackground: meta.thumbnailBackground ? String(meta.thumbnailBackground) : undefined,
+    thumbnailAlt: meta.thumbnailAlt ? String(meta.thumbnailAlt) : undefined,
+    thumbnailWidth: Number.isFinite(meta.thumbnailWidth) ? Number(meta.thumbnailWidth) : undefined,
+    thumbnailHeight: Number.isFinite(meta.thumbnailHeight) ? Number(meta.thumbnailHeight) : undefined,
+    thumbnailCaption: meta.thumbnailCaption ? String(meta.thumbnailCaption) : undefined,
     links: meta.links ? asStringArray(meta.links) : undefined,
     contentHtml: readContentHtml(htmlFile, urlBase),
   };
