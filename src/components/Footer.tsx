@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import { ScholarIcon, GithubIcon, LinkedinIcon, XIcon } from './icons';
 
 const socialLinks = [
@@ -16,13 +13,7 @@ export default function Footer() {
   return (
     <footer className="watercolor-footer border-t border-gray-200">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="flex flex-col items-center gap-5"
-        >
+        <div className="flex flex-col items-center gap-5">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
             {socialLinks.map((social) => {
               const Icon = social.Icon;
@@ -44,7 +35,7 @@ export default function Footer() {
           <div className="text-xs text-gray-500">
             © {currentYear} Najmul Hasan
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );

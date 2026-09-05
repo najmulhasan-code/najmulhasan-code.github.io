@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useState, ComponentType } from 'react';
-import { motion } from 'framer-motion';
 import { Check, Copy } from 'lucide-react';
 import Image from 'next/image';
 import type { Paper } from '@/data/papers';
@@ -275,12 +274,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
       <article id="main-content" tabIndex={-1} className="watercolor-article min-h-screen bg-surface">
         <div className="watercolor-article-hero pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
           <div className="max-w-3xl mx-auto px-4 sm:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="mb-4"
-            >
+            <div className="mb-4">
               <span className="block text-xs font-medium tracking-wide uppercase text-teal-700">
                 {paper.displayVenue ?? paper.venue}
               </span>
@@ -289,32 +283,17 @@ export default function PaperContent({ paper }: { paper: Paper }) {
                   {paper.venueContext}
                 </span>
               )}
-            </motion.div>
+            </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.05 }}
-              className="text-2xl sm:text-3xl lg:text-4xl font-medium text-gray-900 leading-tight mb-5"
-            >
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-gray-900 leading-tight mb-5">
               {paper.title}
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="text-gray-500 text-sm mb-6"
-            >
+            <p className="text-gray-500 text-sm mb-6">
               {renderAuthors(paper.authors)}
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.15 }}
-              className="flex flex-wrap gap-x-5 gap-y-2"
-            >
+            <div className="flex flex-wrap gap-x-5 gap-y-2">
               {links.map((link) => {
                 const { label, logo, FallbackIcon } = getLinkMeta(link);
                 return (
@@ -341,7 +320,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
                   </a>
                 );
               })}
-            </motion.div>
+            </div>
           </div>
         </div>
 
@@ -351,12 +330,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
           }`}
         >
           {paper.thumbnail && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="max-w-4xl mx-auto mb-10 aspect-video flex items-center justify-center"
-            >
+            <div className="max-w-4xl mx-auto mb-10 aspect-video flex items-center justify-center">
               <Image
                 src={paper.thumbnail}
                 alt={`Figure from ${paper.title}`}
@@ -364,7 +338,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
                 height={500}
                 className="w-full h-full object-contain"
               />
-            </motion.div>
+            </div>
           )}
 
           <div
@@ -425,10 +399,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
               </>
             )}
 
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.25 }}
+            <div
               className={`prose prose-lg prose-gray mx-auto !max-w-[80ch] ${
                 hasSectionNavigation ? 'xl:col-start-2 xl:row-start-1' : ''
               }`}
@@ -437,12 +408,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
           </div>
 
           {paper.bibtex && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.4 }}
-              className="max-w-4xl mx-auto mt-10 pt-6 border-t border-gray-100"
-            >
+            <div className="max-w-4xl mx-auto mt-10 pt-6 border-t border-gray-100">
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-sm font-semibold tracking-wide uppercase text-gray-500">
                   BibTeX
@@ -452,7 +418,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
               <pre className="bg-gray-50 border border-gray-100 rounded-md p-4 overflow-x-auto text-xs text-gray-700 font-mono leading-relaxed">
                 <code>{paper.bibtex}</code>
               </pre>
-            </motion.div>
+            </div>
           )}
 
         </div>

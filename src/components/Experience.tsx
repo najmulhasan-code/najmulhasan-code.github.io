@@ -1,7 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
 interface Role {
   position: string;
   institution: string;
@@ -136,24 +132,14 @@ export default function Experience() {
   return (
     <section id="experience" className="watercolor-section watercolor-paper py-12 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-8 sm:mb-10"
-        >
+        <div className="mb-8 sm:mb-10">
           <h2 className="section-heading text-2xl font-bold text-gray-900 sm:text-3xl">Experience</h2>
-        </motion.div>
+        </div>
 
         <div className="border-y border-gray-200">
-          {organizations.map((organization, organizationIndex) => (
-            <motion.article
+          {organizations.map((organization) => (
+            <article
               key={organization.institution}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: Math.min(organizationIndex * 0.05, 0.15) }}
               className="border-b border-gray-200 py-6 last:border-b-0 sm:py-7"
             >
               <header className="flex items-start gap-4">
@@ -199,7 +185,7 @@ export default function Experience() {
                   </div>
                 ))}
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 960" preserveAspectRatio="none">
+  <defs>
+    <filter id="wash" x="-20%" y="-15%" width="140%" height="130%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".016 .012" numOctaves="2" seed="31" result="grain"/>
+      <feDisplacementMap in="SourceGraphic" in2="grain" scale="22" xChannelSelector="R" yChannelSelector="G"/>
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+    <radialGradient id="teal"><stop stop-color="#6fa99c" stop-opacity=".42"/><stop offset=".55" stop-color="#83b5a8" stop-opacity=".22"/><stop offset="1" stop-color="#83b5a8" stop-opacity="0"/></radialGradient>
+    <radialGradient id="blue"><stop stop-color="#86b2bc" stop-opacity=".36"/><stop offset=".6" stop-color="#9bbfc4" stop-opacity=".17"/><stop offset="1" stop-color="#9bbfc4" stop-opacity="0"/></radialGradient>
+    <radialGradient id="warm"><stop stop-color="#d4b58b" stop-opacity=".24"/><stop offset=".6" stop-color="#d8b6a4" stop-opacity=".1"/><stop offset="1" stop-color="#d8b6a4" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g filter="url(#wash)">
+    <path d="M-116 113C-34 44 86 58 154 160S173 371 89 427-108 420-159 322-185 174-116 113Z" fill="url(#teal)"/>
+    <path d="M383 480C462 413 592 449 628 550S595 756 507 792 350 744 329 653 325 532 383 480Z" fill="url(#blue)"/>
+    <ellipse cx="444" cy="176" rx="149" ry="140" fill="url(#warm)"/>
+    <ellipse cx="30" cy="788" rx="148" ry="133" fill="url(#teal)" opacity=".55"/>
+  </g>
+</svg>

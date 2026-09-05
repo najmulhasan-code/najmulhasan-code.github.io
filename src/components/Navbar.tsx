@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useLayoutEffect, useCallback, useRef, useMemo } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 
@@ -21,7 +21,6 @@ export default function Navbar() {
   const handledInitialNavigationRef = useRef(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const firstMobileLinkRef = useRef<HTMLButtonElement>(null);
-  const { scrollY } = useScroll();
 
   const navLinks: NavLink[] = useMemo(() => [
     { label: 'Research', href: '#research', id: 'research' },
@@ -39,16 +38,6 @@ export default function Navbar() {
       ? 'blog'
       : null;
   const currentSection = pathname === '/' ? activeSection : routeSection;
-
-  const bgOpacity = useTransform(scrollY, [0, 80], [0, 0.85]);
-  const blurAmount = useTransform(scrollY, [0, 80], [0, 12]);
-  const backdropFilter = useTransform(blurAmount, (v) => `blur(${v}px)`);
-  const borderOpacity = useTransform(scrollY, [0, 80], [0, 1]);
-  const shadowOpacity = useTransform(scrollY, [0, 80], [0, 0.04]);
-  const boxShadow = useTransform(
-    shadowOpacity,
-    (v) => `0 1px 12px rgba(15, 23, 42, ${v})`
-  );
 
   useEffect(() => {
     if (pathname !== '/') return;
@@ -181,15 +170,13 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50">
-        <motion.div
+        <div
           aria-hidden
-          className="watercolor-nav-surface absolute inset-0 backdrop-blur-md pointer-events-none"
-          style={{ opacity: bgOpacity, backdropFilter, WebkitBackdropFilter: backdropFilter, boxShadow }}
+          className="watercolor-nav-surface absolute inset-0 pointer-events-none"
         />
-        <motion.div
+        <div
           aria-hidden
           className="absolute bottom-0 left-0 right-0 h-px bg-gray-200 pointer-events-none"
-          style={{ opacity: borderOpacity }}
         />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-14 sm:h-16">
@@ -250,7 +237,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="watercolor-nav-surface fixed top-14 sm:top-16 left-0 right-0 z-40 lg:hidden backdrop-blur-md border-b border-gray-200"
+            className="watercolor-nav-surface fixed top-14 sm:top-16 left-0 right-0 z-40 lg:hidden border-b border-gray-200"
           >
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
               <div className="flex flex-col gap-1">

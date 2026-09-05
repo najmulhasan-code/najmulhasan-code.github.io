@@ -121,15 +121,9 @@ export default function News() {
   return (
     <section id="news" className="watercolor-section watercolor-mist pt-8 sm:pt-10 lg:pt-12 pb-12 sm:pb-16 lg:pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-8"
-        >
+        <div className="mb-8">
           <h2 className="section-heading text-2xl sm:text-3xl font-bold text-gray-900">News</h2>
-        </motion.div>
+        </div>
 
         <div>
           {groupedNews.map(({ year, items }) => (

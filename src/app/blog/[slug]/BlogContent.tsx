@@ -1,7 +1,6 @@
 'use client';
 
 import { ComponentType, useEffect, useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { formatDate } from '@/lib/format';
 import type { BlogPost } from '@/data/blog';
@@ -197,43 +196,23 @@ export default function BlogContent({ post }: BlogContentProps) {
       <article id="main-content" tabIndex={-1} className="watercolor-article min-h-screen bg-surface">
         <div className="watercolor-article-hero pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
           <div className="max-w-3xl mx-auto px-4 sm:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="mb-4 text-xs font-medium uppercase tracking-wide text-teal-700"
-            >
+            <div className="mb-4 text-xs font-medium uppercase tracking-wide text-teal-700">
               {post.category}
-            </motion.div>
+            </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.05 }}
-              className="text-2xl sm:text-3xl lg:text-4xl font-medium text-gray-900 leading-tight mb-5"
-            >
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-gray-900 leading-tight mb-5">
               {post.title}
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="text-gray-500 text-sm"
-            >
+            <p className="text-gray-500 text-sm">
               <span className="text-teal-700">Najmul Hasan</span>
               {' · '}
               {formatDate(post.date)}
               {post.updatedDate && ` · Updated ${formatDate(post.updatedDate)}`}
-            </motion.p>
+            </p>
 
             {post.links && post.links.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.15 }}
-                className="flex flex-wrap gap-x-5 gap-y-2 mt-6"
-              >
+              <div className="flex flex-wrap gap-x-5 gap-y-2 mt-6">
                 {post.links.map((link) => {
                   const { label, logo, FallbackIcon } = getLinkMeta(link);
                   return (
@@ -260,7 +239,7 @@ export default function BlogContent({ post }: BlogContentProps) {
                     </a>
                   );
                 })}
-              </motion.div>
+              </div>
             )}
           </div>
         </div>
@@ -271,11 +250,8 @@ export default function BlogContent({ post }: BlogContentProps) {
           }`}
         >
           {post.thumbnail && (
-            <motion.figure
+            <figure
               id="figure-1"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
               className="min-w-0 mx-auto mb-10"
               style={{ width: 'min(100%, 56rem)' }}
             >
@@ -298,7 +274,7 @@ export default function BlogContent({ post }: BlogContentProps) {
                   {post.thumbnailCaption}
                 </figcaption>
               )}
-            </motion.figure>
+            </figure>
           )}
 
           <div
@@ -359,10 +335,7 @@ export default function BlogContent({ post }: BlogContentProps) {
               </>
             )}
 
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.25 }}
+            <div
               className={`prose prose-lg prose-gray mx-auto !max-w-[72ch] text-base sm:text-[1.0625rem] ${
                 hasSectionNavigation ? 'xl:col-start-2 xl:row-start-1' : ''
               }`}

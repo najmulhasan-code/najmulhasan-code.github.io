@@ -1,7 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
 interface ServiceItem {
   role: string;
   organization: string;
@@ -69,24 +65,14 @@ export default function Service() {
   return (
     <section id="service" className="watercolor-section watercolor-mist py-12 sm:py-16 lg:py-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-10"
-        >
+        <div className="mb-10">
           <h2 className="section-heading text-2xl sm:text-3xl font-bold text-gray-900">Professional Activities</h2>
-        </motion.div>
+        </div>
 
         <div className="space-y-10">
-          {serviceGroups.map((group, groupIndex) => (
-            <motion.div
+          {serviceGroups.map((group) => (
+            <div
               key={group.category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: groupIndex * 0.05 }}
             >
               <h3 className="text-xs font-semibold tracking-[0.15em] text-gray-500 uppercase mb-5">
                 {group.category}
@@ -119,7 +105,7 @@ export default function Service() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

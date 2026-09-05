@@ -1,7 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
 interface EducationEntry {
   institution: string;
   degree: string;
@@ -40,24 +36,14 @@ export default function Education() {
   return (
     <section id="education" className="watercolor-section watercolor-sage py-12 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-8 sm:mb-10"
-        >
+        <div className="mb-8 sm:mb-10">
           <h2 className="section-heading text-2xl font-bold text-gray-900 sm:text-3xl">Education</h2>
-        </motion.div>
+        </div>
 
         <div className="border-y border-gray-200">
           {education.map((entry, index) => (
-            <motion.article
+            <article
               key={entry.institution + '-' + index}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
               className="py-6 sm:py-8"
             >
               <header className="flex items-start gap-4">
@@ -103,7 +89,7 @@ export default function Education() {
                   </div>
                 </div>
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>

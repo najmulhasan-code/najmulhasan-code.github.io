@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ScholarIcon, GithubIcon, LinkedinIcon, XIcon } from './icons';
 
@@ -49,12 +46,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <motion.div
-            className="w-full flex-1 min-w-0"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-          >
+          <div className="w-full flex-1 min-w-0">
             <h1 className="text-center sm:text-left text-3xl sm:text-4xl lg:text-[40px] font-bold text-gray-900 tracking-tight leading-[1.1] mb-3">
               Najmul Hasan
             </h1>
@@ -72,7 +64,7 @@ export default function Hero() {
                 I hold a B.S. in Computer Science, with minors in Mathematics and Physics, from the University of North Carolina at Pembroke, where I worked with <a href="https://www.uncp.edu/about/directory/prashanth-busi_reddy_gari.html" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Prashanth BusiReddyGari</a> and <a href="https://zhangshaohu.github.io/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Dr. Shaohu Zhang</a>. I was an AI Safety Research Fellow at <a href="https://algoverseairesearch.org" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Algoverse</a>. I completed the AI Safety Fundamentals Fellowship (AISF) with <a href="https://aialignment.mit.edu/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">MIT AI Alignment (MAIA)</a> and <a href="https://bluedot.org/courses/technical-ai-safety" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">BlueDot Impact&apos;s Technical AI Safety course</a>. I am currently participating in BlueDot Impact&apos;s <a href="https://bluedot.org/courses/technical-ai-safety-project" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Technical AI Safety Project Sprint</a>, where I am working on language-model alignment during pretraining.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

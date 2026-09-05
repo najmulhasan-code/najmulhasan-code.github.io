@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,37 +9,21 @@ export default function Blog({ posts }: { posts: BlogPost[] }) {
   return (
     <section id="blog" className="watercolor-section watercolor-paper py-12 sm:py-16 lg:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-10"
-        >
+        <div className="mb-10">
           <h2 className="section-heading text-2xl sm:text-3xl font-bold text-gray-900">
             Blog
           </h2>
-        </motion.div>
+        </div>
 
         {posts.length === 0 ? (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-sm text-gray-500"
-          >
+          <div className="text-sm text-gray-500">
             Coming soon.
-          </motion.div>
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {posts.map((post, index) => (
-              <motion.article
+            {posts.map((post) => (
+              <article
                 key={post.slug}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
                 className="watercolor-card group relative rounded-lg border hover:border-teal-600 transition-all duration-300 cursor-pointer overflow-hidden flex flex-col"
               >
                 <Link
@@ -86,7 +67,7 @@ export default function Blog({ posts }: { posts: BlogPost[] }) {
                     Read more <ArrowUpRight size={14} />
                   </span>
                 </div>
-              </motion.article>
+              </article>
             ))}
           </div>
         )}

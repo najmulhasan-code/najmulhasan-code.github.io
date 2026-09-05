@@ -85,7 +85,6 @@ h4 {
   overflow-x: hidden;
   overflow-x: clip;
   background: var(--background);
-  animation: page-reveal 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .watercolor-section {
@@ -231,7 +230,7 @@ h4 {
 
 .watercolor-nav-surface {
   background:
-    linear-gradient(100deg, rgb(248 251 249 / 97%), rgb(238 246 243 / 95%) 48%, rgb(246 249 247 / 97%));
+    linear-gradient(100deg, #f8fbf9, #eef6f3 48%, #f6f9f7);
 }
 
 .watercolor-article {
@@ -239,17 +238,6 @@ h4 {
     url("/images/watercolor-cool-wash.svg") top center / 100% 58rem no-repeat,
     url("/images/watercolor-warm-wash.svg") bottom center / 100% 62rem no-repeat,
     var(--surface);
-  animation: page-reveal 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes page-reveal {
-  from {
-    opacity: 0.94;
-  }
-
-  to {
-    opacity: 1;
-  }
 }
 
 .watercolor-article-hero {
@@ -292,12 +280,38 @@ h4 {
   outline: none;
 }
 
-@media (max-width: 640px) {
-  .watercolor-section::before {
-    inset: 0 -20%;
-    filter: none;
+@media (max-width: 767px) {
+  :root {
+    --gray-500: #506468;
   }
 
+  .watercolor-section::before {
+    inset: 0;
+    background: url("/images/watercolor-mobile-cool.svg") top center / 100% 56rem repeat-y;
+    opacity: 0.95;
+    transform: none;
+  }
+
+  .watercolor-sage::before {
+    background-image: url("/images/watercolor-mobile-warm.svg");
+  }
+
+  .watercolor-paper::before {
+    opacity: 0.8;
+  }
+
+  .watercolor-article {
+    background:
+      url("/images/watercolor-mobile-cool.svg") top center / 100% 56rem repeat-y,
+      var(--surface);
+  }
+
+  .watercolor-article-hero,
+  .watercolor-footer {
+    background:
+      url("/images/watercolor-mobile-cool.svg") center 30% / 100% 40rem no-repeat,
+      var(--background);
+  }
 }
 
 @media (forced-colors: active) {
