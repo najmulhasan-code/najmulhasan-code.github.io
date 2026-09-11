@@ -5,6 +5,7 @@ import {
   expectedSitemapUrls,
   loadResearchContent,
   SITE_URL,
+  PROFILE,
 } from './research-assets.mjs';
 
 const root = process.cwd();
@@ -93,7 +94,19 @@ for (const paper of content.papers) {
   if (paper.doi) expectMeta(html, 'citation_doi', paper.doi, route);
   if (paper.arxiv) {
     expectMeta(html, 'citation_arxiv_id', paper.arxiv.id, route);
-    expectMeta(html, 'citation_pdf_url', paper.arxiv.pdfUrl, route);
+  }
+  for (const pdf of metadataValues(html, 'citation_pdf_url')) {
+    if (!pdf.startsWith(`${paper.canonicalUrl}/`) || !pdf.endsWith('.pdf')) {
+      errors.push(`${route}: citation_pdf_url must identify a locally hosted PDF alongside the abstract.`);
+    }
+  }
+  if (!/hackathon/i.test(paper.venue) && /conference|workshop/i.test(paper.venue)) {
+    expectMeta(html, 'citation_conference_title', paper.venue, route);
+  }
+  const pages = paper.bibtex?.match(/\bpages\s*=\s*[{"]\s*(\d+)\s*[-–]+\s*(\d+)/i);
+  if (pages) {
+    expectMeta(html, 'citation_firstpage', pages[1], route);
+    expectMeta(html, 'citation_lastpage', pages[2], route);
   }
   if (!html.includes('"@type":"ScholarlyArticle"')) errors.push(`${route}: missing ScholarlyArticle structured data.`);
   if (!html.includes('"@type":"BreadcrumbList"')) errors.push(`${route}: missing breadcrumb structured data.`);
@@ -143,13 +156,99 @@ if (!fs.existsSync(robotsFile)) {
   errors.push('Missing exported robots.txt.');
 } else {
   const robots = fs.readFileSync(robotsFile, 'utf8').replace(/\r\n/g, '\n');
-  for (const crawler of ['OAI-SearchBot', 'ChatGPT-User', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot']) {
+  for (const crawler of ['OAI-SearchBot', 'ChatGPT-User', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User']) {
     if (!robots.includes(`User-agent: ${crawler}\nAllow: /`)) errors.push(`robots.txt does not allow ${crawler}.`);
   }
   for (const crawler of ['GPTBot', 'ClaudeBot', 'CCBot']) {
     if (!robots.includes(`User-agent: ${crawler}\nDisallow: /`)) errors.push(`robots.txt does not block ${crawler}.`);
   }
   if (!robots.includes(`Sitemap: ${SITE_URL}/sitemap.xml`)) errors.push('robots.txt has the wrong sitemap URL.');
+}
+
+const discoveryIndex = JSON.parse(fs.readFileSync(path.join(out, 'research.json'), 'utf8'));
+const graph = JSON.parse(fs.readFileSync(path.join(out, 'discovery', 'graph.jsonld'), 'utf8'));
+const entities = graph['@graph'];
+if (graph['@context'] !== 'https://schema.org' || entities.length !== 1 + content.papers.length + content.posts.length) {
+  errors.push('Linked-data graph must contain the author and every published article.');
+}
+if (!hasLink(homepage, { rel: 'describedby', type: 'application/ld+json', href: '/discovery/graph.jsonld' })) {
+  errors.push('Homepage is missing linked-data graph discovery.');
+}
+for (const item of [...content.papers, ...content.posts]) {
+  const entity = entities.find((entry) => entry.url === item.canonicalUrl);
+  const authors = entity ? [entity.author].flat() : [];
+  if (entity?.headline !== item.title || !authors.some((author) => author['@id'] === `${SITE_URL}/#person`)) {
+    errors.push(`${item.slug}: incorrect title or author relationship in the linked-data graph.`);
+  }
+  if (item.doi && !entity?.identifier?.some((id) => id.propertyID === 'DOI' && id.value === item.doi)) {
+    errors.push(`${item.slug}: incorrect DOI in the linked-data graph.`);
+  }
+  if (item.arxiv && !entity?.identifier?.some((id) => id.propertyID === 'arXiv' && id.value === item.arxiv.id)) {
+    errors.push(`${item.slug}: incorrect arXiv identifier in the linked-data graph.`);
+  }
+}
+if (discoveryIndex.papers.length !== content.papers.length || discoveryIndex.posts.length !== content.posts.length) {
+  errors.push('Discovery index must contain every published paper and blog post.');
+}
+if (JSON.stringify(discoveryIndex.profile.sameAs) !== JSON.stringify(PROFILE.sameAs)) {
+  errors.push('Discovery index has inconsistent author identity links.');
+}
+
+for (const [collection, items] of [['papers', content.papers], ['blog', content.posts]]) {
+  const actualFiles = fs.readdirSync(path.join(out, 'discovery', collection)).sort();
+  const expectedFiles = items.map((item) => `${item.slug}.json`).sort();
+  if (JSON.stringify(actualFiles) !== JSON.stringify(expectedFiles)) {
+    errors.push(`${collection}: discovery exports include missing or unpublished documents.`);
+  }
+  for (const item of items) {
+    const route = `${collection === 'papers' ? '/research' : '/blog'}/${item.slug}`;
+    const html = requireHtml(route);
+    const documentUrl = `${SITE_URL}/discovery/${collection}/${item.slug}.json`;
+    if (!hasLink(html, { rel: 'alternate', type: 'application/json', href: documentUrl })) {
+      errors.push(`${route}: missing JSON discovery link.`);
+    }
+    const document = JSON.parse(fs.readFileSync(path.join(out, 'discovery', collection, `${item.slug}.json`), 'utf8'));
+    const source = fs.readFileSync(path.join(item.sourceDirectory, collection === 'papers' ? 'content.html' : 'index.html'), 'utf8');
+    if (document.content.html !== source || document.title !== item.title || document.canonicalUrl !== item.canonicalUrl) {
+      errors.push(`${route}: discovery export changed verified source content.`);
+    }
+    const scripts = [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
+    for (const [, json] of scripts) {
+      try { JSON.parse(json); } catch { errors.push(`${route}: invalid JSON-LD.`); }
+    }
+    const article = scripts.map(([, json]) => {
+      try { return JSON.parse(json); } catch { return null; }
+    }).find((entity) => entity?.['@id'] === `${item.canonicalUrl}#article`);
+    if (collection === 'papers') {
+      for (const [propertyID, value] of [['DOI', item.doi], ['arXiv', item.arxiv?.id]]) {
+        if (value && ![article?.identifier].flat().some((id) => id?.propertyID === propertyID && id.value === value)) {
+          errors.push(`${route}: page structured data is missing the correct ${propertyID}.`);
+        }
+      }
+    }
+    const localLinks = [...html.matchAll(/<link\b[^>]*>/gi)]
+      .map((match) => match[0])
+      .filter((tag) => /\brel="(?:alternate|describedby)"/.test(tag))
+      .map((tag) => decodeHtml(tag.match(/\bhref="([^"]+)"/)?.[1] ?? ''));
+    for (const href of localLinks) {
+      const url = new URL(href, item.canonicalUrl);
+      if (url.origin !== SITE_URL) continue;
+      const pathname = decodeURIComponent(url.pathname);
+      if (!fs.existsSync(path.join(out, pathname.slice(1))) && !exportedHtml(pathname)) {
+        errors.push(`${route}: broken discovery link ${url.pathname}.`);
+      }
+    }
+  }
+}
+if (!hasLink(homepage, { rel: 'alternate', type: 'application/atom+xml', href: '/feed.xml' })) {
+  errors.push('Homepage is missing Atom feed discovery.');
+}
+const feed = fs.readFileSync(path.join(out, 'feed.xml'), 'utf8');
+if ([...feed.matchAll(/<entry>/g)].length !== content.papers.length + content.posts.length) {
+  errors.push('Atom feed must contain all published research and writing.');
+}
+if (fs.existsSync(path.join(out, 'temp')) || fs.existsSync(path.join(out, '.env'))) {
+  errors.push('Private workspace files must not be included in the static export.');
 }
 
 if (errors.length > 0) {

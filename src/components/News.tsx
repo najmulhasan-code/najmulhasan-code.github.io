@@ -19,7 +19,7 @@ function NewsListItem({ item }: { item: NewsItem }) {
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-teal-700 transition-colors"
+              className="text-link transition-colors"
             >
               {item.title}
             </a>

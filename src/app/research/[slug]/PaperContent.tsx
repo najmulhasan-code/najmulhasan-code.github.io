@@ -1,5 +1,6 @@
 'use client';
 
+import { serializeJsonLd } from '@/lib/structured-data';
 import { useEffect, useMemo, useState, ComponentType } from 'react';
 import { Check, Copy } from 'lucide-react';
 import Image from 'next/image';
@@ -172,6 +173,7 @@ export default function PaperContent({ paper }: { paper: Paper }) {
     ));
   };
 
+  const arxivId = paper.arxivLink?.match(/arxiv\.org\/abs\/(\d{4}\.\d{4,5})/)?.[1];
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ScholarlyArticle',
@@ -192,16 +194,12 @@ export default function PaperContent({ paper }: { paper: Paper }) {
         ? {
             '@id': `${SITE_URL}/#person`,
             url: SITE_URL,
-            affiliation: {
-              '@type': 'EducationalOrganization',
-              name: 'University of North Carolina at Pembroke',
-            },
           }
         : {}),
     })),
     datePublished: paper.date,
-    publisher: { '@type': 'Organization', name: paper.publisher ?? paper.venueShort },
-    isPartOf: { '@type': 'PublicationEvent', name: paper.venue },
+    ...(paper.publisher ? { publisher: { '@type': 'Organization', name: paper.publisher } } : {}),
+    isPartOf: { '@type': 'CreativeWork', name: paper.venue },
     keywords: paper.keywords,
     sameAs: [paper.paperLink, paper.arxivLink, paper.doiLink]
       .filter((link): link is string => !!link),
@@ -217,15 +215,10 @@ export default function PaperContent({ paper }: { paper: Paper }) {
         contentUrl: `${SITE_URL}/papers/${paper.slug}/citation.ris`,
       },
     ],
-    ...(paper.doi
-      ? {
-          identifier: {
-            '@type': 'PropertyValue',
-            propertyID: 'DOI',
-            value: paper.doi,
-          },
-        }
-      : {}),
+    identifier: [
+      ...(paper.doi ? [{ '@type': 'PropertyValue', propertyID: 'DOI', value: paper.doi }] : []),
+      ...(arxivId ? [{ '@type': 'PropertyValue', propertyID: 'arXiv', value: arxivId }] : []),
+    ],
     ...(paper.thumbnail
       ? { image: `${SITE_URL}${paper.thumbnail}` }
       : {}),
@@ -264,11 +257,11 @@ export default function PaperContent({ paper }: { paper: Paper }) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
       />
 
       <article id="main-content" tabIndex={-1} className="watercolor-article min-h-screen bg-surface">

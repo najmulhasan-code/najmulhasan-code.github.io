@@ -1,3 +1,5 @@
+import { Building2 } from 'lucide-react';
+
 interface Role {
   position: string;
   institution: string;
@@ -14,13 +16,25 @@ interface Organization {
 }
 
 const INSTITUTION_LOGOS: Record<string, string> = {
+  'Rocket Lawyer': '/logos/rocket-lawyer.png',
   Algoverse: '/logos/algoverse.ico',
   'UNC Pembroke': '/logos/uncp.ico',
   'Pembroke Undergraduate Research and Creativity (PURC) Center': '/logos/uncp.ico',
   'Emerging Technology Institute': '/logos/eti.png',
 };
 
+const UNIVERSITY_ORGANIZATIONS = new Set([
+  'UNC Pembroke',
+  'Pembroke Undergraduate Research and Creativity (PURC) Center',
+]);
+
 const roles: Role[] = [
+  {
+    position: 'Quality Engineering Intern, AI/ML',
+    institution: 'Rocket Lawyer',
+    location: 'Remote',
+    startDate: '2026-09',
+  },
   {
     position: 'AI Safety Research Fellow',
     institution: 'Algoverse',
@@ -83,7 +97,7 @@ function roleEndTime(role: Role): number {
 function sortRolesByRecency(items: Role[]): Role[] {
   return [...items].sort((a, b) => {
     const endDifference = roleEndTime(b) - roleEndTime(a);
-    if (endDifference !== 0) return endDifference;
+    if (endDifference && !Number.isNaN(endDifference)) return endDifference;
     return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
   });
 }
@@ -108,6 +122,9 @@ function groupByOrganization(items: Role[]): Organization[] {
       roles: sortRolesByRecency(organization.roles),
     }))
     .sort((a, b) => {
+      const groupDifference = Number(UNIVERSITY_ORGANIZATIONS.has(a.institution))
+        - Number(UNIVERSITY_ORGANIZATIONS.has(b.institution));
+      if (groupDifference !== 0) return groupDifference;
       const latestA = Math.max(...a.roles.map(roleEndTime));
       const latestB = Math.max(...b.roles.map(roleEndTime));
       return latestB - latestA;
@@ -144,14 +161,18 @@ export default function Experience() {
             >
               <header className="flex items-start gap-4">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-background p-2 sm:h-12 sm:w-12">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={INSTITUTION_LOGOS[organization.institution]}
-                    alt=""
-                    width={32}
-                    height={32}
-                    className="h-full w-full object-contain"
-                  />
+                  {INSTITUTION_LOGOS[organization.institution] ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={INSTITUTION_LOGOS[organization.institution]}
+                      alt=""
+                      width={32}
+                      height={32}
+                      className="h-full w-full object-contain"
+                    />
+                  ) : (
+                    <Building2 aria-hidden="true" className="h-7 w-7 text-gray-600" />
+                  )}
                 </div>
                 <div className="min-w-0 pt-0.5">
                   <h3 className="text-base font-bold leading-snug text-gray-900 sm:text-[17px]">

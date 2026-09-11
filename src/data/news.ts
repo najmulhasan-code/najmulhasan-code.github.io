@@ -7,6 +7,11 @@ export interface NewsItem {
 
 export const newsItems: NewsItem[] = [
   {
+    date: '2026-09',
+    title: 'Joined Rocket Lawyer',
+    description: 'Started as a Quality Engineering Intern, AI/ML at Rocket Lawyer.',
+  },
+  {
     date: '2026-06',
     title: 'Presented LLM-PEA at DSML 2026',
     description:

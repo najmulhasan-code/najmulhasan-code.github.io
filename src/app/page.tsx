@@ -1,3 +1,5 @@
+import profile from '@/data/profile.json';
+import { serializeJsonLd } from '@/lib/structured-data';
 import Hero from '@/components/Hero';
 import Publications from '@/components/Publications';
 import Blog from '@/components/Blog';
@@ -27,9 +29,6 @@ function personReference(name: string) {
 export default function Home() {
   const papers = getAllPapers();
   const posts = getAllBlogPosts();
-  const dates = [...papers.map((paper) => paper.date), ...posts.map((post) => post.updatedDate ?? post.date)]
-    .filter(Boolean)
-    .sort();
 
   const profilePageJsonLd = {
     '@context': 'https://schema.org',
@@ -40,19 +39,17 @@ export default function Home() {
     description:
       'Academic portfolio of Najmul Hasan, a researcher interested in language models and AI alignment.',
     inLanguage: 'en-US',
-    ...(dates.length > 0 ? { dateModified: dates[dates.length - 1] } : {}),
     mainEntity: {
       '@type': 'Person',
       '@id': `${SITE_URL}/#person`,
       name: 'Najmul Hasan',
       url: SITE_URL,
       image: `${SITE_URL}/images/najmul-hasan-profile.webp`,
-      sameAs: [
-        'https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en',
-        'https://github.com/najmulhasan-code',
-        'https://linkedin.com/in/najmulhasan-cs-math',
-        'https://x.com/_najmulhasan',
-      ],
+      givenName: profile.givenName,
+      familyName: profile.familyName,
+      description: profile.description,
+      alumniOf: profile.alumniOf,
+      sameAs: profile.sameAs,
     },
     hasPart: [
       ...papers.map((paper) => ({
@@ -79,7 +76,7 @@ export default function Home() {
     <main id="main-content" tabIndex={-1} className="watercolor-page min-h-screen bg-background">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(profilePageJsonLd) }}
       />
       <Hero />
       <Publications papers={papers} />

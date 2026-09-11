@@ -1,3 +1,4 @@
+import { serializeJsonLd } from '@/lib/structured-data';
 import type { Metadata } from 'next';
 import Publications from '@/components/Publications';
 import Footer from '@/components/Footer';
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
   description: 'Research publications by Najmul Hasan on language models, AI alignment, and related areas.',
   alternates: {
     canonical: 'https://najmulhasan-code.github.io/research',
+    types: { 'application/json': `${SITE_URL}/research.json` },
   },
 };
 
@@ -33,7 +35,7 @@ export default function PapersPage() {
     <main id="main-content" tabIndex={-1} className="watercolor-page min-h-screen bg-background">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(itemListJsonLd) }}
       />
       <Publications papers={papers} />
       <Footer />

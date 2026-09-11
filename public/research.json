@@ -2,14 +2,43 @@
   "schemaVersion": 1,
   "profile": {
     "name": "Najmul Hasan",
+    "givenName": "Najmul",
+    "familyName": "Hasan",
     "url": "https://najmulhasan-code.github.io",
-    "researchAreas": [
+    "image": "https://najmulhasan-code.github.io/images/najmul-hasan-profile.webp",
+    "description": "Najmul Hasan is a Quality Engineering Intern, AI/ML at Rocket Lawyer. His research interests center on language models and AI alignment, particularly how model design and training choices shape capabilities and behavior. He holds a B.S. in Computer Science with minors in Mathematics and Physics from the University of North Carolina at Pembroke.",
+    "sameAs": [
+      "https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en",
+      "https://github.com/najmulhasan-code",
+      "https://linkedin.com/in/najmulhasan-cs-math",
+      "https://x.com/_najmulhasan"
+    ],
+    "researchInterests": [
+      "Language models",
+      "AI alignment",
       "Language model design and training",
-      "AI alignment and control",
-      "Multi-agent LLM coordination",
-      "Phishing and security",
-      "DNA synthesis screening",
-      "Lightweight cryptography"
+      "Language model pretraining",
+      "Language model post-training",
+      "Reinforcement learning",
+      "Multi-agent systems",
+      "Language model evaluation",
+      "AI safety"
+    ],
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "University of North Carolina at Pembroke",
+      "sameAs": "https://www.uncp.edu"
+    },
+    "researchAreas": [
+      "Language models",
+      "AI alignment",
+      "Language model design and training",
+      "Language model pretraining",
+      "Language model post-training",
+      "Reinforcement learning",
+      "Multi-agent systems",
+      "Language model evaluation",
+      "AI safety"
     ]
   },
   "papers": [
@@ -35,6 +64,7 @@
         "distributed systems"
       ],
       "canonicalUrl": "https://najmulhasan-code.github.io/research/dpbench",
+      "documentUrl": "https://najmulhasan-code.github.io/discovery/papers/dpbench.json",
       "thumbnailUrl": "https://najmulhasan-code.github.io/papers/dpbench/teaser.png",
       "identifiers": {
         "arxiv": "2602.13255"
@@ -76,6 +106,7 @@
         "NLP"
       ],
       "canonicalUrl": "https://najmulhasan-code.github.io/research/phishing-email-detection",
+      "documentUrl": "https://najmulhasan-code.github.io/discovery/papers/phishing-email-detection.json",
       "thumbnailUrl": "https://najmulhasan-code.github.io/papers/phishing-email-detection/teaser.png",
       "identifiers": {
         "doi": "10.1109/DSN-W70714.2026.00038",
@@ -114,6 +145,7 @@
         "NLP"
       ],
       "canonicalUrl": "https://najmulhasan-code.github.io/research/phishing-url-detection",
+      "documentUrl": "https://najmulhasan-code.github.io/discovery/papers/phishing-url-detection.json",
       "thumbnailUrl": "https://najmulhasan-code.github.io/papers/phishing-url-detection/teaser.png",
       "identifiers": {
         "arxiv": "2602.02641"
@@ -150,6 +182,7 @@
         "calibration"
       ],
       "canonicalUrl": "https://najmulhasan-code.github.io/research/crc-screen",
+      "documentUrl": "https://najmulhasan-code.github.io/discovery/papers/crc-screen.json",
       "thumbnailUrl": "https://najmulhasan-code.github.io/papers/crc-screen/teaser.png",
       "identifiers": {
         "arxiv": "2605.00074"
@@ -184,6 +217,7 @@
         "large language models"
       ],
       "canonicalUrl": "https://najmulhasan-code.github.io/research/honeypot-protocol",
+      "documentUrl": "https://najmulhasan-code.github.io/discovery/papers/honeypot-protocol.json",
       "thumbnailUrl": "https://najmulhasan-code.github.io/papers/honeypot-protocol/teaser.png",
       "identifiers": {
         "arxiv": "2604.13301"
@@ -220,6 +254,7 @@
         "cryptographic algorithms"
       ],
       "canonicalUrl": "https://najmulhasan-code.github.io/research/nist-crypto",
+      "documentUrl": "https://najmulhasan-code.github.io/discovery/papers/nist-crypto.json",
       "thumbnailUrl": "https://najmulhasan-code.github.io/papers/nist-crypto/teaser.png",
       "identifiers": {
         "doi": "10.1109/CCWC67433.2026.11393752",
@@ -234,6 +269,47 @@
         "risUrl": "https://najmulhasan-code.github.io/papers/nist-crypto/citation.ris",
         "bibtex": "@inproceedings{hasan2026time,\n  title         = {Time-Complexity Characterization of the NIST Lightweight Cryptography Finalists},\n  author        = {Hasan, Najmul and BusiReddyGari, Prashanth},\n  booktitle     = {2026 IEEE 16th Annual Computing and Communication Workshop and Conference (CCWC)},\n  year          = {2026},\n  pages         = {1193--1196},\n  address       = {Las Vegas, NV, USA},\n  publisher     = {IEEE},\n  doi           = {10.1109/CCWC67433.2026.11393752},\n  eprint        = {2602.05641},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.CR}\n}"
       }
+    }
+  ],
+  "posts": [
+    {
+      "slug": "refusal-to-redirection",
+      "title": "From Refusal to Redirection After Safety Fine-Tuning",
+      "author": "Najmul Hasan",
+      "date": "2026-09-03",
+      "description": "A QLoRA experiment with Llama 3.2 3B Instruct examining a refusal-to-redirection shift and a mismatch between data labels and the evaluation rubric.",
+      "category": "Research Note",
+      "tags": [
+        "AI Alignment",
+        "Language Model Safety",
+        "Safety Fine-Tuning",
+        "LLM Evaluation",
+        "QLoRA"
+      ],
+      "canonicalUrl": "https://najmulhasan-code.github.io/blog/refusal-to-redirection",
+      "documentUrl": "https://najmulhasan-code.github.io/discovery/blog/refusal-to-redirection.json",
+      "links": [
+        "https://github.com/najmulhasan-code/refusal-to-redirection"
+      ]
+    },
+    {
+      "slug": "sage",
+      "title": "SAGE: When One AI Isn't Enough",
+      "author": "Najmul Hasan",
+      "date": "2025-12-19",
+      "description": "A multi-agent framework where AI agents research, debate, and synthesize answers together.",
+      "category": "Project",
+      "tags": [
+        "LLMs",
+        "Multi-Agent",
+        "Python"
+      ],
+      "canonicalUrl": "https://najmulhasan-code.github.io/blog/sage",
+      "documentUrl": "https://najmulhasan-code.github.io/discovery/blog/sage.json",
+      "links": [
+        "https://github.com/najmulhasan-code/sage",
+        "https://pypi.org/project/agentsage/"
+      ]
     }
   ]
 }

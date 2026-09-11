@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: post.tags,
     alternates: {
       canonical,
+      types: { 'application/json': `${SITE_URL}/discovery/blog/${post.slug}.json` },
     },
     openGraph: {
       title: post.title,

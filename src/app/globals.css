@@ -5,7 +5,7 @@
   --gray-100: #eaf0f0;
   --gray-200: #d8e2e2;
   --gray-400: #91a1a3;
-  --gray-500: #5f7275;
+  --gray-500: #506468;
   --gray-600: #506468;
   --gray-700: #394e53;
   --gray-800: #263b40;
@@ -19,6 +19,8 @@
   --teal-900: #174b48;
 
   --accent-primary: #236f69;
+  --link-color: #334b8e;
+  --link-hover: #24376b;
   --background: #f1f6f4;
   --surface: #fcfdfb;
   --foreground: var(--gray-900);
@@ -100,9 +102,9 @@ h4 {
   content: "";
   position: absolute;
   z-index: 0;
-  inset: -8% -3%;
+  inset: 0;
   pointer-events: none;
-  background: url("/images/watercolor-cool-wash.svg") center / 100% 100% no-repeat;
+  background: url("/images/watercolor-cool-wash.svg") top center / 100% 56rem repeat-y;
   opacity: 0.9;
 }
 
@@ -116,7 +118,7 @@ h4 {
 }
 
 .watercolor-hero::before {
-  inset: -8% -3%;
+  inset: 0;
   background:
     url("/images/watercolor-hero-wash.svg") center / 100% 100% no-repeat,
     radial-gradient(ellipse 28% 44% at 47% 88%, rgb(168 188 161 / 11%), transparent 70%);
@@ -129,7 +131,7 @@ h4 {
 }
 
 .watercolor-paper::before {
-  opacity: 0.58;
+  opacity: 0.8;
 }
 
 .watercolor-mist {
@@ -280,40 +282,6 @@ h4 {
   outline: none;
 }
 
-@media (max-width: 767px) {
-  :root {
-    --gray-500: #506468;
-  }
-
-  .watercolor-section::before {
-    inset: 0;
-    background: url("/images/watercolor-mobile-cool.svg") top center / 100% 56rem repeat-y;
-    opacity: 0.95;
-    transform: none;
-  }
-
-  .watercolor-sage::before {
-    background-image: url("/images/watercolor-mobile-warm.svg");
-  }
-
-  .watercolor-paper::before {
-    opacity: 0.8;
-  }
-
-  .watercolor-article {
-    background:
-      url("/images/watercolor-mobile-cool.svg") top center / 100% 56rem repeat-y,
-      var(--surface);
-  }
-
-  .watercolor-article-hero,
-  .watercolor-footer {
-    background:
-      url("/images/watercolor-mobile-cool.svg") center 30% / 100% 40rem no-repeat,
-      var(--background);
-  }
-}
-
 @media (forced-colors: active) {
   .watercolor-section::before,
   .section-heading::after,
@@ -461,14 +429,27 @@ h4 {
   font-size: 0.875rem;
 }
 
-.prose a {
-  color: var(--accent-primary);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+.watercolor-hero p a,
+.prose a,
+.text-link {
+  color: var(--link-color);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-skip-ink: auto;
 }
 
-.prose a:hover {
-  color: var(--teal-800);
+.watercolor-hero p a:hover,
+.prose a:hover,
+.text-link:hover {
+  color: var(--link-hover);
+  text-decoration-thickness: 2px;
+}
+
+.watercolor-hero p a:focus-visible,
+.prose a:focus-visible,
+.text-link:focus-visible {
+  outline-color: var(--link-color);
 }
 
 .prose blockquote {

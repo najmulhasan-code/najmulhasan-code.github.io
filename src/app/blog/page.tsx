@@ -1,3 +1,4 @@
+import { serializeJsonLd } from '@/lib/structured-data';
 import type { Metadata } from 'next';
 import Blog from '@/components/Blog';
 import Footer from '@/components/Footer';
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
   description: 'Writing by Najmul Hasan on language-model training and evaluation, AI alignment, and research projects.',
   alternates: {
     canonical: `${SITE_URL}/blog`,
+    types: { 'application/json': `${SITE_URL}/research.json` },
   },
 };
 
@@ -33,7 +35,7 @@ export default function BlogPage() {
     <main id="main-content" tabIndex={-1} className="watercolor-page min-h-screen bg-background">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(itemListJsonLd) }}
       />
       <Blog posts={posts} />
       <Footer />

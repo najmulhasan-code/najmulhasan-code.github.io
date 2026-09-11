@@ -13,11 +13,6 @@ function getArxivId(url?: string): string | undefined {
   return url?.match(/arxiv\.org\/abs\/([^?#]+)/i)?.[1]?.replace(/v\d+$/i, '');
 }
 
-function getArxivPdfUrl(url?: string): string | undefined {
-  const id = url?.match(/arxiv\.org\/abs\/([^?#]+)/i)?.[1];
-  return id ? `https://arxiv.org/pdf/${id}` : undefined;
-}
-
 export function generateStaticParams() {
   const papers = getAllPapers({ includeUnpublished: true });
   return papers.map((paper) => ({
@@ -39,15 +34,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : paper.abstract;
   const image = paper.thumbnail ? `${SITE_URL}${paper.thumbnail}` : undefined;
   const arxivId = getArxivId(paper.arxivLink);
-  const pdfUrl = getArxivPdfUrl(paper.arxivLink);
+  const pages = paper.bibtex?.match(/\bpages\s*=\s*[{"]\s*(\d+)\s*[-–]+\s*(\d+)/i);
 
   return {
     title: `${paper.title} | Najmul Hasan`,
     description,
     keywords: paper.keywords,
+    authors: paper.authors.map((name) => ({ name })),
     alternates: {
       canonical,
       types: {
+        ...(paper.published !== false ? { 'application/json': `${SITE_URL}/discovery/papers/${paper.slug}.json` } : {}),
         'application/x-bibtex': `${SITE_URL}/papers/${paper.slug}/citation.bib`,
         'application/x-research-info-systems': `${SITE_URL}/papers/${paper.slug}/citation.ris`,
       },
@@ -80,9 +77,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       'citation_public_url': canonical,
       ...(paper.publisher ? { 'citation_publisher': paper.publisher } : {}),
       ...(arxivId ? { 'citation_arxiv_id': arxivId } : {}),
-      ...(pdfUrl ? { 'citation_pdf_url': pdfUrl } : {}),
+      ...(pages ? { 'citation_firstpage': pages[1], 'citation_lastpage': pages[2] } : {}),
       ...(paper.doi ? { 'citation_doi': paper.doi } : {}),
-      ...(paper.venue.includes('IEEE') || paper.venueShort.includes('NeurIPS')
+      ...(!/hackathon/i.test(paper.venue) && /conference|workshop/i.test(paper.venue)
         ? { 'citation_conference_title': paper.venue }
         : {}),
     },

@@ -1,5 +1,6 @@
 'use client';
 
+import { serializeJsonLd } from '@/lib/structured-data';
 import { ComponentType, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { formatDate } from '@/lib/format';
@@ -187,11 +188,11 @@ export default function BlogContent({ post }: BlogContentProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
       />
       <article id="main-content" tabIndex={-1} className="watercolor-article min-h-screen bg-surface">
         <div className="watercolor-article-hero pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">

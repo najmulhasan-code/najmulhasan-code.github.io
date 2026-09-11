@@ -1,0 +1,30 @@
+{
+  "name": "Najmul Hasan",
+  "givenName": "Najmul",
+  "familyName": "Hasan",
+  "url": "https://najmulhasan-code.github.io",
+  "image": "https://najmulhasan-code.github.io/images/najmul-hasan-profile.webp",
+  "description": "Najmul Hasan is a Quality Engineering Intern, AI/ML at Rocket Lawyer. His research interests center on language models and AI alignment, particularly how model design and training choices shape capabilities and behavior. He holds a B.S. in Computer Science with minors in Mathematics and Physics from the University of North Carolina at Pembroke.",
+  "sameAs": [
+    "https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en",
+    "https://github.com/najmulhasan-code",
+    "https://linkedin.com/in/najmulhasan-cs-math",
+    "https://x.com/_najmulhasan"
+  ],
+  "researchInterests": [
+    "Language models",
+    "AI alignment",
+    "Language model design and training",
+    "Language model pretraining",
+    "Language model post-training",
+    "Reinforcement learning",
+    "Multi-agent systems",
+    "Language model evaluation",
+    "AI safety"
+  ],
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of North Carolina at Pembroke",
+    "sameAs": "https://www.uncp.edu"
+  }
+}
