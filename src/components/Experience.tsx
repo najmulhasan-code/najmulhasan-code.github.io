@@ -28,6 +28,15 @@ const UNIVERSITY_ORGANIZATIONS = new Set([
   'Pembroke Undergraduate Research and Creativity (PURC) Center',
 ]);
 
+const INSTITUTION_WEBSITES: Record<string, string> = {
+  'Rocket Lawyer': 'https://www.rocketlawyer.com/',
+  Algoverse: 'https://algoverseairesearch.org/',
+  'Emerging Technology Institute': 'https://www.eticommunity.com/',
+  'UNC Pembroke': 'https://www.uncp.edu/',
+  'Pembroke Undergraduate Research and Creativity (PURC) Center':
+    'https://www.uncp.edu/academics/colleges-and-schools/college-of-arts-and-sciences/research/pembroke-undergraduate-research-and-creativity-center/index.html',
+};
+
 const roles: Role[] = [
   {
     position: 'Quality Engineering Intern, AI/ML',
@@ -160,7 +169,13 @@ export default function Experience() {
               className="border-b border-gray-200 py-6 last:border-b-0 sm:py-7"
             >
               <header className="flex items-start gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-background p-2 sm:h-12 sm:w-12">
+                <a
+                  href={INSTITUTION_WEBSITES[organization.institution]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${organization.institution} website (opens in a new tab)`}
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-background p-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current sm:h-12 sm:w-12"
+                >
                   {INSTITUTION_LOGOS[organization.institution] ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -173,10 +188,18 @@ export default function Experience() {
                   ) : (
                     <Building2 aria-hidden="true" className="h-7 w-7 text-gray-600" />
                   )}
-                </div>
+                </a>
                 <div className="min-w-0 pt-0.5">
                   <h3 className="text-base font-bold leading-snug text-gray-900 sm:text-[17px]">
-                    {organization.institution}
+                    <a
+                      href={INSTITUTION_WEBSITES[organization.institution]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-inherit no-underline underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+                    >
+                      {organization.institution}
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">{organization.location}</p>
                 </div>
