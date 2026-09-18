@@ -1,4 +1,5 @@
 import { ScholarIcon, GithubIcon, LinkedinIcon, XIcon } from './icons';
+import { ArrowUp } from 'lucide-react';
 
 const socialLinks = [
   { label: 'Google Scholar', url: 'https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en&oi=ao', Icon: ScholarIcon },
@@ -11,30 +12,37 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="watercolor-footer border-t border-gray-200">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-12">
-        <div className="flex flex-col items-center gap-5">
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
-            {socialLinks.map((social) => {
-              const Icon = social.Icon;
-              return (
-                <a
-                  key={social.label}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-gray-600 hover:text-teal-700 transition-colors"
-                >
-                  <Icon className="w-[14px] h-[14px] opacity-75" />
-                  {social.label}
-                </a>
-              );
-            })}
-          </div>
-
-          <div className="text-xs text-gray-500">
-            © {currentYear} Najmul Hasan
-          </div>
+    <footer className="watercolor-footer border-t border-gray-200" aria-label="Site footer">
+      <div className="mx-auto max-w-5xl px-4 pb-4 pt-6 sm:px-6 sm:pt-8">
+        <div className="pb-5 sm:pb-6">
+          <nav aria-label="Research and social profiles">
+            <ul className="grid grid-cols-[max-content_max-content] justify-center gap-x-8 gap-y-1 sm:flex sm:flex-wrap sm:gap-x-8">
+              {socialLinks.map((social) => {
+                const Icon = social.Icon;
+                return (
+                  <li key={social.label}>
+                    <a
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex min-h-11 items-center gap-2 rounded-sm text-sm text-gray-900 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+                    >
+                      <Icon className="h-4 w-4 shrink-0 text-gray-600" />
+                      <span>{social.label}</span>
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-gray-200 pt-3">
+          <p className="text-xs text-gray-600">© {currentYear} Najmul Hasan</p>
+          <a href="#" className="inline-flex min-h-11 items-center gap-2 rounded-sm text-sm text-gray-600 underline-offset-4 hover:text-gray-900 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current">
+            Back to top
+            <ArrowUp aria-hidden="true" className="h-4 w-4" />
+          </a>
         </div>
       </div>
     </footer>
