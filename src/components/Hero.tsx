@@ -61,7 +61,7 @@ export default function Hero() {
               </p>
 
               <p>
-                I am an AI/ML Quality Engineering Intern at <a href="https://www.rocketlawyer.com/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Rocket Lawyer</a>. I am also participating in BlueDot Impact&apos;s <a href="https://bluedot.org/courses/technical-ai-safety-project" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Technical AI Safety Project Sprint</a>, where I am working on language-model alignment during pretraining.
+                I am an AI/ML Quality Engineering Intern at <a href="https://www.rocketlawyer.com/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Rocket Lawyer</a>.
               </p>
 
               <p>
