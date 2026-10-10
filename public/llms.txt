@@ -1,6 +1,6 @@
 # Najmul Hasan
 
-> Najmul Hasan is a Quality Engineering Intern, AI/ML at Rocket Lawyer. His research interests center on language models and AI alignment, particularly how model design and training choices shape capabilities and behavior. He holds a B.S. in Computer Science with minors in Mathematics and Physics from the University of North Carolina at Pembroke.
+> Najmul Hasan is a Quality Engineering Intern, AI/ML at Rocket Lawyer. His research interests are in the pretraining and post-training of language models, and in how choices in data, architecture, and optimization shape what a model learns and how it behaves. He holds a B.S. in Computer Science with minors in Mathematics and Physics from the University of North Carolina at Pembroke.
 
 This file indexes the public research and project materials on this site. Use each paper page as the canonical portfolio URL and the linked publisher, DOI, or arXiv record when citing the scholarly work.
 

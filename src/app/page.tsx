@@ -37,7 +37,7 @@ export default function Home() {
     url: SITE_URL,
     name: 'Najmul Hasan',
     description:
-      'Academic portfolio of Najmul Hasan, a researcher interested in language models and AI alignment.',
+      'Academic portfolio of Najmul Hasan, a researcher interested in the pretraining and post-training of language models.',
     inLanguage: 'en-US',
     mainEntity: {
       '@type': 'Person',

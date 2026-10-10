@@ -8,7 +8,7 @@ const SITE_URL = 'https://najmulhasan-code.github.io';
 
 export const metadata: Metadata = {
   title: 'Blog | Najmul Hasan',
-  description: 'Writing by Najmul Hasan on language-model training and evaluation, AI alignment, and research projects.',
+  description: 'Writing by Najmul Hasan on language model training, evaluation, and research projects.',
   alternates: {
     canonical: `${SITE_URL}/blog`,
     types: { 'application/json': `${SITE_URL}/research.json` },

@@ -8,7 +8,7 @@ import "./globals.css";
 const SITE_DESCRIPTION = profile.description;
 
 const SITE_SHORT_DESCRIPTION =
-  "Researcher interested in language models, language-model training, and AI alignment.";
+  "Researcher interested in the pretraining and post-training of language models.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://najmulhasan-code.github.io"),
@@ -105,7 +105,7 @@ const websiteJsonLd = {
   url: "https://najmulhasan-code.github.io",
   name: "Najmul Hasan",
   description:
-    "Academic portfolio of Najmul Hasan, a researcher interested in language models and AI alignment.",
+    "Academic portfolio of Najmul Hasan, a researcher interested in the pretraining and post-training of language models.",
   inLanguage: "en-US",
   author: { "@id": "https://najmulhasan-code.github.io/#person" },
 };

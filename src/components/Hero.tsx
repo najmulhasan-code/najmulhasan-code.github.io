@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { ScholarIcon, GithubIcon, LinkedinIcon, XIcon } from './icons';
 
 export default function Hero() {
@@ -47,21 +48,21 @@ export default function Hero() {
           </div>
 
           <div className="w-full flex-1 min-w-0">
-            <h1 className="text-center sm:text-left text-3xl sm:text-4xl lg:text-[40px] font-bold text-gray-900 tracking-tight leading-[1.1] mb-3">
+            <h1 className="text-center sm:text-left text-3xl sm:text-4xl lg:text-[40px] font-bold text-gray-900 tracking-tight leading-[1.1] mb-5">
               Najmul Hasan
             </h1>
 
-            <div className="text-center sm:text-left text-[14px] text-gray-600 leading-relaxed mb-5">
-              Language Models · <span className="text-gray-800">AI Alignment</span>
-            </div>
-
             <div className="space-y-4 text-base text-gray-700 leading-[1.7]">
               <p>
-                My research centers on language models and AI alignment. I am particularly interested in how model design and training choices shape capabilities and behavior, and in developing models that are more capable, reliable, and aligned.
+                My research interests are in the pretraining and post-training of language models. I want to build models from the ground up and understand how choices in data, architecture, and optimization shape what they learn and how they behave.
               </p>
 
               <p>
-                I am an AI/ML Quality Engineering Intern at <a href="https://www.rocketlawyer.com/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Rocket Lawyer</a>.
+                My work so far includes evaluations of frontier language models and a <Link href="/blog/refusal-to-redirection">fine-tuning experiment</Link> on how safety training changes a model&apos;s behavior.
+              </p>
+
+              <p>
+                I am currently a Quality Engineering Intern, AI/ML, at <a href="https://www.rocketlawyer.com/" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline">Rocket Lawyer</a>.
               </p>
 
               <p>
