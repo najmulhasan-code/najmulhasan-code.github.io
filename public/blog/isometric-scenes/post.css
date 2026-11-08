@@ -1,0 +1,347 @@
+/* Styles for the isometric-scenes post only. Every rule is scoped to this post. */
+
+[data-post="isometric-scenes"] {
+  --post-ink: #1f2a2e;
+  --post-muted: #4d4d4d;
+  --post-rule: #e3e3e3;
+  --post-text-width: 42rem;
+  --post-serif: Georgia, "Times New Roman", serif;
+}
+
+/* White reading surface; the watercolour stays in the header band. */
+[data-post="isometric-scenes"].watercolor-article {
+  background: #ffffff;
+}
+
+/* Header: one column, aligned with the body text, compact enough to keep the video in view. */
+[data-post="isometric-scenes"] .post-hero {
+  padding-top: 2.5rem;
+  padding-bottom: 1.75rem;
+}
+
+[data-post="isometric-scenes"] .post-hero-inner {
+  max-width: calc(var(--post-text-width) + 3rem);
+}
+
+[data-post="isometric-scenes"] .post-hero h1 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+[data-post="isometric-scenes"] .post-resources a {
+  height: 2.125rem;
+  border-color: #d9d9d9;
+  color: #111111;
+}
+
+[data-post="isometric-scenes"] .post-resources a:hover {
+  border-color: #111111;
+  color: #111111;
+}
+
+@media (max-width: 639px) {
+  [data-post="isometric-scenes"] .post-resources {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Teaser video: plain, no card. */
+[data-post="isometric-scenes"] .post-teaser > div {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+[data-post="isometric-scenes"] .post-teaser figcaption {
+  max-width: var(--post-text-width);
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--post-muted);
+}
+
+/* Body text: serif at reading size, darker ink. */
+[data-post="isometric-scenes"] .post-prose {
+  max-width: var(--post-text-width) !important;
+  color: var(--post-ink);
+  counter-reset: post-section;
+}
+
+[data-post="isometric-scenes"] .post-prose p,
+[data-post="isometric-scenes"] .post-prose li {
+  font-family: var(--post-serif);
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+/* Numbered sections with a thin rule above. */
+[data-post="isometric-scenes"] .post-prose h2 {
+  margin-top: 3.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--post-rule);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #111111;
+}
+
+[data-post="isometric-scenes"] .post-prose h2::before {
+  counter-increment: post-section;
+  content: counter(post-section);
+  margin-right: 0.65em;
+  color: #7a7a7a;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Figures sit on the page; captions in the sans, as in the charts. */
+[data-post="isometric-scenes"] .post-prose .article-figure {
+  margin: 2.5rem 0;
+}
+
+[data-post="isometric-scenes"] .post-prose .article-figure img {
+  border-radius: 0;
+}
+
+[data-post="isometric-scenes"] .post-prose .figure-caption {
+  font-family: var(--font-sans-local);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--post-muted);
+}
+
+/* Results tables: horizontal rules only, aligned numbers. */
+[data-post="isometric-scenes"] .post-prose table {
+  font-family: var(--font-sans-local);
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums lining-nums;
+  border-top: 1.5px solid #111111;
+  border-bottom: 1.5px solid #111111;
+  margin: 2rem 0;
+}
+
+[data-post="isometric-scenes"] .post-prose th,
+[data-post="isometric-scenes"] .post-prose td {
+  border: none;
+  padding: 0.55rem 0.75rem;
+}
+
+[data-post="isometric-scenes"] .post-prose thead th {
+  background: none;
+  border-bottom: 1px solid #111111;
+}
+
+[data-post="isometric-scenes"] .post-prose tbody tr + tr > * {
+  border-top: 1px solid #ededed;
+}
+
+[data-post="isometric-scenes"] .post-prose td {
+  text-align: right;
+  white-space: nowrap;
+}
+
+[data-post="isometric-scenes"] .post-prose thead th:not(:first-child) {
+  text-align: right;
+}
+
+[data-post="isometric-scenes"] .post-prose tbody th {
+  font-weight: 500;
+  text-align: left;
+}
+
+[data-post="isometric-scenes"] .post-prose table .ci {
+  color: #6b6b6b;
+  font-size: 0.85em;
+}
+
+/* Phones: smaller type, and intervals drop below their number so both tables fit the width. */
+@media (max-width: 639px) {
+  [data-post="isometric-scenes"] .post-prose table {
+    width: 100%;
+    font-size: 0.875rem;
+  }
+
+  [data-post="isometric-scenes"] .post-prose th,
+  [data-post="isometric-scenes"] .post-prose td {
+    padding: 0.5rem 0.5rem;
+  }
+
+  [data-post="isometric-scenes"] .post-prose table .ci {
+    display: block;
+    margin-top: 0.15rem;
+  }
+
+  [data-post="isometric-scenes"] .post-prose tbody th {
+    white-space: normal;
+  }
+}
+
+/* Section list: neutral ink for this post. */
+[data-post="isometric-scenes"] nav[aria-label="Blog post sections"] a.border-teal-600 {
+  border-color: #111111;
+  color: #111111;
+  font-weight: 600;
+}
+
+/* References: a compact numbered list, left out of the section numbering. */
+[data-post="isometric-scenes"] .post-prose h2#references::before {
+  content: none;
+}
+
+[data-post="isometric-scenes"] .post-prose ol.references {
+  margin: 1rem 0 0;
+  padding-left: 1.75rem;
+  list-style: decimal;
+  font-family: var(--font-sans-local);
+}
+
+[data-post="isometric-scenes"] .post-prose ol.references li {
+  margin: 0 0 0.6rem;
+  padding-left: 0.25rem;
+  font-family: var(--font-sans-local);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--post-muted);
+}
+
+[data-post="isometric-scenes"] .post-prose ol.references li::marker {
+  color: #7a7a7a;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Citation: a light block, left out of the section numbering. */
+[data-post="isometric-scenes"] .post-prose h2#citation::before {
+  content: none;
+}
+
+[data-post="isometric-scenes"] .post-prose pre.citation {
+  margin: 1rem 0 0;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  border: 1px solid var(--post-rule);
+  border-radius: 0;
+  background: #f7f7f7;
+  color: #1f2a2e;
+}
+
+[data-post="isometric-scenes"] .post-prose pre.citation code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+/* Isometric grid behind the top video: thin lines at 30 degrees, fading out at the edges.
+   One tile holds the two diagonals of a 56 x 32.33 px cell (tan 30 degrees), so the lines meet
+   in the diamond lattice of an isometric drawing. */
+[data-post="isometric-scenes"] .post-teaser {
+  position: relative;
+  z-index: 0;
+}
+
+[data-post="isometric-scenes"] .post-teaser::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -2.5rem;
+  bottom: -1.5rem;
+  left: calc(50% - 50vw);
+  right: calc(50% - 50vw);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='32.33' viewBox='0 0 56 32.33'%3E%3Cpath d='M0 0L56 32.33M0 32.33L56 0' stroke='%23e4e6e8' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  background-size: 56px 32.33px;
+  background-position: center top;
+  -webkit-mask-image: radial-gradient(ellipse 70% 75% at 50% 45%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 75% at 50% 45%, #000 35%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Wide screens: section numbers hang in the left margin, like a lab notebook. */
+@media (min-width: 1280px) {
+  [data-post="isometric-scenes"] .post-prose h2 {
+    position: relative;
+  }
+
+  [data-post="isometric-scenes"] .post-prose h2::before {
+    position: absolute;
+    left: -3.5rem;
+    width: 2.5rem;
+    margin-right: 0;
+    text-align: right;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #9a9a9a;
+  }
+}
+
+/* Reward diagram: the four stages as connected blocks, then the score. */
+[data-post="isometric-scenes"] .reward-flow {
+  margin: 2rem 0 2.5rem;
+}
+
+[data-post="isometric-scenes"] .reward-stages {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+[data-post="isometric-scenes"] .reward-stage {
+  position: relative;
+  padding: 0.85rem 0.9rem 0.95rem;
+  border: 1px solid #222222;
+  background: #ffffff;
+}
+
+[data-post="isometric-scenes"] .reward-stage:last-child {
+  border: 2px solid #0072b2;
+}
+
+[data-post="isometric-scenes"] .reward-stage + .reward-stage::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -1.25rem;
+  width: 1.25rem;
+  border-top: 1px solid #222222;
+}
+
+[data-post="isometric-scenes"] .post-prose .reward-stage p {
+  margin: 0;
+  font-family: var(--font-sans-local);
+}
+
+[data-post="isometric-scenes"] .post-prose .reward-stage .stage-name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #111111;
+}
+
+[data-post="isometric-scenes"] .post-prose .reward-stage .stage-detail {
+  margin-top: 0.3rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--post-muted);
+}
+
+@media (max-width: 767px) {
+  [data-post="isometric-scenes"] .reward-stages {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  [data-post="isometric-scenes"] .reward-stage + .reward-stage::before {
+    top: -0.9rem;
+    left: 1.25rem;
+    width: 0;
+    height: 0.9rem;
+    border-top: none;
+    border-left: 1px solid #222222;
+  }
+}
+
+[data-post="isometric-scenes"] .post-prose ol.references code {
+  background: none;
+  padding: 0;
+  font-size: 0.85em;
+}

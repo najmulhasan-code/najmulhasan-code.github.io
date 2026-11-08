@@ -305,6 +305,29 @@
     },
     {
       "@type": "BlogPosting",
+      "@id": "https://najmulhasan-code.github.io/blog/isometric-scenes#article",
+      "url": "https://najmulhasan-code.github.io/blog/isometric-scenes",
+      "headline": "RL Post-Training Qwen3.5-4B to Write Animated Isometric SVG Scenes",
+      "description": "RL with LoRA on Qwen3.5-4B using rule-based checks, sandboxed rendering, frame checks and a VLM judge. More answers passed the rule-based checks and showed motion; isometric drawing remained rare.",
+      "author": {
+        "@id": "https://najmulhasan-code.github.io/#person"
+      },
+      "datePublished": "2026-11-07",
+      "inLanguage": "en",
+      "keywords": [
+        "Reinforcement Learning",
+        "LLM Post-Training",
+        "SVG Generation",
+        "LLM Evaluation",
+        "LoRA"
+      ],
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://najmulhasan-code.github.io/blog/isometric-scenes"
+      }
+    },
+    {
+      "@type": "BlogPosting",
       "@id": "https://najmulhasan-code.github.io/blog/refusal-to-redirection#article",
       "url": "https://najmulhasan-code.github.io/blog/refusal-to-redirection",
       "headline": "From Refusal to Redirection After Safety Fine-Tuning",

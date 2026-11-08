@@ -37,6 +37,22 @@ export default function Blog({ posts }: { posts: BlogPost[] }) {
                     className="aspect-video flex items-center justify-center overflow-hidden border-b border-gray-100"
                     style={{ backgroundColor: post.thumbnailBackground ?? 'var(--gray-50)' }}
                   >
+                    {post.thumbnailVideo && (
+                      <video
+                        src={post.thumbnailVideo}
+                        poster={post.thumbnail}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        aria-hidden="true"
+                        tabIndex={-1}
+                        className={`w-full h-full motion-reduce:hidden group-hover:scale-[1.02] transition-transform duration-300 ${
+                          post.thumbnailFit === 'cover' ? 'object-cover' : 'object-contain'
+                        }`}
+                      />
+                    )}
                     <Image
                       src={post.thumbnail}
                       alt=""
@@ -45,7 +61,7 @@ export default function Blog({ posts }: { posts: BlogPost[] }) {
                       sizes="(max-width: 767px) calc(100vw - 2rem), (max-width: 1152px) calc(50vw - 2rem), 544px"
                       className={`w-full h-full group-hover:scale-[1.02] transition-transform duration-300 ${
                         post.thumbnailFit === 'cover' ? 'object-cover' : 'object-contain'
-                      }`}
+                      } ${post.thumbnailVideo ? 'hidden motion-reduce:block' : ''}`}
                     />
                   </div>
                 )}

@@ -2,7 +2,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { readContentHtml, resolveTeaser } from '../content';
+import { readContentHtml, resolvePostStylesheet, resolveTeaser, resolveTeaserVideo } from '../content';
 
 export interface BlogPost {
   slug: string;
@@ -21,14 +21,38 @@ export interface BlogPost {
   thumbnailWidth?: number;
   thumbnailHeight?: number;
   thumbnailCaption?: string;
+  thumbnailVideo?: string;
   links?: string[];
+  resources?: BlogResource[];
+  stylesheet?: string;
   contentHtml: string;
+}
+
+// Optional labelled link buttons shown under the title. When a post has none, its
+// plain `links` are shown instead, labelled by domain.
+export interface BlogResource {
+  label: string;
+  url: string;
+  icon?: string;
 }
 
 const BLOG_DIR = path.join(process.cwd(), 'public', 'blog');
 
 function asStringArray(value: unknown): string[] {
   return Array.isArray(value) ? value.map((item) => String(item)) : [];
+}
+
+function asResources(value: unknown): BlogResource[] | undefined {
+  if (!Array.isArray(value)) return undefined;
+  const resources = value
+    .filter((item): item is Record<string, unknown> => typeof item === 'object' && item !== null)
+    .filter((item) => typeof item.label === 'string' && typeof item.url === 'string')
+    .map((item) => ({
+      label: String(item.label),
+      url: String(item.url),
+      ...(typeof item.icon === 'string' ? { icon: item.icon } : {}),
+    }));
+  return resources.length > 0 ? resources : undefined;
 }
 
 function readBlogPost(slug: string): BlogPost | null {
@@ -57,7 +81,10 @@ function readBlogPost(slug: string): BlogPost | null {
     thumbnailWidth: Number.isFinite(meta.thumbnailWidth) ? Number(meta.thumbnailWidth) : undefined,
     thumbnailHeight: Number.isFinite(meta.thumbnailHeight) ? Number(meta.thumbnailHeight) : undefined,
     thumbnailCaption: meta.thumbnailCaption ? String(meta.thumbnailCaption) : undefined,
+    thumbnailVideo: resolveTeaserVideo(dir, urlBase),
     links: meta.links ? asStringArray(meta.links) : undefined,
+    resources: asResources(meta.resources),
+    stylesheet: resolvePostStylesheet(dir, urlBase),
     contentHtml: readContentHtml(htmlFile, urlBase),
   };
 }

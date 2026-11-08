@@ -19,6 +19,24 @@ export function resolveTeaser(dir: string, urlBase: string): string | undefined 
   return undefined;
 }
 
+const TEASER_VIDEO_EXTENSIONS = ['mp4', 'webm'];
+
+// Public URL of the folder's optional teaser video, if one exists. The teaser image
+// stays the poster and the social preview.
+export function resolveTeaserVideo(dir: string, urlBase: string): string | undefined {
+  for (const ext of TEASER_VIDEO_EXTENSIONS) {
+    if (fs.existsSync(path.join(dir, `teaser.${ext}`))) {
+      return `${urlBase}/teaser.${ext}`;
+    }
+  }
+  return undefined;
+}
+
+// Public URL of the folder's optional stylesheet (post.css), applied to that post only.
+export function resolvePostStylesheet(dir: string, urlBase: string): string | undefined {
+  return fs.existsSync(path.join(dir, 'post.css')) ? `${urlBase}/post.css` : undefined;
+}
+
 // Read an HTML fragment, resolving relative image paths and lazy-loading images.
 export function readContentHtml(file: string, urlBase: string): string {
   let html = fs.readFileSync(file, 'utf8');

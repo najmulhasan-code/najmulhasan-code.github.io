@@ -4,7 +4,16 @@
   <title>Najmul Hasan: Research and Writing</title>
   <link href="https://najmulhasan-code.github.io/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://najmulhasan-code.github.io/"/>
-  <updated>2026-09-03T00:00:00Z</updated>
+  <updated>2026-11-07T00:00:00Z</updated>
+  <entry>
+    <id>https://najmulhasan-code.github.io/blog/isometric-scenes</id>
+    <title>RL Post-Training Qwen3.5-4B to Write Animated Isometric SVG Scenes</title>
+    <link href="https://najmulhasan-code.github.io/blog/isometric-scenes"/>
+    <published>2026-11-07T00:00:00Z</published>
+    <updated>2026-11-07T00:00:00Z</updated>
+    <author><name>Najmul Hasan</name></author>
+    <summary type="text">RL with LoRA on Qwen3.5-4B using rule-based checks, sandboxed rendering, frame checks and a VLM judge. More answers passed the rule-based checks and showed motion; isometric drawing remained rare.</summary>
+  </entry>
   <entry>
     <id>https://najmulhasan-code.github.io/blog/refusal-to-redirection</id>
     <title>From Refusal to Redirection After Safety Fine-Tuning</title>

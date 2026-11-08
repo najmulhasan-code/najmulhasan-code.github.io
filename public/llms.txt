@@ -74,6 +74,14 @@ This file indexes the public research and project materials on this site. Use ea
 
 ## Writing
 
+### [RL Post-Training Qwen3.5-4B to Write Animated Isometric SVG Scenes](https://najmulhasan-code.github.io/blog/isometric-scenes)
+
+- Published: 2026-11-07
+- Summary: RL with LoRA on Qwen3.5-4B using rule-based checks, sandboxed rendering, frame checks and a VLM judge. More answers passed the rule-based checks and showed motion; isometric drawing remained rare.
+- Topics: Reinforcement Learning, LLM Post-Training, SVG Generation, LLM Evaluation, LoRA
+- Resources: [Code](https://github.com/najmulhasan-code/isometric-scenes) | [External resource](https://huggingface.co/najmulhasan/qwen3.5-4b-isometric-scenes-lora) | [External resource](https://huggingface.co/datasets/najmulhasan/isometric-scenes) | [External resource](https://app.primeintellect.ai/dashboard/environments/najmulhasan-code/isometric-scenes)
+- Full blog article and metadata: [JSON](https://najmulhasan-code.github.io/discovery/blog/isometric-scenes.json)
+
 ### [From Refusal to Redirection After Safety Fine-Tuning](https://najmulhasan-code.github.io/blog/refusal-to-redirection)
 
 - Published: 2026-09-03

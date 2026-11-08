@@ -1,0 +1,49 @@
+{
+  "title": "RL Post-Training Qwen3.5-4B to Write Animated Isometric SVG Scenes",
+  "date": "2026-11-07",
+  "description": "RL with LoRA on Qwen3.5-4B using rule-based checks, sandboxed rendering, frame checks and a VLM judge. More answers passed the rule-based checks and showed motion; isometric drawing remained rare.",
+  "excerpt": "Evaluation reward rose on test and the held-out space category. On test, the rates for valid SVG and animation reached 97% and 91%; scene recognition, object visibility and composition judgments also improved. Isometric drawing remained rare.",
+  "category": "Research Note",
+  "tags": [
+    "Reinforcement Learning",
+    "LLM Post-Training",
+    "SVG Generation",
+    "LLM Evaluation",
+    "LoRA"
+  ],
+  "thumbnailFit": "contain",
+  "thumbnailBackground": "#ffffff",
+  "thumbnailAlt": "Side-by-side animated scenes compare base answers on the left with RL answers on the right for matching prompts and seeds",
+  "thumbnailWidth": 1600,
+  "thumbnailHeight": 790,
+  "thumbnailCaption": "Figure 1. Selected final-evaluation examples. Base answers appear on the left, RL answers on the right; each comparison uses an identical prompt and generation seed. Figure 5 shows a random sample later in the post.",
+  "published": true,
+  "links": [
+    "https://github.com/najmulhasan-code/isometric-scenes",
+    "https://huggingface.co/najmulhasan/qwen3.5-4b-isometric-scenes-lora",
+    "https://huggingface.co/datasets/najmulhasan/isometric-scenes",
+    "https://app.primeintellect.ai/dashboard/environments/najmulhasan-code/isometric-scenes"
+  ],
+  "resources": [
+    {
+      "label": "Code",
+      "url": "https://github.com/najmulhasan-code/isometric-scenes",
+      "icon": "/logos/github.png"
+    },
+    {
+      "label": "Model",
+      "url": "https://huggingface.co/najmulhasan/qwen3.5-4b-isometric-scenes-lora",
+      "icon": "/logos/huggingface.png"
+    },
+    {
+      "label": "Dataset",
+      "url": "https://huggingface.co/datasets/najmulhasan/isometric-scenes",
+      "icon": "/logos/huggingface.png"
+    },
+    {
+      "label": "Environment",
+      "url": "https://app.primeintellect.ai/dashboard/environments/najmulhasan-code/isometric-scenes",
+      "icon": "/logos/primeintellect.png"
+    }
+  ]
+}

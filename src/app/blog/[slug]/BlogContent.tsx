@@ -1,7 +1,7 @@
 'use client';
 
 import { serializeJsonLd } from '@/lib/structured-data';
-import { ComponentType, useEffect, useMemo, useState } from 'react';
+import { ComponentType, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { formatDate } from '@/lib/format';
 import type { BlogPost } from '@/data/blog';
@@ -91,6 +91,16 @@ export default function BlogContent({ post }: BlogContentProps) {
     [post.contentHtml]
   );
   const hasSectionNavigation = sectionNavigation.sections.length >= 3;
+  const teaserVideoRef = useRef<HTMLVideoElement>(null);
+
+  // Autoplay the muted teaser video unless the reader prefers reduced motion.
+  useEffect(() => {
+    const video = teaserVideoRef.current;
+    if (!video) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    video.play().catch(() => {});
+  }, []);
+
   const [activeSectionId, setActiveSectionId] = useState(
     sectionNavigation.sections[0]?.id ?? ''
   );
@@ -194,9 +204,15 @@ export default function BlogContent({ post }: BlogContentProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
       />
-      <article id="main-content" tabIndex={-1} className="watercolor-article min-h-screen bg-surface">
-        <div className="watercolor-article-hero pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6">
+      {post.stylesheet && <link rel="stylesheet" href={post.stylesheet} precedence="default" />}
+      <article
+        id="main-content"
+        tabIndex={-1}
+        data-post={post.slug}
+        className="watercolor-article min-h-screen bg-surface"
+      >
+        <div className="post-hero watercolor-article-hero pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
+          <div className="post-hero-inner max-w-3xl mx-auto px-4 sm:px-6">
             <div className="mb-4 text-xs font-medium uppercase tracking-wide text-teal-700">
               {post.category}
             </div>
@@ -212,7 +228,33 @@ export default function BlogContent({ post }: BlogContentProps) {
               {post.updatedDate && ` · Updated ${formatDate(post.updatedDate)}`}
             </p>
 
-            {post.links && post.links.length > 0 && (
+            {post.resources && post.resources.length > 0 ? (
+              <div className="post-resources flex flex-wrap gap-2 mt-6">
+                {post.resources.map((resource) => (
+                  <a
+                    key={resource.url}
+                    href={resource.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 rounded-md border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:border-teal-600 hover:text-teal-700 transition-colors"
+                  >
+                    {resource.icon ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={resource.icon}
+                        alt=""
+                        width={16}
+                        height={16}
+                        className="w-4 h-4 object-contain"
+                      />
+                    ) : (
+                      <ExternalLinkIcon className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" />
+                    )}
+                    <span>{resource.label}</span>
+                  </a>
+                ))}
+              </div>
+            ) : post.links && post.links.length > 0 && (
               <div className="flex flex-wrap gap-x-5 gap-y-2 mt-6">
                 {post.links.map((link) => {
                   const { label, logo, FallbackIcon } = getLinkMeta(link);
@@ -253,25 +295,45 @@ export default function BlogContent({ post }: BlogContentProps) {
           {post.thumbnail && (
             <figure
               id="figure-1"
-              className="min-w-0 mx-auto mb-10"
+              className="post-teaser min-w-0 mx-auto mb-10"
               style={{ width: 'min(100%, 56rem)' }}
             >
               <div
                 className="w-full min-w-0 overflow-hidden rounded-md ring-1 ring-gray-100"
                 style={{ backgroundColor: post.thumbnailBackground ?? 'var(--gray-50)' }}
               >
-                <Image
-                  src={post.thumbnail}
-                  alt={post.thumbnailAlt ?? `Teaser for ${post.title}`}
-                  width={post.thumbnailWidth ?? 1200}
-                  height={post.thumbnailHeight ?? 630}
-                  sizes="(max-width: 768px) calc(100vw - 2rem), 896px"
-                  className="block w-full min-w-0 max-w-full h-auto object-contain"
-                  preload
-                />
+                {post.thumbnailVideo ? (
+                  <video
+                    ref={teaserVideoRef}
+                    src={post.thumbnailVideo}
+                    poster={post.thumbnail}
+                    width={post.thumbnailWidth ?? 1200}
+                    height={post.thumbnailHeight ?? 630}
+                    controls
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-label={post.thumbnailAlt ?? `Teaser video for ${post.title}`}
+                    aria-describedby={post.thumbnailCaption ? 'figure-1-caption' : undefined}
+                    className="block w-full min-w-0 max-w-full h-auto"
+                  >
+                    <a href={post.thumbnailVideo} download>Download the video</a>
+                  </video>
+                ) : (
+                  <Image
+                    src={post.thumbnail}
+                    alt={post.thumbnailAlt ?? `Teaser for ${post.title}`}
+                    width={post.thumbnailWidth ?? 1200}
+                    height={post.thumbnailHeight ?? 630}
+                    sizes="(max-width: 768px) calc(100vw - 2rem), 896px"
+                    className="block w-full min-w-0 max-w-full h-auto object-contain"
+                    preload
+                  />
+                )}
               </div>
               {post.thumbnailCaption && (
-                <figcaption className="mt-3 text-left text-sm leading-relaxed text-gray-500">
+                <figcaption id="figure-1-caption" className="mt-3 text-left text-sm leading-relaxed text-gray-500">
                   {post.thumbnailCaption}
                 </figcaption>
               )}
@@ -279,11 +341,11 @@ export default function BlogContent({ post }: BlogContentProps) {
           )}
 
           <div
-            className={
+            className={`post-body ${
               hasSectionNavigation
                 ? 'xl:grid xl:grid-cols-[minmax(10rem,1fr)_minmax(0,80ch)_minmax(10rem,1fr)] xl:gap-8 xl:items-start'
                 : ''
-            }
+            }`}
           >
             {hasSectionNavigation && (
               <>
@@ -337,7 +399,7 @@ export default function BlogContent({ post }: BlogContentProps) {
             )}
 
             <div
-              className={`prose prose-lg prose-gray mx-auto !max-w-[72ch] text-base sm:text-[1.0625rem] ${
+              className={`post-prose prose prose-lg prose-gray mx-auto !max-w-[72ch] text-base sm:text-[1.0625rem] ${
                 hasSectionNavigation ? 'xl:col-start-2 xl:row-start-1' : ''
               }`}
               dangerouslySetInnerHTML={{ __html: sectionNavigation.html }}
