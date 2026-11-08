@@ -2,9 +2,9 @@
 
 [Website](https://najmulhasan-code.github.io) · [Google Scholar](https://scholar.google.com/citations?user=YL8xF4MAAAAJ&hl=en) · [LinkedIn](https://linkedin.com/in/najmulhasan-cs-math) · [Twitter](https://x.com/_najmulhasan)
 
-My research interests are in the pretraining and post-training of language models. I want to build models from the ground up and understand how choices in data, architecture, and optimization shape what they learn and how they behave.
+My research interests are in how choices in data, architecture, and optimization, during both pretraining and post-training, shape what language models learn and how they behave.
 
-My work so far includes evaluations of frontier language models and a [fine-tuning experiment](https://najmulhasan-code.github.io/blog/refusal-to-redirection) on how safety training changes a model's behavior.
+In post-training, I have [trained a model with reinforcement learning](https://najmulhasan-code.github.io/blog/isometric-scenes) to write animated SVG scenes, and [studied how safety fine-tuning changes](https://najmulhasan-code.github.io/blog/refusal-to-redirection) a model's behavior.
 
 I am currently a Quality Engineering Intern, AI/ML, at [Rocket Lawyer](https://www.rocketlawyer.com/).
 

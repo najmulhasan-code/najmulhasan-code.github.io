@@ -54,11 +54,11 @@ export default function Hero() {
 
             <div className="space-y-4 text-base text-gray-700 leading-[1.7]">
               <p>
-                My research interests are in the pretraining and post-training of language models. I want to build models from the ground up and understand how choices in data, architecture, and optimization shape what they learn and how they behave.
+                My research interests are in how choices in data, architecture, and optimization, during both pretraining and post-training, shape what language models learn and how they behave.
               </p>
 
               <p>
-                My work so far includes evaluations of frontier language models and a <Link href="/blog/refusal-to-redirection">fine-tuning experiment</Link> on how safety training changes a model&apos;s behavior.
+                In post-training, I have <Link href="/blog/isometric-scenes">trained a model with reinforcement learning</Link> to write animated SVG scenes, and <Link href="/blog/refusal-to-redirection">studied how safety fine-tuning changes</Link> a model&apos;s behavior.
               </p>
 
               <p>
