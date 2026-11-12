@@ -1,9 +1,14 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useMemo, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { newsItems, formatMonthYear, groupByYear, NewsItem } from '@/data/news';
+
+// Rows of the newest year shown before the reader opens the full list. Kept small so the
+// sections after News stay close to the top of the page.
+const PREVIEW_COUNT = 3;
+
+const FOLD = 'grid transition-[grid-template-rows] duration-500 ease-out';
 
 function NewsListItem({ item }: { item: NewsItem }) {
   const { month } = formatMonthYear(item.date);
@@ -37,106 +42,93 @@ function NewsListItem({ item }: { item: NewsItem }) {
   );
 }
 
-interface NewsYearProps {
-  year: string;
-  items: NewsItem[];
-  isLatest: boolean;
-  isOpen: boolean;
-  onToggle: () => void;
+function NewsList({ items }: { items: NewsItem[] }) {
+  return (
+    <ul className="space-y-5">
+      {items.map((item, index) => (
+        <NewsListItem key={`${item.date}-${index}`} item={item} />
+      ))}
+    </ul>
+  );
 }
 
-function NewsYear({ year, items, isLatest, isOpen, onToggle }: NewsYearProps) {
-  const reduceMotion = useReducedMotion();
-  const buttonId = `news-year-${year}-button`;
-  const panelId = `news-year-${year}-panel`;
-
-  return (
-    <div className="border-t border-gray-200 last:border-b">
-      <button
-        id={buttonId}
-        type="button"
-        aria-expanded={isOpen}
-        aria-controls={panelId}
-        onClick={onToggle}
-        className="group flex w-full items-center justify-between gap-4 rounded-sm py-4 text-left focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
-      >
-        <span className="flex items-center gap-3">
-          <span className="text-sm font-semibold text-gray-900">{year}</span>
-          {isLatest && (
-            <span className="rounded-full bg-teal-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-teal-800">
-              Latest
-            </span>
-          )}
-        </span>
-
-        <span className="flex items-center gap-3 text-xs text-gray-500">
-          <span>{items.length} {items.length === 1 ? 'update' : 'updates'}</span>
-          <ChevronDown
-            aria-hidden="true"
-            className={`h-4 w-4 transition-transform duration-300 group-hover:text-teal-700 ${isOpen ? 'rotate-180' : ''}`}
-          />
-        </span>
-      </button>
-
-      <motion.div
-        id={panelId}
-        role="region"
-        aria-labelledby={buttonId}
-        aria-hidden={!isOpen}
-        inert={!isOpen}
-        initial={false}
-        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
-        transition={reduceMotion ? { duration: 0 } : { duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-        className="overflow-hidden"
-      >
-        <ul className="space-y-5 pb-7 pt-1">
-          {items.map((item, index) => (
-            <NewsListItem key={`${item.date}-${index}`} item={item} />
-          ))}
-        </ul>
-      </motion.div>
-    </div>
-  );
+function YearLabel({ year }: { year: string }) {
+  return <h3 className="mb-4 text-sm font-semibold text-gray-900">{year}</h3>;
 }
 
 export default function News() {
-  const groupedNews = useMemo(() => groupByYear(newsItems), []);
-  const latestYear = groupedNews[0]?.year ?? null;
-  const [openYears, setOpenYears] = useState<Set<string>>(
-    () => new Set(latestYear ? [latestYear] : [])
-  );
+  const sectionRef = useRef<HTMLElement>(null);
+  const [latest, ...earlierYears] = useMemo(() => groupByYear(newsItems), []);
+  const [showAll, setShowAll] = useState(false);
 
-  const toggleYear = (year: string) => {
-    setOpenYears((current) => {
-      const next = new Set(current);
-      if (next.has(year)) {
-        next.delete(year);
-      } else {
-        next.add(year);
-      }
-      return next;
-    });
+  if (!latest) return null;
+
+  const preview = latest.items.slice(0, PREVIEW_COUNT);
+  const restOfLatest = latest.items.slice(PREVIEW_COUNT);
+  const hasMore = restOfLatest.length > 0 || earlierYears.length > 0;
+
+  const toggleAll = () => {
+    // Closing the full list from its end would leave the reader far below the section.
+    const section = sectionRef.current;
+    if (showAll && section && section.getBoundingClientRect().top < 0) {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      section.scrollIntoView({ block: 'start', behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+    setShowAll(!showAll);
   };
 
   return (
-    <section id="news" className="watercolor-section watercolor-mist pt-8 sm:pt-10 lg:pt-12 pb-12 sm:pb-16 lg:pb-20">
+    <section
+      id="news"
+      ref={sectionRef}
+      className="watercolor-section watercolor-mist pt-8 sm:pt-10 lg:pt-12 pb-8 sm:pb-10 lg:pb-12"
+    >
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-7">
           <h2 className="section-heading text-2xl sm:text-3xl font-bold text-gray-900">News</h2>
         </div>
 
-        <div>
-          {groupedNews.map(({ year, items }) => (
-            <NewsYear
-              key={year}
-              year={year}
-              items={items}
-              isLatest={year === latestYear}
-              isOpen={openYears.has(year)}
-              onToggle={() => toggleYear(year)}
-            />
-          ))}
-        </div>
+        <YearLabel year={latest.year} />
+        <NewsList items={preview} />
+
+        {hasMore && (
+          <>
+            <div
+              id="news-more"
+              inert={!showAll}
+              className={`${FOLD} ${showAll ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
+            >
+              <div className="overflow-hidden">
+                {restOfLatest.length > 0 && (
+                  <div className="pt-5">
+                    <NewsList items={restOfLatest} />
+                  </div>
+                )}
+
+                {earlierYears.map(({ year, items }) => (
+                  <div key={year} className="mt-7 border-t border-gray-200 pt-6">
+                    <YearLabel year={year} />
+                    <NewsList items={items} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={toggleAll}
+              aria-expanded={showAll}
+              aria-controls="news-more"
+              className="mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-sm text-sm font-medium text-gray-700 transition-colors hover:text-teal-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700"
+            >
+              {showAll ? 'Show less' : 'All news'}
+              <ChevronDown
+                aria-hidden="true"
+                className={`h-4 w-4 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`}
+              />
+            </button>
+          </>
+        )}
       </div>
     </section>
   );

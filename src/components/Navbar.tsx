@@ -23,10 +23,10 @@ export default function Navbar() {
   const firstMobileLinkRef = useRef<HTMLButtonElement>(null);
 
   const navLinks: NavLink[] = useMemo(() => [
+    { label: 'News', href: '#news', id: 'news' },
     { label: 'Research', href: '#research', id: 'research' },
     { label: 'Experience', href: '#experience', id: 'experience' },
     { label: 'Blog', href: '#blog', id: 'blog' },
-    { label: 'News', href: '#news', id: 'news' },
     { label: 'Education', href: '#education', id: 'education' },
     { label: 'Awards', href: '#awards', id: 'awards' },
     { label: 'Activities', href: '#service', id: 'service' },
@@ -42,37 +42,40 @@ export default function Navbar() {
   useEffect(() => {
     if (pathname !== '/') return;
 
-    const observerOptions = {
-      root: null,
-      rootMargin: '-64px 0px -55% 0px',
-      threshold: 0,
-    };
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+    // The current section is the last one whose top has passed a line just below the navbar.
+    // Reading positions directly keeps the result correct for sections of any height.
+    const updateActiveSection = () => {
       if (isScrolling) return;
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    navLinks.forEach(({ id }) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
-    });
-
-    const handleScroll = () => {
-      if (isScrolling) return;
       const scrolledToBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 100;
-      if (scrolledToBottom) setActiveSection('service');
+      if (scrolledToBottom) {
+        setActiveSection('service');
+        return;
+      }
+
+      const line = 64 + 160;
+      let current = 'hero';
+      for (const { id } of navLinks) {
+        const element = document.getElementById(id);
+        if (element && element.getBoundingClientRect().top <= line) current = id;
+      }
+      setActiveSection(current);
     };
-    window.addEventListener('scroll', handleScroll);
+
+    let frame = 0;
+    const scheduleUpdate = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    scheduleUpdate();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
     };
   }, [isScrolling, navLinks, pathname]);
 

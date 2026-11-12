@@ -79,10 +79,10 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(profilePageJsonLd) }}
       />
       <Hero />
+      <News />
       <Publications papers={papers} />
       <Experience />
       <Blog posts={posts} />
-      <News />
       <Education />
       <Awards />
       <Service />
